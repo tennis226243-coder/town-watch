@@ -250,6 +250,13 @@ details.filterbox > summary { cursor: pointer; padding: .65rem 0; font-weight: 7
 .mapsvg .pin.planned { stroke-width: 2.5; }
 .mapctl button { border-radius: 10px; box-shadow: none; }
 .map-card { border: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,.14); }
+.lmap { position: relative; height: min(85vw, 540px); min-height: 360px; width: 100%; z-index: 0; background: #e9ece6; }
+.zlabel span { display: inline-block; transform: translate(-50%, -50%); white-space: nowrap; font-weight: 700; font-size: 13px; color: #1d2b45; text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 3px #fff; }
+.leaflet-popup-content { margin: 12px 14px; font-family: inherit; font-size: 14px; line-height: 1.6; }
+.leaflet-popup-content .btn { color: #fff; }
+.leaflet-popup-content .btn.secondary { color: #1d2b45; }
+.leaflet-container a.btn { color: #fff; }
+.leaflet-container a.btn.secondary { color: #1d2b45; }
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
@@ -572,6 +579,7 @@ function initMaps() {
         L.circleMarker([p.lat, p.lng], { radius: r, color: pinOf(p) === "planned" ? PIN_COLOR.planned : "#fff", weight: pinOf(p) === "planned" ? 3 : 2, fillColor: pinOf(p) === "planned" ? "#fff" : PIN_COLOR[pinOf(p)], fillOpacity: .95, opacity: p.latEst ? .75 : 1 }).addTo(m).bindPopup(() => pinCardHtml(p), { maxWidth: 300 }).bindTooltip(esc(p.name.replace(/（.*?）/g, "")), { direction: "right", offset: [8, 0] });
         ll.push([p.lat, p.lng]);
       }
+      setTimeout(() => m.invalidateSize(), 150);
       if (ll.length > 1) m.fitBounds(ll, { padding: [30, 30], maxZoom: 15 }); else if (ll.length === 1) m.setView(ll[0], 16); else m.setView(curCity().center, 13);
     }
     return;
