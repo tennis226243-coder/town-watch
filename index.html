@@ -271,7 +271,8 @@ details.filterbox > summary { cursor: pointer; padding: .65rem 0; font-weight: 7
 .mapsvg .pin-g.sel path { stroke: #d9a84e; stroke-width: 3; }
 .mapsvg .tglyph { font-size: 9px; font-weight: 700; pointer-events: none; }
 .mapsvg .plabel { font-size: 10px; }
-.tiles-simple { filter: saturate(.55) contrast(.95) brightness(1.03); }
+.tiles-simple { filter: grayscale(.85) contrast(.85) brightness(1.08); }
+.tiles-blank { filter: contrast(.8) brightness(1.05); opacity: .9; }
 .lmap .leaflet-tile-pane { }
 .lmap { background: #eef0ee; }
 .lmap { height: 70vh; max-height: 560px; min-height: 340px; width: 100%; position: relative; z-index: 0; }
@@ -589,10 +590,12 @@ function initMaps() {
     for (const [id, { points, opts }] of Object.entries(LMAPS)) {
       const el = document.getElementById(id); if (!el || el.__map) { if (!el) delete LMAPS[id]; continue; }
       let m; try { m = L.map(el, { scrollWheelZoom: false }); } catch (err) { console.error(err); continue; } el.__map = m;
-      const simple = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png", { maxZoom: 19, subdomains: "abcd", className: "tiles-simple", attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>' });
-      const pale = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", { maxZoom: 18, attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>' });
+      const gsiAttr = '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>';
+      const simple = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", { maxZoom: 18, className: "tiles-simple", attribution: gsiAttr });
+      const blank = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/blank/{z}/{x}/{y}.png", { maxZoom: 14, maxNativeZoom: 14, className: "tiles-blank", attribution: gsiAttr });
+      const std = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", { maxZoom: 18, attribution: gsiAttr });
       simple.addTo(m);
-      L.control.layers({ "シンプル": simple, "淡色（国土地理院）": pale }, null, { position: "topright" }).addTo(m);
+      L.control.layers({ "シンプル": simple, "白地図": blank, "詳しい地図": std }, null, { position: "topright" }).addTo(m);
       const sc = opts.scores || {};
       for (const [zid, z] of Object.entries(ZONES_())) {
         const a = cfg().areas.find(x => x.id === zid); if (!a) continue;
