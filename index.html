@@ -1,0 +1,1370 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>会津若松 街の変化ウォッチ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=BIZ+UDPGothic:wght@400;700&family=Shippori+Mincho:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  box-sizing: border-box;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+  --ink: #18202e; --muted: #6a7280; --faint: #9aa1ab;
+  --paper: #f6f7f8; --surface: #ffffff; --line: #e6e8eb; --soft: #eef0f2;
+  --indigo: #1d2b45; --heading: #1d2b45; --header: #1d2b45;
+  --growth: #2e7d5b; --shu: #c0392b; --warn: #9a6b14;
+  --upbg: #eaf4ef; --downbg: #faecea; --midbg: #f6f0e3; --notice: #f6f0e3;
+  --radius: 14px;
+  color-scheme: light;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --ink: #e9ecf1; --muted: #9ba3af; --faint: #6d7480; --paper: #0f1318; --surface: #171c23; --line: #262d37; --soft: #1e242c;
+    --heading: #c9d5ee; --header: #131a26; --growth: #5cb88d; --shu: #ea7a6f; --warn: #d9a84e;
+    --upbg: #15291f; --downbg: #321b19; --midbg: #2c2414; --notice: #2c2414; color-scheme: dark;
+  }
+}
+:root[data-theme="dark"] {
+  --ink: #e9ecf1; --muted: #9ba3af; --faint: #6d7480; --paper: #0f1318; --surface: #171c23; --line: #262d37; --soft: #1e242c;
+  --heading: #c9d5ee; --header: #131a26; --growth: #5cb88d; --shu: #ea7a6f; --warn: #d9a84e;
+  --upbg: #15291f; --downbg: #321b19; --midbg: #2c2414; --notice: #2c2414; color-scheme: dark;
+}
+html { scroll-padding-top: env(safe-area-inset-top, 0px); }
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; background: var(--paper); color: var(--ink); font-family: "BIZ UDPGothic", "Hiragino Sans", "Hiragino Kaku Gothic ProN", "Yu Gothic", Meiryo, sans-serif; font-size: 16px; line-height: 1.7; -webkit-text-size-adjust: 100%; -webkit-font-smoothing: antialiased; }
+a { color: var(--heading); text-decoration-thickness: 1px; text-underline-offset: 3px; }
+:focus-visible { outline: 2px solid #d9a84e; outline-offset: 2px; }
+h1, h2, h3 { color: var(--heading); line-height: 1.35; font-weight: 700; letter-spacing: .01em; }
+h1 { font-size: 1.5rem; margin: .3rem 0 .4rem; }
+h2 { font-size: 1.02rem; margin: 2.2rem 0 .8rem; color: var(--ink); }
+h3 { font-size: .95rem; margin: 1rem 0 .4rem; }
+.muted { color: var(--muted); } .small { font-size: .84rem; }
+
+/* ヘッダー */
+.site-header { background: var(--header); color: #fff; padding: .55rem 1rem; display: flex; align-items: center; justify-content: space-between; gap: 1rem; }
+.site-header a { color: #fff; text-decoration: none; }
+.brandwrap { display: flex; align-items: baseline; gap: .6rem; min-width: 0; }
+.brand { font-family: "Shippori Mincho", "Hiragino Mincho ProN", serif; font-weight: 800; font-size: .95rem; letter-spacing: .06em; opacity: .85; white-space: nowrap; }
+#citysel { appearance: none; -webkit-appearance: none; width: auto; max-width: 10rem; font: inherit; font-size: 1.05rem; font-weight: 700; padding: .1rem 1.3rem .1rem 0; border: none; border-radius: 0; color: #fff; background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6'%3E%3Cpath d='M1 1l4 4 4-4' fill='none' stroke='white' stroke-width='1.6'/%3E%3C/svg%3E") no-repeat right center; }
+#citysel option { color: #18202e; }
+.topnav { display: flex; gap: 1.2rem; }
+.topnav a { opacity: .7; font-size: .9rem; padding: .2rem 0; }
+.topnav a.active { opacity: 1; box-shadow: inset 0 -2px 0 #d9a84e; }
+.tabbar { display: none; }
+main { max-width: 1040px; margin: 0 auto; padding: 1.1rem 1rem 3rem; }
+footer { max-width: 1040px; margin: 0 auto; padding: 1rem 1rem 1.5rem; color: var(--faint); font-size: .74rem; }
+@media (max-width: 760px) {
+  .topnav { display: none; }
+  .tabbar { display: flex; position: fixed; left: 0; right: 0; bottom: 0; z-index: 1000; background: color-mix(in srgb, var(--surface) 92%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border-top: 1px solid var(--line); padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .tabbar a { flex: 1; text-align: center; text-decoration: none; color: var(--faint); font-size: .64rem; padding: .5rem 0 .4rem; display: flex; flex-direction: column; align-items: center; gap: .15rem; }
+  .tabbar a svg { width: 21px; height: 21px; stroke-width: 1.8; }
+  .tabbar a.active { color: var(--heading); font-weight: 700; }
+  main, footer { padding-bottom: 6.5rem; }
+}
+
+/* 共通の面 */
+.card, .panel, .acard, .kpi, .mapbox, .trend, form.stack, details.filterbox, .table-wrap, .empty { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); box-shadow: none; }
+.card, .acard { padding: 1rem 1.1rem; }
+.stack { display: grid; gap: .6rem; }
+.cols, .grid2col { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+@media (max-width: 860px) { .cols, .grid2col { grid-template-columns: 1fr; } }
+
+/* ヒーロー */
+.hero { background: var(--header); color: #fff; border-radius: var(--radius); padding: 1.2rem 1.2rem 1.1rem; display: grid; grid-template-columns: 1fr auto; gap: .2rem 1rem; align-items: end; }
+.hero .eyebrow { grid-column: 1 / -1; font-size: .78rem; opacity: .65; letter-spacing: .04em; }
+.hero h1 { color: #fff; margin: .1rem 0 0; font-size: 1.45rem; }
+.hero h1 small { display: block; font-size: .85rem; font-weight: 400; opacity: .7; margin-top: .15rem; }
+.hero .big { text-align: right; line-height: 1; }
+.hero .big b { font-size: 2.6rem; font-weight: 700; font-variant-numeric: tabular-nums; letter-spacing: -.02em; }
+.hero .big span { font-size: .8rem; opacity: .7; margin-left: .15rem; }
+.hero .big em { display: block; font-style: normal; font-size: .82rem; margin-top: .35rem; color: #9fe0bd; }
+.hero .big em.down { color: #f5a59c; }
+.hero .why { grid-column: 1 / -1; font-size: .88rem; opacity: .85; margin-top: .7rem; padding-top: .7rem; border-top: 1px solid rgba(255,255,255,.15); }
+
+/* ランキング（行） */
+.panel { padding: .3rem 0; }
+.rrow { display: grid; grid-template-columns: 1.6rem 1fr auto; gap: .1rem .7rem; align-items: center; padding: .8rem 1.1rem; text-decoration: none; color: inherit; border-top: 1px solid var(--line); }
+.rrow:first-child { border-top: none; }
+.rrow .rk { font-weight: 700; color: var(--faint); font-variant-numeric: tabular-nums; }
+.rrow .rn { font-weight: 700; line-height: 1.35; }
+.rrow .rn small { display: block; font-weight: 400; font-size: .76rem; color: var(--muted); }
+.rrow .rs { font-size: 1.35rem; font-weight: 700; font-variant-numeric: tabular-nums; color: var(--heading); }
+.rrow .rb { grid-column: 2 / 4; }
+.rrow .rm { grid-column: 2 / 4; display: flex; flex-wrap: wrap; gap: .25rem .8rem; font-size: .76rem; color: var(--muted); }
+.rrow.nodata .rs { color: var(--faint); font-size: 1rem; }
+
+/* 旧カード（エリア一覧など） */
+.rcard { display: block; text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: .9rem 1.1rem; }
+.rhead { display: flex; align-items: baseline; gap: .6rem; }
+.rank { font-weight: 700; color: var(--faint); min-width: 1.3rem; font-variant-numeric: tabular-nums; }
+.rname { flex: 1; font-weight: 700; line-height: 1.4; }
+.rscore { font-size: 1.5rem; font-weight: 700; color: var(--heading); font-variant-numeric: tabular-nums; }
+.rscore small { font-size: .72rem; color: var(--muted); font-weight: 400; margin-left: .1rem; }
+.rmeta { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .5rem; align-items: center; }
+
+/* 小さなラベル */
+.chip { display: inline-flex; align-items: center; font-size: .72rem; line-height: 1.5; padding: .05rem .5rem; border-radius: 6px; background: var(--soft); color: var(--muted); white-space: nowrap; text-decoration: none; }
+.chip.up { background: var(--upbg); color: var(--growth); }
+.chip.down { background: var(--downbg); color: var(--shu); }
+.chip.mid { background: var(--midbg); color: var(--warn); }
+.up { color: var(--growth); } .down { color: var(--shu); }
+
+/* スコアバー */
+.scorebar { position: relative; height: 6px; background: var(--soft); border-radius: 3px; margin-top: .45rem; }
+.scorebar .fill { position: absolute; top: 0; bottom: 0; border-radius: 3px; }
+.scorebar .fill.up { background: var(--growth); } .scorebar .fill.down { background: var(--shu); }
+.scorebar .axis { position: absolute; left: 50%; top: -3px; bottom: -3px; width: 1px; background: var(--faint); }
+.scorebar.empty { opacity: .5; }
+
+/* 数字 */
+.kpis { display: grid; grid-template-columns: repeat(4, 1fr); background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+@media (max-width: 760px) { .kpis { grid-template-columns: 1fr 1fr; } .kpi:nth-child(2) { border-right: none; } .kpi:nth-child(-n+2) { border-bottom: 1px solid var(--line); } }
+.kpis .kpi { background: none; border: none; border-radius: 0; border-right: 1px solid var(--line); padding: .85rem 1rem; }
+.kpis .kpi:last-child { border-right: none; }
+.kpi b { display: block; font-size: 1.4rem; font-variant-numeric: tabular-nums; color: var(--heading); }
+.kpi b small { font-size: .85rem; font-weight: 400; }
+.kpi span { font-size: .74rem; color: var(--muted); line-height: 1.4; display: block; }
+
+.alerts { list-style: none; padding: 0; margin: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); }
+.alerts li { border-top: 1px solid var(--line); }
+.alerts li:first-child { border-top: none; }
+.alerts li a { display: block; padding: .7rem 1rem .7rem 1.6rem; color: var(--ink); text-decoration: none; font-size: .9rem; position: relative; background: none; }
+.alerts li a::before { content: ""; position: absolute; left: .85rem; top: 1.15rem; width: 6px; height: 6px; border-radius: 50%; background: var(--growth); }
+.alerts li.warn a::before { background: var(--shu); }
+.list { list-style: none; padding: 0; margin: 0; }
+.list li { padding: .55rem 0; border-bottom: 1px solid var(--line); }
+.list li:last-child { border-bottom: none; }
+details.more { margin-top: .5rem; }
+details.more > summary { cursor: pointer; color: var(--muted); font-size: .86rem; padding: .4rem 0; list-style: none; }
+details.more > summary::before { content: "＋ "; }
+details.more[open] > summary::before { content: "－ "; }
+
+/* 案件カード */
+.pcard { display: block; text-decoration: none; color: inherit; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: .75rem .95rem; }
+.pcard .pn { font-weight: 700; line-height: 1.45; }
+.pcard .pc { display: flex; flex-wrap: wrap; gap: .3rem; margin-top: .4rem; }
+.pcard .pd { font-size: .76rem; color: var(--muted); margin-top: .35rem; }
+.pin-dot { display: inline-block; width: 9px; height: 9px; border-radius: 50%; margin-right: .45rem; vertical-align: 1px; }
+
+.stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: .8rem; border-top: 1px solid var(--line); }
+@media (max-width: 520px) { .stats { grid-template-columns: repeat(4, 1fr); } }
+.stats div { padding: .5rem .2rem .1rem; }
+.stats b { display: block; font-size: 1.05rem; font-variant-numeric: tabular-nums; }
+.stats span { font-size: .66rem; color: var(--muted); line-height: 1.3; display: block; }
+
+.ol ul { margin: .2rem 0 .6rem; padding-left: 1.1rem; }
+.ol li { margin: .25rem 0; font-size: .9rem; }
+.ol .plus li::marker { color: var(--growth); content: "＋ "; }
+.ol .minus li::marker { color: var(--shu); content: "－ "; }
+
+/* 地図 */
+.mapbox { padding: 0; overflow: hidden; }
+.mapbox svg { width: 100%; height: auto; display: block; }
+.mapcap { font-size: .72rem; color: var(--faint); padding: .5rem .8rem .6rem; }
+.legend { display: flex; flex-wrap: wrap; gap: .35rem; margin: .6rem 0; }
+.legend button { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: .2rem .7rem; font: inherit; font-size: .78rem; color: var(--ink); cursor: pointer; display: inline-flex; gap: .4rem; align-items: center; }
+.legend button.off { opacity: .35; }
+.dot { width: 9px; height: 9px; border-radius: 50%; display: inline-block; }
+.dot.ring { background: transparent !important; border: 2px solid #2e7d5b; width: 10px; height: 10px; }
+
+.trend { padding: .7rem; margin: 0; }
+.trend svg { width: 100%; height: auto; display: block; }
+.trend .g { stroke: var(--soft); } .trend .a50 { stroke: var(--faint); stroke-dasharray: 3 3; }
+.trend text { font-size: 11px; fill: var(--muted); }
+.trend figcaption { display: flex; flex-wrap: wrap; gap: .3rem .9rem; font-size: .74rem; padding-top: .3rem; color: var(--muted); }
+.trend i { display: inline-block; width: 14px; height: 2px; margin-right: .3rem; vertical-align: middle; }
+
+.facts { display: grid; grid-template-columns: max-content 1fr; gap: .4rem 1rem; margin: 0; }
+.facts dt { color: var(--muted); font-size: .82rem; } .facts dd { margin: 0; }
+.est { color: var(--warn); font-size: .72rem; margin-left: .3rem; }
+.timeline { list-style: none; margin: 0; padding: 0 0 0 1rem; border-left: 1px solid var(--line); }
+.timeline li { position: relative; padding: 0 0 1rem .7rem; }
+.timeline li::before { content: ""; position: absolute; left: -1.33rem; top: .55rem; width: 9px; height: 9px; border-radius: 50%; background: var(--surface); border: 2px solid var(--heading); }
+.timeline .date { font-weight: 700; color: var(--heading); margin-right: .5rem; font-variant-numeric: tabular-nums; }
+
+table { border-collapse: collapse; width: 100%; font-size: .88rem; }
+th, td { padding: .5rem .6rem; border-bottom: 1px solid var(--line); text-align: left; white-space: nowrap; }
+td.wrap { white-space: normal; }
+.table-wrap { overflow-x: auto; }
+
+form.stack { padding: 1rem; }
+.grid2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); gap: .8rem; }
+label.field { display: grid; gap: .25rem; font-size: .8rem; color: var(--muted); }
+input, select, textarea { font: inherit; font-size: 16px; padding: .55rem .6rem; border: 1px solid var(--line); border-radius: 10px; background: var(--paper); color: var(--ink); width: 100%; }
+input[type=checkbox] { width: auto; }
+textarea { min-height: 4.5rem; }
+fieldset { border: 1px solid var(--line); border-radius: 10px; }
+.btn, button.btn { font: inherit; font-size: .9rem; font-weight: 700; background: var(--header); color: #fff; border: 1px solid var(--header); border-radius: 10px; padding: .55rem 1rem; cursor: pointer; text-decoration: none; display: inline-block; }
+.btn.secondary { background: var(--surface); color: var(--heading); border-color: var(--line); }
+.btn.danger { background: var(--shu); border-color: var(--shu); }
+.btn.sm { padding: .3rem .7rem; font-size: .8rem; }
+.row { display: flex; flex-wrap: wrap; gap: .5rem; align-items: center; margin: .9rem 0; }
+details.filterbox { padding: .1rem 1rem; margin-bottom: .8rem; }
+details.filterbox > summary { cursor: pointer; padding: .65rem 0; font-weight: 700; font-size: .9rem; }
+.filters { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .6rem; padding-bottom: .9rem; }
+.filters label { display: grid; gap: .2rem; font-size: .78rem; color: var(--muted); }
+.empty { padding: 1.5rem; text-align: center; color: var(--muted); }
+.notice { padding: .8rem 1rem; background: var(--notice); border-radius: var(--radius); margin: 0 0 1rem; font-size: .88rem; }
+.toast { position: fixed; left: 50%; transform: translateX(-50%); bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px)); background: var(--ink); color: var(--paper); padding: .55rem 1rem; border-radius: 10px; font-size: .88rem; z-index: 1100; max-width: 90vw; }
+.sources { font-size: .74rem; color: var(--faint); }
+.sources a { color: var(--muted); }
+@media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+.mapwrap { position: relative; }
+.mapbox svg.mapsvg { background: none; user-select: none; -webkit-user-select: none; cursor: grab; }
+.mapsvg .bg { fill: #eef1ec; }
+.mapsvg .grid { stroke: #dfe5dc; stroke-width: 1; }
+.mapsvg .zone { stroke: rgba(31,47,79,.35); stroke-width: 1.5; stroke-dasharray: 5 4; cursor: pointer; }
+.mapsvg .zone-label { fill: #1f2f4f; font-weight: 700; paint-order: stroke; stroke: #fff; stroke-width: 3px; cursor: pointer; }
+.mapsvg .town { fill: #6b7568; font-weight: 700; paint-order: stroke; stroke: #eef1ec; stroke-width: 3px; opacity: .85; pointer-events: none; }
+.mapsvg .rail { fill: none; stroke: #4a4f57; stroke-width: 3; stroke-dasharray: 10 6; opacity: .7; }
+.mapsvg .lm { cursor: pointer; }
+.mapsvg .lm-hit { fill: rgba(255,255,255,.01); }
+.mapsvg .lm-icon { fill: #2b3140; font-weight: 700; }
+.mapsvg .lm-st .lm-icon { fill: #1f2f4f; } .mapsvg .lm-hosp .lm-icon { fill: #b5302a; } .mapsvg .lm-castle .lm-icon { fill: #6a4c93; } .mapsvg .lm-ic .lm-icon { fill: #2f6f9f; }
+.mapsvg .lm-name { fill: #2b3140; paint-order: stroke; stroke: #eef1ec; stroke-width: 3px; }
+.mapsvg .pin { stroke: #fff; stroke-width: 2; cursor: pointer; }
+.mapsvg .pin.est { opacity: .75; }
+.mapsvg .plabel { display: none; fill: #1b2230; font-weight: 700; paint-order: stroke; stroke: #fff; stroke-width: 3px; pointer-events: none; }
+.mapsvg.z2 .plabel { display: inline; }
+.mapsvg.z1 .lm-shop .lm-name, .mapsvg.z1 .lm-gov .lm-name { display: none; }
+.mapsvg .pick { fill: none; stroke: #b5302a; stroke-width: 3; }
+.mapctl { position: absolute; right: .5rem; top: .5rem; display: grid; gap: .3rem; }
+.mapctl button { width: 38px; height: 38px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); font-size: 1.15rem; line-height: 1; cursor: pointer; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.map-card { position: absolute; left: .5rem; right: .5rem; bottom: .5rem; background: var(--surface); color: var(--ink); border-radius: 12px; box-shadow: 0 6px 20px rgba(0,0,0,.2); padding: .75rem .9rem; max-height: 60%; overflow: auto; }
+.map-card .mclose { position: absolute; right: .4rem; top: .3rem; border: none; background: none; font-size: 1.4rem; color: var(--muted); cursor: pointer; }
+.land .lp { list-style: none; padding: 0; margin: 0; }
+.land .lp li { display: flex; justify-content: space-between; gap: .5rem; padding: .35rem 0; border-bottom: 1px solid var(--line); font-size: .9rem; }
+.land .lp li:last-child { border-bottom: none; }
+
+
+.mapsvg .bg { fill: #f1f2ef; }
+.mapsvg .zone { stroke: none; }
+.mapsvg .zone-label { fill: #1d2b45; font-weight: 700; paint-order: stroke; stroke: rgba(255,255,255,.9); stroke-width: 3px; }
+.mapsvg .town { fill: #8b9089; font-weight: 400; }
+.mapsvg.z1 .lm-name { display: none; }
+.mapsvg.z1 .lm-st .lm-name, .mapsvg.z1 .lm-castle .lm-name { display: inline; }
+.mapsvg .pin.planned { stroke-width: 2.5; }
+.mapctl button { border-radius: 10px; box-shadow: none; }
+.map-card { border: 1px solid var(--line); box-shadow: 0 8px 24px rgba(0,0,0,.14); }
+</style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<meta name="robots" content="noindex">
+</head>
+<body>
+<header class="site-header">
+  <span class="brandwrap"><a class="brand" href="#/" id="brand">街の変化ウォッチ</a><select id="citysel" aria-label="都市を選ぶ"></select></span>
+  <nav class="topnav" id="nav"></nav>
+</header>
+<nav class="tabbar" id="tabbar" aria-label="メインメニュー"></nav>
+<main id="app"><p class="muted">読み込み中</p></main>
+<footer>2026年10月4日時点のデータの書き出しです。スコアは登録した公開情報にもとづく推計で、将来の発展や投資判断を保証するものではありません。地図は位置関係を示す模式図です。</footer>
+<div id="toast" class="toast" hidden></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>window.EMBED = {"projects": [{"id": "aoki-kitakata", "address": "喜多方市東桜ガ丘1丁目2", "areaId": "", "areaManual": false, "category": "drugstore", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "株式会社クスリのアオキ", "confidence": "A", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "A", "date": "2026-02-06", "description": "大店立地法 新設届出（新設日 R8.10.7）", "id": "e1", "source": {"name": "福島県 大規模小売店舗立地法届出状況（令和7年度）", "publishedAt": "2026-09-29", "tier": 1, "title": "大店立地法 新設届出一覧 令和7年度", "url": "https://www.pref.fukushima.lg.jp/uploaded/attachment/763932.pdf"}, "type": "ADMIN_DOCUMENT"}], "firstDiscoveredAt": "2026-02-06", "kind": "LARGE_COMMERCIAL", "lastCheckedAt": "2026-10-04", "lat": 37.6655566, "latEst": false, "lng": 139.876913, "name": "クスリのアオキ 喜多方桜ガ丘店", "note": "大店立地法 新設届出（1,353㎡）。", "openedDate": "", "parking": "", "plannedDate": "2026-10-07", "size": "LARGE", "status": "CONFIRMED", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "clinical-town", "address": "会津若松市飯寺北1丁目4番10号", "areaId": "", "areaManual": false, "category": "new_office", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "株式会社アポロケア", "confidence": "A", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "D", "date": "2026-02-06", "description": "看護師・介護職のオープニング求人", "id": "e1", "source": {"name": "看護roo!", "publishedAt": "2026-02-06", "tier": 3, "title": "施設の看護師求人", "url": "https://www.kango-roo.com/career/hos-t352009/"}, "type": "JOB_POSTING"}, {"confidence": "C", "date": "2026-03-14", "description": "建設とスタッフ募集を報道", "id": "e2", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-03-14", "tier": 2, "title": "飯寺北の老人ホーム建設", "url": "https://aizu.goguynet.jp/2026/03/14/clinicaltown/"}, "type": "MEDIA_REPORT"}, {"confidence": "A", "date": "2026-04-01", "description": "開設", "id": "e3", "source": {"name": "クリニカルタウン 公式サイト", "publishedAt": "", "tier": 1, "title": "拠点紹介（開設2026年4月・定員112名）", "url": "https://clinical-town.com/base/base-1444/"}, "type": "OPENED"}], "firstDiscoveredAt": "2026-02-06", "kind": "EMPLOYMENT", "lastCheckedAt": "2026-10-04", "lat": 37.4812631, "latEst": false, "lng": 139.9086923, "name": "クリニカルタウン会津飯寺（住宅型有料老人ホーム）", "note": "112室・RC3階建て。オープニングスタッフを多職種で募集。", "openedDate": "2026-04-01", "parking": "yes", "plannedDate": "", "size": "LARGE", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "clubclub", "address": "会津若松市栄町1-16 UK116ヒルズ2階", "areaId": "", "areaManual": false, "category": "entertainment", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-04-12", "description": "4月18日開店予定と報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-04-12", "tier": 2, "title": "神明通りにトレカカフェが開店予定", "url": "https://aizu.goguynet.jp/2026/04/12/clubclub/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-04-12", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.4953996, "latEst": false, "lng": 139.9282624, "name": "トレカカフェ クラブクラブ", "note": "TCG専門店（飲食併設）。無料駐車場17台。", "openedDate": "2026-04-18", "parking": "yes", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "cut-a-sengoku", "address": "会津若松市花畑東3-41", "areaId": "", "areaManual": false, "category": "beauty", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": ["openedDate"], "events": [{"confidence": "C", "date": "2026-06-01", "description": "6月26日開店予定と報道（市内2店舗目）", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-06-01", "tier": 2, "title": "花畑東に理容チェーンが開店予定", "url": "https://aizu.goguynet.jp/2026/06/01/cuta/"}, "type": "MEDIA_REPORT"}, {"confidence": "C", "date": "2026-06-26", "description": "営業中を確認（開店日は推定）", "id": "e2", "source": {"name": "Googleマップ", "publishedAt": "", "tier": 4, "title": "カットエー 会津千石店", "url": "https://www.google.com/maps/place/?q=place_id:ChIJvdZRfeBV9V8RQKxk-98x9Kg"}, "type": "OPENED"}], "firstDiscoveredAt": "2026-06-01", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.4980675, "latEst": false, "lng": 139.9428625, "name": "理容cut-A 会津千石店", "note": "開店予定日どおり開店したと推定（Googleマップで営業中を確認）。", "openedDate": "2026-06-26", "parking": "", "plannedDate": "2026-06-26", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "daikichi-makuuchi", "address": "会津若松市幕内南町", "areaId": "", "areaManual": false, "category": "service", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "D", "createdAt": "2026-10-04T15:00:00+09:00", "estimated": [], "events": [{"confidence": "D", "date": "2026-10-04", "description": "新店舗オープニングメンバーの求人を確認", "id": "e1", "source": {"name": "求人ボックス", "publishedAt": "", "tier": 3, "title": "会津若松市の新規オープン店舗の求人", "url": "https://xn--pckua2a7gp15o89zb.com/%E6%96%B0%E8%A6%8F%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3-%E5%BA%97%E8%88%97%E3%81%AE%E4%BB%95%E4%BA%8B-%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE%E5%B8%82"}, "type": "JOB_POSTING"}], "firstDiscoveredAt": "2026-10-04", "kind": "STORE", "lastCheckedAt": "2026-10-04", "name": "買取大吉 会津若松（幕内南町）", "note": "求人票から新店の準備を推定。開店時期は未確認。", "openedDate": "", "parking": "", "plannedDate": "", "size": "SMALL", "status": "PLANNED", "updatedAt": "2026-10-04T15:00:00+09:00"}, {"id": "gotoya", "address": "会津若松市藤原2丁目6-11", "areaId": "", "areaManual": false, "category": "food", "chain": "UNKNOWN", "changeType": "RENEWAL", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-07-24", "description": "7月27日営業再開と報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-07-24", "tier": 2, "title": "郷戸家が営業再開", "url": "https://aizu.goguynet.jp/2026/07/24/gotoyakai/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-07-24", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.5138754, "latEst": false, "lng": 139.9418601, "name": "郷戸家 会津本店（営業再開）", "note": "", "openedDate": "2026-07-27", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "gunjii-shokudo", "address": "会津若松市藤原2-6-8", "areaId": "", "areaManual": false, "category": "food", "chain": "INDEPENDENT", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "B", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-02-03", "description": "2月1日開店を報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-02-03", "tier": 2, "title": "藤原2丁目でぐんじぃ〜食堂が開店", "url": "https://aizu.goguynet.jp/2026/02/03/gunzi/"}, "type": "MEDIA_REPORT"}, {"confidence": "B", "date": "2026-02-01", "description": "開店", "id": "e2", "source": {"name": "食べログ", "publishedAt": "", "tier": 4, "title": "会津若松市のニューオープン一覧", "url": "https://tabelog.com/fukushima/C7202/rstLst/cond16-00-00/"}, "type": "OPENED"}], "firstDiscoveredAt": "2026-02-03", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.5142515, "latEst": false, "lng": 139.9420123, "name": "ぐんじぃ〜食堂", "note": "ヨークベニマル一箕町店の隣。", "openedDate": "2026-02-01", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "gyukaku-hinoki", "address": "会津若松市桧町1-50", "areaId": "", "areaManual": false, "category": "food", "chain": "CHAIN", "changeType": "RENEWAL", "closedDate": "", "company": "", "confidence": "B", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-05-14", "description": "休業・リニューアル準備を報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-05-14", "tier": 2, "title": "桧町の牛角がリニューアル準備", "url": "https://aizu.goguynet.jp/2026/05/14/gyukaku/"}, "type": "MEDIA_REPORT"}, {"confidence": "C", "date": "2026-07-03", "description": "求人票に「2026年7月3日リニューアルオープン」と記載", "id": "e2", "source": {"name": "Indeed", "publishedAt": "", "tier": 3, "title": "牛角 会津若松店のオープニングスタッフ求人", "url": "https://jp.indeed.com/q-%E6%96%B0%E8%A6%8F%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3-%E5%BA%97%E8%88%97-l-%E7%A6%8F%E5%B3%B6%E7%9C%8C-%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE%E5%B8%82-%E6%B1%82%E4%BA%BA.html"}, "type": "OPENED"}], "firstDiscoveredAt": "2026-05-14", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.501717, "latEst": false, "lng": 139.9432519, "name": "牛角 会津若松店（リニューアル）", "note": "大規模改装を経て2026年7月3日にリニューアルオープン（求人票の記載）。串カツ田中と同じ住所（桧町1-50）の隣接区画。", "openedDate": "2026-07-03", "parking": "", "plannedDate": "", "size": "MEDIUM", "status": "OPEN", "updatedAt": "2026-10-04T15:00:00+09:00"}, {"id": "heim-hachiman", "address": "会津若松市一箕町八幡", "areaId": "", "areaManual": false, "category": "subdivision", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "セキスイハイム", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-10-04", "description": "分譲戸建ての販売情報を確認", "id": "e1", "source": {"name": "スマイティ", "publishedAt": "", "tier": 4, "title": "会津若松市の新築一戸建て一覧", "url": "https://sumaity.com/house_new/7/city_07202/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-10-04", "kind": "HOUSING", "lastCheckedAt": "2026-10-04", "lat": 37.499, "latEst": true, "lng": 139.96, "name": "スマートハイムプレイス一箕町八幡（分譲）", "note": "", "openedDate": "", "parking": "", "plannedDate": "", "size": "MEDIUM", "status": "OPEN", "updatedAt": "2026-10-04T09:00:00+09:00"}, {"id": "heim-iideminami", "address": "会津若松市飯寺南4丁目", "areaId": "", "areaManual": false, "category": "subdivision", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "セキスイハイム", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-10-04", "description": "分譲の予告情報を確認", "id": "e1", "source": {"name": "スマイティ", "publishedAt": "", "tier": 4, "title": "会津若松市の新築一戸建て一覧", "url": "https://sumaity.com/house_new/7/city_07202/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-10-04", "kind": "HOUSING", "lastCheckedAt": "2026-10-04", "lat": 37.469, "latEst": true, "lng": 139.923, "name": "スマートハイムプレイス飯寺南（予告）", "note": "新築分譲戸建ての計画が予告されている。", "openedDate": "", "parking": "", "plannedDate": "", "size": "MEDIUM", "status": "PLANNED", "updatedAt": "2026-10-04T09:00:00+09:00"}, {"id": "heim-kitaaoki", "address": "会津若松市北青木217番6他", "areaId": "", "areaManual": false, "category": "subdivision", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "セキスイハイム", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-10-04", "description": "分譲地の販売情報を確認", "id": "e1", "source": {"name": "SUUMO", "publishedAt": "", "tier": 4, "title": "会津若松市の土地情報", "url": "https://suumo.jp/tochi/fukushima/sc_aizuwakamatsu/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-10-04", "kind": "HOUSING", "lastCheckedAt": "2026-10-04", "lat": 37.51, "latEst": true, "lng": 139.915, "name": "スマートハイムプレイス北青木（分譲地）", "note": "新規分譲地として販売中（全区画50坪超）。", "openedDate": "", "parking": "", "plannedDate": "", "size": "MEDIUM", "status": "OPEN", "updatedAt": "2026-10-04T09:00:00+09:00"}, {"id": "jmty-spot", "address": "会津若松市山見町2丁目9-8", "areaId": "", "areaManual": false, "category": "service", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-07-08", "description": "6月30日開設と報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-07-08", "tier": 2, "title": "ジモティースポット開設", "url": "https://aizu.goguynet.jp/2026/07/08/zimot/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-07-08", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.5099384, "latEst": false, "lng": 139.9412333, "name": "ジモティースポット会津若松", "note": "不要品の無料引き取り拠点。", "openedDate": "2026-06-30", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "juhachiban", "address": "会津若松市西七日町", "areaId": "", "areaManual": false, "category": "food", "chain": "UNKNOWN", "changeType": "CLOSURE", "closedDate": "2026-03-08", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-03-08", "description": "閉店を報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-03-08", "tier": 2, "title": "西七日の十八番が閉店", "url": "https://aizu.goguynet.jp/2026/03/08/juhachiban/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-03-08", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.499, "latEst": true, "lng": 139.917, "name": "中華料理 十八番（閉店）", "note": "閉店日は報道日で代用。", "openedDate": "", "parking": "", "plannedDate": "", "size": "SMALL", "status": "CLOSED", "updatedAt": "2026-10-04T09:00:00+09:00"}, {"id": "katsuichi", "address": "", "areaId": "", "areaManual": false, "category": "food", "chain": "INDEPENDENT", "changeType": "CLOSURE", "closedDate": "2026-05-09", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-05-06", "description": "5月9日閉店予定と報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-05-06", "tier": 2, "title": "かつ一が閉店へ", "url": "https://aizu.goguynet.jp/2026/05/06/post-10060/"}, "type": "MEDIA_REPORT"}, {"confidence": "C", "date": "2026-05-09", "description": "閉店", "id": "e2", "type": "CLOSED"}], "firstDiscoveredAt": "2026-05-06", "kind": "STORE", "lastCheckedAt": "2026-10-04", "name": "とんかつの店 かつ一（閉店）", "note": "長年営業した店。住所は未確認。", "openedDate": "", "parking": "", "plannedDate": "", "size": "SMALL", "status": "CLOSED", "updatedAt": "2026-10-04T09:00:00+09:00"}, {"id": "kouriya", "address": "会津若松市北会津町", "areaId": "", "areaManual": false, "category": "food", "chain": "UNKNOWN", "changeType": "RENEWAL", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-03-22", "description": "3月17日リニューアルオープンと報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-03-22", "tier": 2, "title": "北会津町のこおりや食堂", "url": "https://aizu.goguynet.jp/2026/03/22/koriya/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-03-22", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.472, "latEst": true, "lng": 139.882, "name": "お食事処こおりや食堂（リニューアル）", "note": "", "openedDate": "2026-03-17", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T09:00:00+09:00"}, {"id": "kushikatsu-tanaka", "address": "会津若松市桧町1-50", "areaId": "", "areaManual": false, "category": "food", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "株式会社串カツ田中", "confidence": "A", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-05-15", "description": "オープン準備と求人募集が報じられる", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-05-15", "tier": 2, "title": "桧町で串カツ田中がオープン準備・求人開始", "url": "https://aizu.goguynet.jp/2026/05/15/kusikatu/"}, "type": "JOB_POSTING"}, {"confidence": "A", "date": "2026-06-03", "description": "企業が6月10日開店を発表", "id": "e2", "source": {"name": "PR TIMES（ユニシアホールディングス）", "publishedAt": "2026-06-03", "tier": 1, "title": "串カツ田中 会津若松店のオープン告知", "url": "https://prtimes.jp/main/html/rd/p/000000595.000027839.html"}, "type": "OFFICIAL_ANNOUNCEMENT"}, {"confidence": "A", "date": "2026-06-10", "description": "開店", "id": "e3", "source": {"name": "串カツ田中 公式サイト", "publishedAt": "2026-06-04", "tier": 1, "title": "会津若松店の新規オープンのお知らせ", "url": "https://kushi-tanaka.com/news/entry/3307"}, "type": "OPENED"}], "firstDiscoveredAt": "2026-05-15", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.5017829, "latEst": false, "lng": 139.9431523, "name": "串カツ田中 会津若松店", "note": "70席。号外NETが求人段階で出店準備を報じ、その後企業がプレスリリースで発表。", "openedDate": "2026-06-10", "parking": "", "plannedDate": "", "size": "MEDIUM", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "lumics-kitaaoki", "address": "会津若松市北青木", "areaId": "", "areaManual": false, "category": "service", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "D", "createdAt": "2026-10-04T15:00:00+09:00", "estimated": ["plannedDate"], "events": [{"confidence": "D", "date": "2026-10-04", "description": "「2026年秋冬オープン」の求人を確認", "id": "e1", "source": {"name": "Indeed", "publishedAt": "", "tier": 3, "title": "会津若松市の新規オープン店舗の求人", "url": "https://jp.indeed.com/q-%E6%96%B0%E8%A6%8F%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3-%E5%BA%97%E8%88%97-l-%E7%A6%8F%E5%B3%B6%E7%9C%8C-%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE%E5%B8%82-%E6%B1%82%E4%BA%BA.html"}, "type": "JOB_POSTING"}], "firstDiscoveredAt": "2026-10-04", "kind": "STORE", "lastCheckedAt": "2026-10-04", "name": "児童発達支援・放課後等デイサービス（Lumics）北青木", "note": "求人票に「2026年秋冬オープン」。施設名・正確な住所は未確認。", "openedDate": "", "parking": "", "plannedDate": "2026-12-01", "size": "SMALL", "status": "PLANNED", "updatedAt": "2026-10-04T15:00:00+09:00"}, {"id": "machouse-ic", "address": "会津若松市町北町", "areaId": "", "areaManual": false, "category": "retail", "chain": "CHAIN", "changeType": "CLOSURE", "closedDate": "2026-01-12", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": ["closedDate"], "events": [{"confidence": "C", "date": "2025-12-22", "description": "店舗統合に伴う閉店セールを報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2025-12-22", "tier": 2, "title": "マックハウス会津インター店の閉店", "url": "https://aizu.goguynet.jp/2025/12/22/machouse/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2025-12-22", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.527, "latEst": true, "lng": 139.895, "name": "マックハウス会津インター店（閉店）", "note": "店舗統合による閉店。", "openedDate": "", "parking": "", "plannedDate": "", "size": "MEDIUM", "status": "CLOSED", "updatedAt": "2026-10-04T09:00:00+09:00"}, {"id": "mako-sakaemachi", "address": "会津若松市栄町", "areaId": "", "areaManual": false, "category": "food", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "D", "createdAt": "2026-10-04T15:00:00+09:00", "estimated": ["openedDate"], "events": [{"confidence": "D", "date": "2026-10-04", "description": "「令和8年4月〜オープン」のオープニング求人を確認", "id": "e1", "source": {"name": "Indeed", "publishedAt": "", "tier": 3, "title": "会津若松市の新規オープン店舗の求人", "url": "https://jp.indeed.com/q-%E6%96%B0%E8%A6%8F%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3-%E5%BA%97%E8%88%97-l-%E7%A6%8F%E5%B3%B6%E7%9C%8C-%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE%E5%B8%82-%E6%B1%82%E4%BA%BA.html"}, "type": "JOB_POSTING"}], "firstDiscoveredAt": "2026-10-04", "kind": "STORE", "lastCheckedAt": "2026-10-04", "name": "喫茶カラオケ＆小料理屋風スナック ま☆こ", "note": "求人票の記載から4月開店と推定。営業の事実は未確認。", "openedDate": "2026-04-01", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T15:00:00+09:00"}, {"id": "motsuni-kotobuki", "address": "会津若松市蚕養町4-46", "areaId": "", "areaManual": false, "category": "food", "chain": "UNKNOWN", "changeType": "RELOCATION", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-05-29", "description": "移転リニューアルを報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-05-29", "tier": 2, "title": "もつ煮の寿が移転", "url": "https://aizu.goguynet.jp/2026/05/29/motunikotobuki/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-05-29", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.505865, "latEst": false, "lng": 139.9368643, "name": "もつ煮の寿（移転）", "note": "ログハウスへ移転リニューアル。", "openedDate": "", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "mugenan", "address": "会津若松市大町1丁目1-22", "areaId": "", "areaManual": false, "category": "food", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-02-22", "description": "大町に開店と紹介", "id": "e1", "source": {"name": "食録あいづ（miyanet）", "publishedAt": "", "tier": 4, "title": "新店紹介記事一覧", "url": "https://miyanet.net/tag/open/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-02-22", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.4986324, "latEst": false, "lng": 139.9249816, "name": "霧幻庵（あかべこキッチン 自家製麺）", "note": "", "openedDate": "2026-02-22", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "new-industrial-park", "address": "会津若松市河東町八田北生井地区", "areaId": "", "areaManual": false, "category": "factory", "chain": "INDEPENDENT", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "A", "createdAt": "2026-10-04T15:00:00+09:00", "estimated": ["plannedDate"], "events": [{"confidence": "A", "date": "2026-03-31", "description": "基本計画を改定。開発約30ha・分譲約20ha・11区画、2032年度分譲開始予定、事業費約44.9億円", "id": "e1", "source": {"name": "会津若松市 企業立地課", "publishedAt": "2026-03-31", "tier": 1, "title": "新工業団地基本計画（改定版）概要", "url": "https://www.city.aizuwakamatsu.fukushima.jp/docs/2024040100023/file_contents/gaiyou.pdf"}, "type": "ADMIN_DOCUMENT"}], "firstDiscoveredAt": "2026-03-31", "kind": "CONSTRUCTION", "lastCheckedAt": "2026-10-04", "name": "（仮称）会津若松市新工業団地（河東町八田）", "note": "市内に分譲可能な工業団地がないための新規整備。磐梯河東ICから約1.3km。", "openedDate": "", "parking": "", "plannedDate": "2032-04-01", "size": "LARGE", "status": "PLANNED", "updatedAt": "2026-10-04T15:00:00+09:00"}, {"id": "noen", "address": "会津若松市東栄町8-8", "areaId": "", "areaManual": false, "category": "food", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": ["openedDate"], "events": [{"confidence": "C", "date": "2026-05-19", "description": "5月オープンの新店として紹介", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-05-19", "tier": 2, "title": "ジェラートの新店", "url": "https://aizu.goguynet.jp/2026/05/19/noen/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-05-19", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.4922335, "latEst": false, "lng": 139.9308912, "name": "ジェラート .NŌEN", "note": "2026年5月開店（日付は推定）。", "openedDate": "2026-05-01", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "paletteplaza", "address": "会津若松市幕内南町9-10", "areaId": "", "areaManual": false, "category": "retail", "chain": "CHAIN", "changeType": "CLOSURE", "closedDate": "2026-02-22", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-02-22", "description": "閉店を報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-02-22", "tier": 2, "title": "店内の写真店が閉店", "url": "https://aizu.goguynet.jp/2026/02/22/paletteplaza/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-02-22", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.4834927, "latEst": false, "lng": 139.9043842, "name": "パレットプラザ（MEGAドン・キホーテUNY会津若松店内・閉店）", "note": "テナント閉店。閉店日は報道日で代用。", "openedDate": "", "parking": "", "plannedDate": "", "size": "SMALL", "status": "CLOSED", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "pediatric-pharmacy", "address": "", "areaId": "", "areaManual": false, "category": "medical", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "D", "createdAt": "2026-10-04T15:00:00+09:00", "estimated": ["plannedDate"], "events": [{"confidence": "D", "date": "2026-10-04", "description": "「小児科クリニックと同時に10月新規オープン」の薬剤師求人を確認", "id": "e1", "source": {"name": "求人ボックス", "publishedAt": "", "tier": 3, "title": "会津若松市の新規オープン店舗の求人", "url": "https://xn--pckua2a7gp15o89zb.com/%E6%96%B0%E8%A6%8F%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3-%E5%BA%97%E8%88%97%E3%81%AE%E4%BB%95%E4%BA%8B-%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE%E5%B8%82"}, "type": "JOB_POSTING"}], "firstDiscoveredAt": "2026-10-04", "kind": "STORE", "lastCheckedAt": "2026-10-04", "name": "小児科クリニック併設の調剤薬局（10月開業予定）", "note": "求人票から推定。クリニック名・場所は未確認。", "openedDate": "", "parking": "", "plannedDate": "2026-10-01", "size": "SMALL", "status": "PLANNED", "updatedAt": "2026-10-04T15:00:00+09:00"}, {"id": "r252-nanokamachi", "address": "会津若松市七日町", "areaId": "", "areaManual": false, "category": "road", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "福島県", "confidence": "A", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "A", "date": "2024-12-18", "description": "主要事業の進捗状況に掲載", "id": "e1", "source": {"name": "福島県 会津若松建設事務所", "publishedAt": "2024-12-18", "tier": 1, "title": "主要事業の進捗状況", "url": "https://www.pref.fukushima.lg.jp/sec/41340a/kojijoho1.html"}, "type": "ADMIN_DOCUMENT"}], "firstDiscoveredAt": "2024-12-18", "kind": "INFRASTRUCTURE", "lastCheckedAt": "2026-10-04", "lat": 37.4995, "latEst": true, "lng": 139.923, "name": "国道252号 七日町工区（電線共同溝・無散水消雪）", "note": "", "openedDate": "", "parking": "", "plannedDate": "", "size": "MEDIUM", "status": "CONFIRMED", "updatedAt": "2026-10-04T09:00:00+09:00"}, {"id": "rakutto-hakkaku", "address": "会津若松市八角町13-45", "areaId": "", "areaManual": false, "category": "service", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "D", "createdAt": "2026-10-04T15:00:00+09:00", "estimated": [], "events": [{"confidence": "D", "date": "2026-10-04", "description": "新規オープンのスタッフ募集を確認", "id": "e1", "source": {"name": "求人ボックス", "publishedAt": "", "tier": 3, "title": "会津若松市の新規オープン店舗の求人", "url": "https://xn--pckua2a7gp15o89zb.com/%E6%96%B0%E8%A6%8F%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3-%E5%BA%97%E8%88%97%E3%81%AE%E4%BB%95%E4%BA%8B-%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE%E5%B8%82"}, "type": "JOB_POSTING"}], "firstDiscoveredAt": "2026-10-04", "kind": "STORE", "lastCheckedAt": "2026-10-04", "name": "ほぐし処らくっと（八角町）", "note": "求人票から新店の準備を推定。開店時期は未確認。", "openedDate": "", "parking": "", "plannedDate": "", "size": "SMALL", "status": "PLANNED", "updatedAt": "2026-10-04T15:00:00+09:00"}, {"id": "ramen-maru", "address": "会津若松市中央1丁目3-15", "areaId": "", "areaManual": false, "category": "food", "chain": "INDEPENDENT", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-01-20", "description": "2025年12月27日開店と報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-01-20", "tier": 2, "title": "中央1丁目のらぁ麺まる", "url": "https://aizu.goguynet.jp/2026/01/20/ramenmaru/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-01-20", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.4991984, "latEst": false, "lng": 139.9294368, "name": "らぁ麺 まる", "note": "", "openedDate": "2025-12-27", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "reuse-shop", "address": "", "areaId": "", "areaManual": false, "category": "retail", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "D", "createdAt": "2026-10-04T15:00:00+09:00", "estimated": [], "events": [{"confidence": "D", "date": "2026-10-04", "description": "「2026年6月末オープン予定」の求人を確認", "id": "e1", "source": {"name": "Indeed", "publishedAt": "", "tier": 3, "title": "会津若松市の新規オープン店舗の求人", "url": "https://jp.indeed.com/q-%E6%96%B0%E8%A6%8F%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3-%E5%BA%97%E8%88%97-l-%E7%A6%8F%E5%B3%B6%E7%9C%8C-%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE%E5%B8%82-%E6%B1%82%E4%BA%BA.html"}, "type": "JOB_POSTING"}], "firstDiscoveredAt": "2026-10-04", "kind": "STORE", "lastCheckedAt": "2026-10-04", "name": "リユースショップ 会津若松店", "note": "求人票に「6月末グランドオープン予定」。運営会社・住所・開店の事実は未確認。", "openedDate": "", "parking": "", "plannedDate": "2026-06-30", "size": "MEDIUM", "status": "PLANNED", "updatedAt": "2026-10-04T15:00:00+09:00"}, {"id": "ssin-studio", "address": "会津若松市白虎町", "areaId": "", "areaManual": false, "category": "beauty", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "D", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": ["plannedDate"], "events": [{"confidence": "D", "date": "2026-10-04", "description": "新規オープンの求人を確認", "id": "e1", "source": {"name": "求人ボックス", "publishedAt": "", "tier": 3, "title": "会津若松市の新規オープン店舗の求人一覧", "url": "https://xn--pckua2a7gp15o89zb.com/%E6%96%B0%E8%A6%8F%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3-%E5%BA%97%E8%88%97%E3%81%AE%E4%BB%95%E4%BA%8B-%E7%A6%8F%E5%B3%B6%E7%9C%8C%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE%E5%B8%82"}, "type": "JOB_POSTING"}], "firstDiscoveredAt": "2026-10-04", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.5065, "latEst": true, "lng": 139.933, "name": "SSIN STUDIO 会津若松店（まつげサロン）", "note": "求人情報に「2026年夏オープン予定」。開店は未確認。", "openedDate": "", "parking": "", "plannedDate": "2026-07-01", "size": "SMALL", "status": "PLANNED", "updatedAt": "2026-10-04T09:00:00+09:00"}, {"id": "sukekuro", "address": "会津若松市栄町6-31", "areaId": "", "areaManual": false, "category": "food", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-06-12", "description": "6月12日グランドオープンと報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-06-12", "tier": 2, "title": "しゃぶしゃぶ×和食居酒屋の開店", "url": "https://aizu.goguynet.jp/2026/06/12/sukekuro/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-06-12", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.4952689, "latEst": false, "lng": 139.9312809, "name": "しゃぶしゃぶ・和食居酒屋 すけくろ", "note": "", "openedDate": "2026-06-12", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "sukiya-yamami", "address": "会津若松市山見町1丁目9-1", "areaId": "", "areaManual": false, "category": "food", "chain": "CHAIN", "changeType": "RELOCATION", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": ["openedDate"], "events": [{"confidence": "C", "date": "2026-05-18", "description": "移転と求人を報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-05-18", "tier": 2, "title": "山見町のすき家が移転予定", "url": "https://aizu.goguynet.jp/2026/05/18/sukiya/"}, "type": "JOB_POSTING"}, {"confidence": "C", "date": "2026-06-18", "description": "8月頃オープン予定と続報", "id": "e2", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-06-18", "tier": 2, "title": "新すき家はドライブスルー対応", "url": "https://aizu.goguynet.jp/2026/06/18/sukiyayamami/"}, "type": "MEDIA_REPORT"}, {"confidence": "C", "date": "2026-08-01", "description": "移転先で営業中を確認（開店日は推定）", "id": "e3", "source": {"name": "Googleマップ", "publishedAt": "", "tier": 4, "title": "すき家 会津若松山見店", "url": "https://www.google.com/maps/place/?q=place_id:ChIJ-4Zk512til8RhkMSMBdpsTc"}, "type": "OPENED"}], "firstDiscoveredAt": "2026-05-18", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.5073464, "latEst": false, "lng": 139.9412736, "name": "すき家 山見町（移転）", "note": "ドライブスルー対応で北側の敷地へ移転。開店日は「8月頃」の報道からの推定。", "openedDate": "2026-08-01", "parking": "", "plannedDate": "2026-08-01", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "taroan-tsurugajo", "address": "会津若松市追手町", "areaId": "", "areaManual": false, "category": "retail", "chain": "CHAIN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "D", "createdAt": "2026-10-04T15:00:00+09:00", "estimated": [], "events": [{"confidence": "D", "date": "2026-10-04", "description": "オープニングスタッフの求人を確認", "id": "e1", "source": {"name": "Indeed", "publishedAt": "", "tier": 3, "title": "会津若松市の新店舗オープンの求人", "url": "https://jp.indeed.com/q-%E6%96%B0%E5%BA%97%E8%88%97%E3%82%AA%E3%83%BC%E3%83%97%E3%83%B3-l-%E7%A6%8F%E5%B3%B6%E7%9C%8C-%E4%BC%9A%E6%B4%A5%E8%8B%A5%E6%9D%BE%E5%B8%82-%E6%B1%82%E4%BA%BA.html"}, "type": "JOB_POSTING"}], "firstDiscoveredAt": "2026-10-04", "kind": "STORE", "lastCheckedAt": "2026-10-04", "name": "お菓子の蔵 太郎庵 鶴ヶ城前店", "note": "オープニングスタッフ募集の求人あり。新規出店か改装かは未確認。", "openedDate": "", "parking": "", "plannedDate": "", "size": "SMALL", "status": "PLANNED", "updatedAt": "2026-10-04T15:00:00+09:00"}, {"id": "wakamatsu-kita-bp", "address": "会津若松市（市北部）", "areaId": "north", "areaManual": true, "category": "large", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "福島県", "confidence": "A", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": ["plannedDate"], "events": [{"confidence": "A", "date": "2024-11-23", "description": "起工式", "id": "e1", "source": {"name": "福島県 会津若松建設事務所", "publishedAt": "", "tier": 1, "title": "若松北バイパスの起工式", "url": "https://www.pref.fukushima.lg.jp/sec/41340a/wakamatsukitabaipasu.html"}, "type": "CONSTRUCTION_START"}, {"confidence": "C", "date": "2026-10-04", "description": "2026年度開通予定との記載を確認", "id": "e2", "source": {"name": "Wikipedia 会津縦貫北道路", "publishedAt": "", "tier": 4, "title": "会津縦貫北道路", "url": "https://ja.wikipedia.org/wiki/%E4%BC%9A%E6%B4%A5%E7%B8%A6%E8%B2%AB%E5%8C%97%E9%81%93%E8%B7%AF"}, "type": "NOTE"}], "firstDiscoveredAt": "2024-11-23", "kind": "INFRASTRUCTURE", "lastCheckedAt": "2026-10-04", "lat": 37.53, "latEst": true, "lng": 139.905, "name": "国道121号 若松北バイパス（会津縦貫北道路）", "note": "2024年11月に起工式。若松西バイパス（国道118号）まで延伸する区間で、2026年度開通予定とされる（百科事典記載、公式発表は未確認）。", "openedDate": "", "parking": "", "plannedDate": "2027-03-31", "size": "LARGE", "status": "CONFIRMED", "updatedAt": "2026-10-04T15:00:00+09:00"}, {"id": "yaemasa", "address": "会津若松市栄町8-11", "areaId": "", "areaManual": false, "category": "food", "chain": "UNKNOWN", "changeType": "NEW", "closedDate": "", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-06-30", "description": "7月1日グランドオープンと報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-06-30", "tier": 2, "title": "栄町の新店 やえまさ開店", "url": "https://aizu.goguynet.jp/2026/06/30/yaemasa/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-06-30", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.4956856, "latEst": false, "lng": 139.9326579, "name": "會津らぁ麺やえまさ", "note": "", "openedDate": "2026-07-01", "parking": "", "plannedDate": "", "size": "SMALL", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}, {"id": "yamaa", "address": "会津若松市神指町", "areaId": "", "areaManual": false, "category": "food", "chain": "UNKNOWN", "changeType": "CLOSURE", "closedDate": "2025-12-30", "company": "", "confidence": "C", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "C", "date": "2026-01-17", "description": "2025年12月30日閉店を報道", "id": "e1", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-01-17", "tier": 2, "title": "神指町のやまあ食堂が閉店", "url": "https://aizu.goguynet.jp/2026/01/17/yamaashokudou/"}, "type": "MEDIA_REPORT"}], "firstDiscoveredAt": "2026-01-17", "kind": "STORE", "lastCheckedAt": "2026-10-04", "lat": 37.515, "latEst": true, "lng": 139.896, "name": "やまあ食堂（閉店）", "note": "", "openedDate": "", "parking": "", "plannedDate": "", "size": "SMALL", "status": "CLOSED", "updatedAt": "2026-10-04T09:00:00+09:00"}, {"id": "yorkbenimaru-ichiki", "address": "会津若松市藤原2丁目21-6", "areaId": "", "areaManual": false, "category": "supermarket", "chain": "CHAIN", "changeType": "RENEWAL", "closedDate": "", "company": "株式会社ヨークベニマル", "confidence": "A", "createdAt": "2026-10-04T09:00:00+09:00", "estimated": [], "events": [{"confidence": "A", "date": "2025-06-11", "description": "大店立地法 新設届出（1,995㎡）", "id": "e1", "source": {"name": "福島県 大規模小売店舗立地法届出状況（令和7年度）", "publishedAt": "2026-09-29", "tier": 1, "title": "大店立地法 新設届出一覧 令和7年度", "url": "https://www.pref.fukushima.lg.jp/uploaded/attachment/763932.pdf"}, "type": "ADMIN_DOCUMENT"}, {"confidence": "C", "date": "2026-02-15", "description": "リニューアルオープンに向けた従業員募集が報じられる", "id": "e2", "source": {"name": "号外NET 会津若松市・喜多方市", "publishedAt": "2026-02-15", "tier": 2, "title": "ヨークベニマル一箕町店の従業員募集", "url": "https://aizu.goguynet.jp/category/cat_openclose/page/2/"}, "type": "JOB_POSTING"}, {"confidence": "B", "date": "2026-05-29", "description": "開店", "id": "e3", "source": {"name": "流通ニュース", "publishedAt": "", "tier": 2, "title": "一箕町店の新設・開店に関する記事", "url": "https://www.ryutsuu.biz/store/r20251001008.html"}, "type": "OPENED"}], "firstDiscoveredAt": "2025-06-11", "kind": "LARGE_COMMERCIAL", "lastCheckedAt": "2026-10-04", "lat": 37.5149341, "latEst": false, "lng": 139.9416897, "name": "ヨークベニマル一箕町店（建替え）", "note": "大店立地法の新設届出（店舗面積1,995㎡、駐車場70台）。既存店の建替えのため、純増の効果は新規出店より小さい可能性あり。", "openedDate": "2026-05-29", "parking": "yes", "plannedDate": "2026-02-12", "size": "LARGE", "status": "OPEN", "updatedAt": "2026-10-04T12:00:00+09:00"}], "configs": {"main": {"areas": [{"id": "center", "name": "中心市街地／七日町周辺", "towns": ["七日町", "中央", "大町", "栄町", "上町", "本町", "馬場町", "日新町", "相生町", "追手町"], "outlook": {"stance": "mixed", "headline": "公共投資で再生を図る中心拠点。人口減少の影響も最も大きい", "plus": ["立地適正化計画で「中心拠点」とされ、都市機能誘導区域の中核（会津若松駅〜七日町、庁舎〜竹田綜合病院、鶴ヶ城〜県立病院跡地）", "新市庁舎が2025年5月に供用開始", "県立病院跡地に子どもの屋内遊び場を核とした公共施設を整備中（2028年5月の供用開始が目標）", "会津若松駅前の都市基盤整備構想、まちなかウォーカブル推進", "栄町・中央・大町で小規模飲食の新規出店が続いている"], "minus": ["市の推計では2040年に向けて人口減少が最も顕著な地域", "空き家・駐車場化など低未利用地が多く、歩行者通行量も減少傾向", "跡地の民間収益施設は事業者の確保が不透明と報じられている"]}, "landPrice": {"points": [["七日町駅周辺（平均）", 49562, -0.3, "https://tochidai.info/fukushima/aizuwakamatsu/"], ["商業地 七日町", 59900, 1.5, "https://totinokati.com/kakaku/place/07202/kouji/"], ["商業地 上町", 49000, 1.4, "https://totinokati.com/kakaku/place/07202/kouji/"], ["商業地 大町（平均）", 57800, 0.8, "https://totinokati.com/kakaku/place/07202/kouji/"], ["商業地 中町", 65900, -1.8, "https://totinokati.com/kakaku/place/07202/kouji/"], ["商業地 本町", 46600, -1.7, "https://totinokati.com/kakaku/place/07202/kouji/"]], "view": "市内で最も地価が高い。商業地は七日町・上町・大町で上昇、中町・本町で下落と二極化。公共投資が進む地点の周辺は底堅いと見られる。"}}, {"id": "east", "name": "駅東側／一箕町周辺", "towns": ["一箕町", "駅前町", "白虎町", "桧町", "藤原", "花畑東", "八角町", "山見町", "蚕養町"], "outlook": {"stance": "up", "headline": "民間の商業投資が最も集まっている。住宅供給も続く", "plus": ["ヨークベニマル一箕町店の建替え、串カツ田中・すき家（移転拡張）など民間投資が集中", "藤原・山見・桧町で新規出店が連続（出店の連鎖の初期段階の可能性）", "一箕町八幡・八角町で分譲住宅の供給が続く", "松長団地周辺は市の推計で人口増加が見込まれる数少ない場所（居住誘導区域）"], "minus": ["大部分は都市機能誘導区域の外で、大型の誘導施設は市の誘導対象ではない", "飯盛山・東山地区は土砂災害リスクから居住誘導区域外", "千石通りでは新店開業時の渋滞の声もある"]}, "landPrice": {"points": [["会津若松駅周辺（平均）", 43946, 0.48, "https://tochidai.info/fukushima/aizuwakamatsu/"]], "view": "駅周辺は市内主要駅で最も高い上昇率。出店集中と分譲供給が続いており、横ばい〜小幅上昇の材料が多い。"}}, {"id": "north", "name": "町北町～神指町周辺", "towns": ["町北町", "神指町", "高野町", "扇町"], "outlook": {"stance": "mixed", "headline": "道路・産業の大型案件が進む一方、小売は入れ替わり", "plus": ["国道121号若松北バイパス（会津縦貫北道路）が工事中", "町北町地区は居住誘導区域。工業地域内で住居系の扇町土地区画整理事業が進む", "高久工業団地（半導体関連の集積）が国の地域経済牽引の重点促進区域", "IC周辺は流通業務地としての立地が県の方針"], "minus": ["マックハウス会津インター店、やまあ食堂など閉店が続いた", "市街化調整区域が広く、一般の店舗・住宅は原則立地できない"]}, "landPrice": {"points": [["住宅地 神指町天満", 12100, -2.42, "https://e-estate.jp/land/market-price/fukushima/aizuwakamatsushi/"]], "view": "郊外の住宅地は下落傾向。若松北バイパス開通やIC周辺の流通用地需要が下支え材料になり得る。"}}, {"id": "south", "name": "門田町～西若松周辺", "towns": ["門田町", "材木町", "西年貢", "錦町", "飯寺北", "飯寺南", "幕内"], "outlook": {"stance": "mixed", "headline": "地域拠点で生活機能は伸びるが、水害リスクが前提条件", "plus": ["西若松駅〜鶴ヶ城周辺が「地域拠点」として都市機能誘導区域に指定", "飯寺北に住宅型有料老人ホーム（112室）が開設し雇用も発生", "飯寺地区の医療機器製造の集積が重点促進区域", "飯寺南で分譲住宅が予告されている"], "minus": ["阿賀川沿いは浸水想定区域が広く、西若松駅西側や飯寺の一部は居住誘導区域から除外", "発展には河川改修など防災投資の進捗が前提"]}, "landPrice": {"points": [["西若松駅周辺（平均）", 49262, 0.07, "https://tochidai.info/fukushima/aizuwakamatsu/"], ["商業地 飯寺南（路線商業）", 36000, 1.1, "https://totinokati.com/kakaku/place/07202/kouji/"], ["住宅地 門田町堤沢", 10100, -2.88, "https://diamond-fudosan.jp/articles/-/1112365"]], "view": "駅周辺はほぼ横ばい、幹線沿いの路線商業地は上昇、郊外の住宅地は下落。浸水リスクの高い区域は弱含みが続く可能性。"}}, {"id": "other", "name": "その他", "towns": ["河東町"], "fallback": true, "outlook": {"stance": "mixed", "headline": "生活拠点として維持が基本方針", "plus": ["河東支所周辺・北会津支所周辺は生活拠点に位置づけ", "北会津町上米塚地区で既存工業団地と連携した土地利用を県が推進"], "minus": ["多くが市街化調整区域で、新規の店舗・住宅開発は限定的", "東長原駅周辺は人口密度が低く居住誘導区域から除外"]}, "landPrice": {"points": [["広田駅周辺（平均）", 16200, -1.8, "https://tochidai.info/fukushima/aizuwakamatsu/"], ["住宅地 北会津町中荒井", 8450, -1.97, "https://e-estate.jp/land/market-price/fukushima/aizuwakamatsushi/"], ["住宅地 河東町八田", 7400, -1.33, "https://e-estate.jp/land/market-price/fukushima/aizuwakamatsushi/"]], "view": "郊外の下落が続く。河東町の新工業団地（2032年度分譲予定）は長期の雇用・地価の材料。"}}, {"id": "kitakata", "name": "喜多方市", "towns": ["喜多方市"], "peripheral": true, "outlook": {"stance": "mixed", "headline": "高規格道路で若松との結びつきが強まる", "plus": ["会津縦貫北道路の全線開通で若松〜喜多方が30分程度に", "クスリのアオキ喜多方桜ガ丘店（1,353㎡）が新設予定"], "minus": ["会津若松市とは別の計画体系のため、本サイトの都市計画評価は対象外"]}}, {"id": "aizubange", "name": "会津坂下町", "towns": ["会津坂下町"], "peripheral": true}, {"id": "aizumisato", "name": "会津美里町", "towns": ["会津美里町"], "peripheral": true}], "plan": {"summary": "会津若松市の人口は1995年の約13.7万人をピークに減少し、2040年には約9.3万人と10万人を下回る見通し。立地適正化計画（2022年）は、中心拠点（会津若松駅〜鶴ヶ城）と地域拠点（西若松駅〜鶴ヶ城）に都市機能を、居住誘導区域（市街化区域の62%）に住まいを緩やかに集める「コンパクト＋ネットワーク」を掲げる。", "sources": [["会津若松市 立地適正化計画（案）2022年5月", "https://www.city.aizuwakamatsu.fukushima.jp/docs/2020103000026/file_contents/an.pdf"], ["会津都市計画区域マスタープラン（福島県 令和5年）", "https://www.pref.fukushima.lg.jp/uploaded/attachment/588098.pdf"], ["県立病院跡地の利活用について（会津若松市）", "https://www.city.aizuwakamatsu.fukushima.jp/docs/2025092900012/"], ["市役所庁舎の整備（会津若松市）", "https://www.city.aizuwakamatsu.fukushima.jp/docs/2018052500025/"]], "landCity": {"text": "2026年公示地価の市平均は住宅地33,850円/㎡（前年比−0.19%）、商業地52,162円/㎡（＋0.32%）。中心商業地は緩やかな上昇、郊外住宅地は下落という構図。", "source": ["土地代データ（公示地価 2026年）", "https://tochidai.info/fukushima/aizuwakamatsu/"]}}, "govInfo": [{"level": "市", "date": "2026-03", "title": "新工業団地の整備計画を改定（河東町八田）", "body": "開発約30ha・分譲約20ha・11区画。2026年度に基本設計、2029〜31年度に造成、2032年度に分譲開始予定。事業費は約44.9億円。磐梯河東ICから約1.3km。", "impact": "河東周辺の雇用・住宅需要（長期）", "area": "other", "src": ["会津若松市 新工業団地基本計画（改定版）概要", "https://www.city.aizuwakamatsu.fukushima.jp/docs/2024040100023/file_contents/gaiyou.pdf"]}, {"level": "国・県", "date": "2026年度", "title": "若松北バイパス（会津縦貫北道路の延伸）", "body": "会津若松北ICから若松西バイパス（国道118号）方面へ延伸する区間。2024年11月起工、2026年度開通予定との記載あり（公式の開通日は未確認）。", "impact": "町北町〜神指町、西側の物流・通勤", "area": "north", "src": ["福島県 会津若松建設事務所", "https://www.pref.fukushima.lg.jp/sec/41340a/wakamatsukitabaipasu.html"]}, {"level": "国", "date": "事業中", "title": "磐越自動車道の4車線化（会津坂下IC〜西会津IC など）", "body": "会津若松IC以西の暫定2車線区間のうち、会津坂下〜西会津などで4車線化工事中。開通年度は未定。新潟方面の物流・冬期の通行安定に効く。", "impact": "市全体（物流・企業立地）", "area": "", "src": ["NEXCO東日本 磐越自動車道の開通予定", "https://www.e-nexco.co.jp/en/activity/agreeable/open_schedule/tohoku/tohoku18.html"]}, {"level": "県", "date": "2026-09", "title": "大規模小売店舗の新設届出：今年度は会津若松市内なし", "body": "令和8年度の新設届出（9月時点）は郡山・いわき・白河などで、会津若松市内の案件はない。市内の大型店は当面、新設より建替え型が中心と見られる。", "impact": "大型商業の新規出店（短期）", "area": "", "src": ["福島県 大規模小売店舗立地法届出状況（令和8年度）", "https://www.pref.fukushima.lg.jp/uploaded/attachment/763931.pdf"]}, {"level": "県", "date": "2023", "title": "会津都市計画区域マスタープラン", "body": "IC周辺での流通業務地の形成、北会津町上米塚地区での既存工業団地と連携した土地利用、駅前・栄町・中町での市街地再開発による都市機能更新を方針として示す。", "impact": "IC周辺・北会津・中心市街地", "area": "", "src": ["会津都市計画区域マスタープラン（福島県）", "https://www.pref.fukushima.lg.jp/uploaded/attachment/588098.pdf"]}, {"level": "市", "date": "2028-05目標", "title": "県立病院跡地の公共施設（城前）", "body": "子どもの屋内遊び場を核とした多世代交流施設を整備中。供用開始は2028年5月が目標。南側の民間収益施設は事業者確保が課題と報じられている。", "impact": "中心市街地南部（鶴ヶ城周辺）", "area": "center", "src": ["県立病院跡地の利活用について（会津若松市）", "https://www.city.aizuwakamatsu.fukushima.jp/docs/2025092900012/"]}, {"level": "市", "date": "2025-05", "title": "新市庁舎の供用開始", "body": "東栄町の新庁舎が2025年5月に供用開始。周辺道路・駐車場の整備と合わせ、中心拠点の機能を更新。", "impact": "中心市街地", "area": "center", "src": ["市役所庁舎の整備（会津若松市）", "https://www.city.aizuwakamatsu.fukushima.jp/docs/2018052500025/"]}, {"level": "市", "date": "2022", "title": "立地適正化計画", "body": "中心拠点（会津若松駅〜鶴ヶ城）と地域拠点（西若松駅〜鶴ヶ城）に都市機能を、居住誘導区域に住まいを緩やかに集める方針。区域外の3戸以上の住宅開発などは届出が必要。", "impact": "市全体の立地の方向性", "area": "", "src": ["会津若松市 立地適正化計画（案）", "https://www.city.aizuwakamatsu.fukushima.jp/docs/2020103000026/file_contents/an.pdf"]}]}}, "exportedAt": "2026-10-04"};</script>
+<script>
+"use strict";
+// ================= 定数 =================
+const KIND = { STORE: "店舗", LARGE_COMMERCIAL: "大型商業施設", CONSTRUCTION: "建設・開発", HOUSING: "住宅", EMPLOYMENT: "求人・雇用", INFRASTRUCTURE: "交通・インフラ" };
+const CATS = {
+  STORE: [["food","飲食"],["retail","小売"],["drugstore","ドラッグストア"],["supermarket","スーパー"],["homecenter","ホームセンター"],["beauty","美容／理容"],["medical","医療"],["service","サービス"],["hotel","ホテル／宿泊"],["entertainment","娯楽"],["other","その他"]],
+  LARGE_COMMERCIAL: [["supermarket","スーパー"],["homecenter","ホームセンター"],["drugstore","ドラッグストア"],["shopping_center","ショッピングセンター"],["electronics","家電"],["specialty","大型専門店"],["complex","複合商業施設"]],
+  CONSTRUCTION: [["store","店舗建設"],["commercial","商業施設"],["hotel","ホテル"],["apartment","集合住宅"],["factory","工場"],["logistics","物流施設"],["public","公共施設"]],
+  HOUSING: [["subdivision","分譲地"],["detached","戸建住宅開発"],["condo","マンション"],["apartment","アパート"]],
+  EMPLOYMENT: [["opening_staff","オープニングスタッフ"],["job","新規求人"],["large_job","大型求人"],["new_office","新規事業所"]],
+  INFRASTRUCTURE: [["road","道路整備"],["road_widening","道路拡張"],["intersection","交差点改良"],["new_road","新規道路"],["transit","公共交通"],["parking","駐車場"],["station","駅周辺整備"],["large","大型インフラ"]],
+};
+const catLabel = (k, c) => (CATS[k] || []).find(x => x[0] === c)?.[1] || c;
+const CHAIN_GROUP = { supermarket:"スーパー", shopping_center:"スーパー", complex:"スーパー", drugstore:"ドラッグストア", food:"飲食", beauty:"美容・サービス", service:"美容・サービス", medical:"医療", retail:"小売", electronics:"小売", specialty:"小売", homecenter:"小売", hotel:"宿泊・娯楽", entertainment:"宿泊・娯楽", other:"その他" };
+const STATUS = { PLANNED: "予定", CONFIRMED: "確定", OPEN: "開店済／稼働中", CLOSED: "閉店／中止" };
+const SIZE = { SMALL: "小", MEDIUM: "中", LARGE: "大" };
+const CHANGE = { NEW: "新規", RELOCATION: "移転", RENEWAL: "リニューアル", CLOSURE: "閉店" };
+const CHAIN = { CHAIN: "チェーン", INDEPENDENT: "個人店", UNKNOWN: "不明" };
+const CONF = { A: "A 一次情報で確認", B: "B 複数情報源で一致", C: "C 地元メディア等", D: "D 求人・SNSから推測", E: "E 未確認" };
+const EVENT = { JOB_POSTING: "求人を確認", MEDIA_REPORT: "メディア掲載", OFFICIAL_ANNOUNCEMENT: "公式発表", ADMIN_DOCUMENT: "行政資料", CONSTRUCTION_START: "着工", OPENED: "開店", CLOSED: "閉店", RELOCATED: "移転", RENEWED: "リニューアル", STATUS_CHANGE: "ステータス変更", NOTE: "メモ" };
+const TIER = { 1: "一次情報（行政・企業）", 2: "地元メディア", 3: "求人", 4: "地図・口コミ・SNS" };
+const PIN = { new: "新規出店", planned: "出店予定", large: "大型店", closed: "閉店", construction: "建設", housing: "住宅開発", infra: "道路整備", job: "求人" };
+const PIN_COLOR = { new: "#2e7d5b", planned: "#2e7d5b", large: "#1d2b45", closed: "#c0392b", construction: "#8a6d3b", housing: "#6b5b95", infra: "#5b6b7a", job: "#b7791f" };
+const ESTIMABLE = [["address","住所"],["company","企業"],["size","規模"],["plannedDate","開店予定日"],["openedDate","開店日"]];
+
+const DEFAULT_AREAS = [
+  { id: "center", name: "中心市街地／七日町周辺", towns: ["七日町","中央","大町","栄町","上町","本町","馬場町","日新町","相生町"] },
+  { id: "east", name: "駅東側／一箕町周辺", towns: ["一箕町","駅前町","白虎町"] },
+  { id: "north", name: "町北町～神指町周辺", towns: ["町北町","神指町","高野町"] },
+  { id: "south", name: "門田町～西若松周辺", towns: ["門田町","材木町","西年貢","錦町"] },
+  { id: "other", name: "その他", towns: [], fallback: true },
+  { id: "kitakata", name: "喜多方市", towns: ["喜多方市"], peripheral: true },
+  { id: "aizubange", name: "会津坂下町", towns: ["会津坂下町"], peripheral: true },
+  { id: "aizumisato", name: "会津美里町", towns: ["会津美里町"], peripheral: true },
+];
+const WEIGHT_DEFS = [
+  ["store.SMALL","新規出店（小規模）","store",1],["store.MEDIUM","新規出店（中規模）","store",2],["store.LARGE","新規出店（大規模）","store",5],
+  ["large.supermarket","大型：スーパー","large",4],["large.drugstore","大型：ドラッグストア","large",2],["large.homecenter","大型：ホームセンター","large",4],
+  ["large.electronics","大型：家電","large",4],["large.specialty","大型：大型専門店","large",4],["large.shopping_center","大型：ショッピングセンター","large",8],
+  ["large.complex","大型：複合施設","large",10],["construction.commercial","建設：商業施設","large",5],["construction.hotel","建設：ホテル","large",3],
+  ["construction.public","建設：公共施設","infra",3],
+  ["housing.subdivision","分譲地・戸建開発","housing",3],["housing.apartment","集合住宅・マンション","housing",3],
+  ["employment.job","新規求人","employment",1],["employment.large_job","大型求人","employment",3],["employment.new_office","新規事業所・工場・物流","employment",4],
+  ["infra.road","道路整備など","infra",3],["infra.large","大型インフラ","infra",5],
+  ["closure.SMALL","小規模閉店","closure",-1],["closure.MEDIUM","中規模閉店","closure",-2],["closure.LARGE","大型店閉店","closure",-5],["closure.large_facility","大型施設撤退","closure",-8],
+  ["conf.A","確度係数 A","factor",1],["conf.B","確度係数 B","factor",.9],["conf.C","確度係数 C","factor",.7],["conf.D","確度係数 D","factor",.4],["conf.E","確度係数 E（0＝計算しない）","factor",0],
+  ["status.PLANNED","状態係数 予定","factor",.5],["status.CONFIRMED","状態係数 確定","factor",.8],["status.OPEN","状態係数 開店済","factor",1],
+  ["decay.months","影響が0になるまでの月数","factor",12],["scale","点数の倍率","factor",1.5],
+];
+const GROUP_LABEL = { large: "大型商業・大型投資", housing: "住宅", employment: "雇用", infra: "交通・インフラ", store: "新規出店", closure: "閉店（マイナス）", factor: "計算係数" };
+
+// ================= 状態 =================
+const DEFAULT_CITY = "aizuwakamatsu";
+const AIZU_CITY = { id: DEFAULT_CITY, name: "会津若松市", center: [37.4948, 139.9298] };
+const S = { db: null, projects: [], config: null, configs: {}, city: (() => { try { return localStorage.getItem("watch-city") || DEFAULT_CITY; } catch { return DEFAULT_CITY; } })(), loadedP: false, loadedC: false, canWrite: null, dbMissing: false, mapFilter: null, pickTarget: null };
+
+// ================= ユーティリティ =================
+const esc = v => String(v ?? "").replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c]));
+const DAY = 864e5, MONTH = 30.44 * DAY, JST = 9 * 36e5;
+const toDate = s => (s ? new Date(s + "T00:00:00+09:00") : null);
+const todayStr = () => new Date(Date.now() + JST).toISOString().slice(0, 10);
+const fmt = s => (s ? s.replaceAll("-", "/") : "—");
+const signed = n => (n > 0 ? "+" + n : String(n));
+const r1 = n => Math.round(n * 10) / 10;
+const rid = () => Math.random().toString(36).slice(2, 10);
+function toast(msg) { const t = document.getElementById("toast"); t.textContent = msg; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => (t.hidden = true), 3200); }
+
+const cityDocId = id => id === DEFAULT_CITY ? "main" : id;
+function cities() {
+  const list = Object.entries(S.configs).map(([doc, c]) => doc === "main" ? { ...AIZU_CITY, ...(c.city || {}) } : (c.city || { id: doc, name: doc, center: AIZU_CITY.center }));
+  if (!list.some(c => c.id === DEFAULT_CITY)) list.unshift(AIZU_CITY);
+  return list;
+}
+const curCity = () => cities().find(c => c.id === S.city) || AIZU_CITY;
+const isAizu = () => S.city === DEFAULT_CITY;
+function syncConfig() { S.config = S.configs[cityDocId(S.city)] || null; setBB(); }
+function setCity(id) { S.city = id; try { localStorage.setItem("watch-city", id); } catch {} S.mapFilter = null; S.mapView = {};
+let LSEQ = 0; const LMAPS = {};
+const M_PER_UNIT = () => (BB.maxLng - BB.minLng) * 111320 * Math.cos(curCity().center[0] * Math.PI / 180) / BB.W; syncConfig(); location.hash = "#/"; render(); }
+function cfg() {
+  const c = S.config || {};
+  const w = Object.fromEntries(WEIGHT_DEFS.map(d => [d[0], d[3]]));
+  Object.assign(w, c.weights || {});
+  return { areas: (c.areas && c.areas.length ? c.areas : (isAizu() ? DEFAULT_AREAS : [{ id: "all", name: "市内全域", towns: [], fallback: true }])), weights: w };
+}
+function resolveArea(p, areas) {
+  if (p.areaManual && p.areaId && areas.some(a => a.id === p.areaId)) return p.areaId;
+  const addr = p.address || "";
+  let best = null, len = 0;
+  for (const a of areas) for (const t of a.towns || []) if (t && addr.includes(t) && t.length > len) { best = a.id; len = t.length; }
+  return best || (areas.find(a => a.fallback) || {}).id || null;
+}
+function prepared() {
+  const { areas } = cfg();
+  return S.projects.filter(p => (p.city || DEFAULT_CITY) === S.city).map(p => ({ ...p, area: resolveArea(p, areas), fd: toDate(p.firstDiscoveredAt) || new Date(p.createdAt || Date.now()), od: toDate(p.openedDate), cd: toDate(p.closedDate), pd: toDate(p.plannedDate), cr: new Date(p.createdAt || Date.now()) }));
+}
+function pinOf(p) {
+  if (p.status === "CLOSED" || p.changeType === "CLOSURE") return "closed";
+  return { LARGE_COMMERCIAL: p.status === "OPEN" ? "large" : "planned", STORE: p.status === "OPEN" ? "new" : "planned", CONSTRUCTION: "construction", HOUSING: "housing", INFRASTRUCTURE: "infra", EMPLOYMENT: "job" }[p.kind] || "new";
+}
+
+// ================= スコア =================
+// 点数 = clamp(50 + scale × Σ 基本点 × 確度係数 × 状態係数 × 時間減衰)。50=変化なし。1案件1回だけ数える
+function statusAsOf(p, asOf) {
+  if (p.fd > asOf) return null;
+  if (p.cd) { if (p.cd <= asOf) return "CLOSED"; }
+  else if (p.status === "CLOSED" || p.changeType === "CLOSURE") return "CLOSED";
+  if (p.od) return p.od <= asOf ? "OPEN" : (p.status === "PLANNED" ? "PLANNED" : "CONFIRMED");
+  if (p.status === "CLOSED") return "CONFIRMED";
+  return p.status;
+}
+function posKey(p) {
+  const c = p.category;
+  switch (p.kind) {
+    case "STORE": return "store." + p.size;
+    case "LARGE_COMMERCIAL": return "large." + c;
+    case "CONSTRUCTION": return c === "store" ? "store." + p.size : c === "commercial" ? "construction.commercial" : c === "hotel" ? "construction.hotel" : c === "apartment" ? "housing.apartment" : (c === "factory" || c === "logistics") ? "employment.new_office" : c === "public" ? "construction.public" : null;
+    case "HOUSING": return (c === "subdivision" || c === "detached") ? "housing.subdivision" : "housing.apartment";
+    case "EMPLOYMENT": return c === "large_job" ? "employment.large_job" : c === "new_office" ? "employment.new_office" : "employment.job";
+    case "INFRASTRUCTURE": return c === "large" ? "infra.large" : "infra.road";
+  }
+  return null;
+}
+function closeKey(p) {
+  if (p.kind === "LARGE_COMMERCIAL") return (p.category === "shopping_center" || p.category === "complex") ? "closure.large_facility" : "closure.LARGE";
+  if (p.kind === "STORE") return "closure." + p.size;
+  if (p.kind === "EMPLOYMENT" && p.category === "new_office") return "closure.LARGE";
+  return null;
+}
+const groupOf = k => k.startsWith("closure") ? "closure" : k.startsWith("store") ? "store" : k.startsWith("housing") ? "housing" : k.startsWith("employment") ? "employment" : (k.startsWith("infra") || k === "construction.public") ? "infra" : "large";
+function contrib(p, asOf, w) {
+  const s = statusAsOf(p, asOf); if (!s) return null;
+  const key = s === "CLOSED" ? closeKey(p) : posKey(p); if (!key) return null;
+  const ref = s === "CLOSED" ? (p.cd || p.fd) : s === "OPEN" ? (p.od || p.fd) : p.fd;
+  const months = (asOf - ref) / MONTH;
+  const decay = months < 0 ? 1 : Math.max(0, 1 - months / Math.max(1, w["decay.months"]));
+  const v = (w[key] ?? 0) * (w["conf." + p.confidence] ?? 0) * (s === "CLOSED" ? 1 : (w["status." + s] ?? 1)) * decay;
+  return v ? { id: p.id, key, group: groupOf(key), value: v } : null;
+}
+function scoreAt(ps, asOf, w) {
+  const cs = ps.map(p => contrib(p, asOf, w)).filter(Boolean);
+  const raw = cs.reduce((s, c) => s + c.value, 0);
+  return { raw, cs, score: r1(Math.max(0, Math.min(100, 50 + w.scale * raw))) };
+}
+const isShop = p => p.kind === "STORE" || p.kind === "LARGE_COMMERCIAL";
+const isLarge = p => p.kind === "LARGE_COMMERCIAL" || (p.kind === "STORE" && p.size === "LARGE") || (p.kind === "CONSTRUCTION" && (p.category === "commercial" || p.size === "LARGE"));
+const within = (d, a, b) => !!d && d > a && d <= b;
+function stats(ps, asOf) {
+  const m3 = new Date(asOf - 90 * DAY), m12 = new Date(asOf - 365 * DAY);
+  const recent = p => p.fd > m12 && p.fd <= asOf;
+  const closedIn = (p, from) => isShop(p) && statusAsOf(p, asOf) === "CLOSED" && within(p.cd || p.fd, from, asOf);
+  return {
+    open3: ps.filter(p => isShop(p) && p.changeType !== "CLOSURE" && within(p.od, m3, asOf)).length,
+    open12: ps.filter(p => isShop(p) && p.changeType !== "CLOSURE" && within(p.od, m12, asOf)).length,
+    close3: ps.filter(p => closedIn(p, m3)).length,
+    close12: ps.filter(p => closedIn(p, m12)).length,
+    large: ps.filter(p => isLarge(p) && recent(p) && statusAsOf(p, asOf) !== "CLOSED").length,
+    construction: ps.filter(p => p.kind === "CONSTRUCTION" && recent(p)).length,
+    housing: ps.filter(p => p.kind === "HOUSING" && recent(p)).length,
+    jobs: ps.filter(p => p.kind === "EMPLOYMENT" && recent(p)).length,
+    infra: ps.filter(p => p.kind === "INFRASTRUCTURE" && recent(p)).length,
+  };
+}
+function chainOf(ps, asOf) {
+  const m12 = new Date(asOf - 365 * DAY);
+  const shops = ps.filter(p => isShop(p) && p.fd > m12 && p.fd <= asOf && statusAsOf(p, asOf) !== "CLOSED");
+  const groups = [...new Set(shops.map(p => CHAIN_GROUP[p.category] || "その他"))];
+  return { detected: groups.length >= 3 && shops.some(isLarge), groups, withHousing: ps.some(p => p.kind === "HOUSING" && p.fd > m12 && p.fd <= asOf) };
+}
+const monthKey = d => { const j = new Date(+d + JST); return j.getUTCFullYear() + "-" + String(j.getUTCMonth() + 1).padStart(2, "0"); };
+function analyze(asOf = new Date()) {
+  const { areas, weights: w } = cfg();
+  const all = prepared();
+  const j = new Date(+asOf + JST), Y = j.getUTCFullYear(), M = j.getUTCMonth();
+  const res = areas.map(area => {
+    const ps = all.filter(p => p.area === area.id);
+    const now = scoreAt(ps, asOf, w), prev = scoreAt(ps, new Date(asOf - 90 * DAY), w);
+    const breakdown = {}; now.cs.forEach(c => (breakdown[c.group] = (breakdown[c.group] || 0) + c.value));
+    const st = stats(ps, asOf), ch = chainOf(ps, asOf), mom = r1(now.score - prev.score);
+    const reasons = [];
+    if (st.large) reasons.push(`大型案件 ${st.large}件`);
+    if (ch.detected) reasons.push(`出店の連鎖（${ch.groups.join("・")}）`);
+    if (ch.detected && ch.withHousing) reasons.push("住宅開発と同時進行");
+    if (st.open3 >= 3) reasons.push(`直近3か月で${st.open3}件の出店`);
+    if (st.infra && st.open12) reasons.push("道路整備＋出店");
+    if (st.jobs >= 3) reasons.push(`求人 ${st.jobs}件`);
+    if (st.close3 >= 3) reasons.push(`直近3か月で閉店 ${st.close3}件`);
+    const attention = (mom >= 5 && (st.large || ch.detected)) ? "高" : (mom >= 2 || st.large || ch.detected) ? "中" : "低";
+    const trend = [];
+    for (let i = 11; i >= 0; i--) {
+      const end = new Date(Math.min(Date.UTC(Y, M - i + 1, 1) - JST - 1, +asOf));
+      trend.push({ period: monthKey(end), score: scoreAt(ps, end, w).score });
+    }
+    return { area, ps, score: now.score, raw: now.raw, hasData: now.cs.length > 0, mom, breakdown, st, ch, attention, reasons, trend,
+      top: [...now.cs].sort((a, b) => Math.abs(b.value) - Math.abs(a.value)).slice(0, 5) };
+  });
+  res.sort((a, b) => (b.hasData - a.hasData) || (b.score - a.score));
+  return { all, res };
+}
+function alertsOf(res, all, asOf = new Date()) {
+  const out = [], d30 = new Date(asOf - 30 * DAY), areaName = id => (cfg().areas.find(a => a.id === id) || {}).name || "";
+  for (const p of all) {
+    if (p.cr < d30 && p.fd < d30 && !within(p.cd, d30, asOf)) continue;
+    const s = statusAsOf(p, asOf);
+    if (s === "CLOSED" && (isLarge(p) || p.size === "LARGE")) out.push({ warn: true, href: "#/project/" + p.id, text: "大型店の閉店：" + p.name });
+    else if (isLarge(p) && s !== "CLOSED") out.push({ href: "#/project/" + p.id, text: "大型案件：" + p.name + "（" + areaName(p.area) + "）" });
+    else if (p.kind === "EMPLOYMENT" && p.category === "large_job") out.push({ href: "#/project/" + p.id, text: "大型求人：" + p.name });
+  }
+  for (const a of res) {
+    const h = "#/area/" + a.area.id, n = a.area.name;
+    if (a.ch.detected) out.push({ href: h, text: n + "：商業集積が進行している可能性" });
+    if (a.mom >= 5) out.push({ href: h, text: `${n}：3か月でスコア +${a.mom}` });
+    if (a.st.close3 >= 3) out.push({ warn: true, href: h, text: `${n}：閉店が増加（3か月で${a.st.close3}件）` });
+    if (a.st.open3 >= 3) out.push({ href: h, text: n + "：短期間に複数出店" });
+    if (a.st.housing && a.st.open12 && !a.ch.detected) out.push({ href: h, text: n + "：住宅開発＋店舗出店" });
+  }
+  return out;
+}
+
+// ================= 地図 =================
+let BB = { minLat: 37.452, maxLat: 37.555, minLng: 139.865, maxLng: 139.985, W: 600, H: 650 };
+function setBB() { const [la, ln] = curCity().center; BB = isAizu() ? { minLat: 37.452, maxLat: 37.555, minLng: 139.865, maxLng: 139.985, W: 600, H: 650 } : { minLat: la - 0.0515, maxLat: la + 0.0515, minLng: ln - 0.06, maxLng: ln + 0.06, W: 600, H: 650 }; }
+const proj = (lat, lng) => [(lng - BB.minLng) / (BB.maxLng - BB.minLng) * BB.W, (BB.maxLat - lat) / (BB.maxLat - BB.minLat) * BB.H];
+const unproj = (x, y) => [BB.maxLat - y / BB.H * (BB.maxLat - BB.minLat), BB.minLng + x / BB.W * (BB.maxLng - BB.minLng)];
+const AIZU_ZONES = { center: [37.4975, 139.927, 55], east: [37.5085, 139.9425, 72], north: [37.523, 139.905, 80], south: [37.4815, 139.911, 62] };
+// Googleマップで確認した実座標
+const AIZU_LANDMARKS = [
+  ["会津若松駅", 37.5078657, 139.9303261, "st"], ["七日町駅", 37.5015088, 139.9192036, "st"], ["西若松駅", 37.4859549, 139.9140936, "st"],
+  ["鶴ヶ城", 37.4878198, 139.9296657, "castle"], ["市役所", 37.4948395, 139.929765, "gov"], ["AiCT", 37.4921352, 139.9305533, "gov"],
+  ["竹田綜合病院", 37.4900675, 139.9225151, "hosp"], ["会津中央病院", 37.5216853, 139.9451252, "hosp"], ["会津医療センター", 37.551952, 139.9076217, "hosp"],
+  ["会津大学", 37.5238424, 139.9374396, "univ"], ["会津若松IC", 37.5264576, 139.9190342, "ic"], ["会津若松北IC", 37.5356634, 139.9142176, "ic"],
+  ["飯盛山", 37.5035038, 139.9560077, "sight"], ["東山温泉", 37.4785635, 139.9605713, "sight"], ["MEGAドン・キホーテ", 37.4834927, 139.9043842, "shop"],
+];
+const AIZU_TOWNS = [["藤原", 37.5150, 139.9445], ["山見町", 37.5090, 139.9440], ["桧町", 37.5012, 139.9458], ["花畑東", 37.4972, 139.9450], ["蚕養町", 37.5048, 139.9372], ["栄町", 37.4942, 139.9335], ["中央", 37.4998, 139.9312], ["大町", 37.4993, 139.9240], ["飯寺北", 37.4798, 139.9098], ["幕内", 37.4848, 139.9015], ["神指町", 37.5175, 139.8886], ["門田町", 37.4610, 139.9404], ["北会津町", 37.4600, 139.8720], ["一箕町八幡", 37.5008, 139.9605], ["鶴賀", 37.5200, 139.9480], ["町北町", 37.5300, 139.9255]];
+const AIZU_RAIL = [[37.5078657, 139.9303261], [37.5015088, 139.9192036], [37.4859549, 139.9140936]];
+const ZONES_ = () => isAizu() ? AIZU_ZONES : ((S.config || {}).zones || {});
+const LANDMARKS_ = () => isAizu() ? AIZU_LANDMARKS : ((S.config || {}).landmarks || []);
+const TOWNS_ = () => isAizu() ? AIZU_TOWNS : ((S.config || {}).towns || []);
+const RAIL_ = () => isAizu() ? AIZU_RAIL : [];
+const LM_ICON = { st: "■", castle: "◆", gov: "●", hosp: "✚", univ: "▲", ic: "IC", sight: "△", shop: "●" };
+const gmapUrl = (lat, lng) => `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
+function zoneFill(a) {
+  if (!a || !a.hasData) return "rgba(128,128,128,.10)";
+  const d = a.score - 50, t = Math.min(1, Math.abs(d) / 15);
+  return d >= 0 ? `rgba(47,125,91,${(.10 + .25 * t).toFixed(2)})` : `rgba(181,48,42,${(.10 + .25 * t).toFixed(2)})`;
+}
+function mapSVG(points, opts = {}) {
+  if (window.L && !opts.id) { const id = "lmap" + (++LSEQ); LMAPS[id] = { points, opts }; return `<div class="mapbox"><div id="${id}" class="lmap"></div><div class="mapcap">地図：国土地理院（地理院タイル）。ピン・エリアの円をタップすると情報を表示します。${mapPoints(points).length < points.length ? "位置未登録の案件は表示されません。" : ""}</div></div>`; }
+  const areas = cfg().areas, scores = opts.scores || {};
+  const key = (location.hash || "#/") + "|" + (opts.key || opts.id || "m");
+  let s = `<svg class="mapsvg" viewBox="0 0 ${BB.W} ${BB.H}" ${opts.id ? `id="${opts.id}"` : ""} role="img" aria-label="会津若松市の地図">`;
+  s += `<rect x="0" y="0" width="${BB.W}" height="${BB.H}" class="bg"/>`;
+  for (const [id, z] of Object.entries(ZONES_())) {
+    const a = areas.find(x => x.id === id); if (!a) continue;
+    const [x, y] = proj(z[0], z[1]), sc = scores[id];
+    s += `<circle class="zone" data-zone="${id}" cx="${x}" cy="${y}" r="${z[2]}" fill="${zoneFill(sc)}" vector-effect="non-scaling-stroke"/>`;
+  }
+  s += `<polyline class="rail" vector-effect="non-scaling-stroke" points="${RAIL_().map(p => proj(p[0], p[1]).join(",")).join(" ")}"/>`;
+  for (const [n, la, ln] of TOWNS_()) { const [x, y] = proj(la, ln); s += `<text class="town" data-fs="12" x="${x}" y="${y}" text-anchor="middle">${n}</text>`; }
+  for (const [id, z] of Object.entries(ZONES_())) {
+    const a = areas.find(x => x.id === id); if (!a) continue;
+    const [x, y] = proj(z[0], z[1]), sc = scores[id];
+    s += `<text class="zone-label" data-zone="${id}" data-fs="14" x="${x}" y="${y - z[2] + 18}" text-anchor="middle">${esc(a.name.split("／")[0].split("～")[0])}</text>`;
+  }
+  for (const [n, la, ln, t] of LANDMARKS_()) {
+    const [x, y] = proj(la, ln);
+    s += `<g class="lm lm-${t}" data-lm="${esc(n)}" data-lat="${la}" data-lng="${ln}"><circle class="lm-hit" cx="${x}" cy="${y}" r="10" data-r="10"/><text class="lm-icon" data-fs="11" x="${x}" y="${y + 4}" text-anchor="middle">${LM_ICON[t]}</text><text class="lm-name" data-fs="11" x="${x + 9}" y="${y - 6}">${esc(n)}</text></g>`;
+  }
+  let outside = 0;
+  for (const p of points) {
+    const [x, y] = proj(p.lat, p.lng);
+    if (x < 0 || y < 0 || x > BB.W || y > BB.H) { outside++; continue; }
+    const r = p.size === "LARGE" ? 10 : p.size === "MEDIUM" ? 8 : 6.5;
+    s += `<g class="pin-g"><circle class="pin ${pinOf(p) === "planned" ? "planned" : ""} ${p.latEst ? "est" : ""}" vector-effect="non-scaling-stroke" data-pin="${esc(p.id)}" data-r="${r}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${pinOf(p) === "planned" ? "#fff" : PIN_COLOR[pinOf(p)]}" ${pinOf(p) === "planned" ? `style="stroke:${PIN_COLOR.planned}"` : ""}/><text class="plabel" data-fs="10" x="${(x + r + 3).toFixed(1)}" y="${(y + 3).toFixed(1)}">${esc(p.name.replace(/（.*?）/g, "").slice(0, 14))}</text></g>`;
+  }
+  if (opts.pick) { const [x, y] = proj(opts.pick[0], opts.pick[1]); s += `<circle class="pick" vector-effect="non-scaling-stroke" cx="${x}" cy="${y}" r="12" data-r="12"/>`; }
+  s += `</svg>`;
+  return `<div class="mapbox" data-mapkey="${esc(key)}"><div class="mapwrap">${s}
+    <div class="mapctl"><button type="button" data-mz="in" aria-label="拡大">＋</button><button type="button" data-mz="out" aria-label="縮小">－</button><button type="button" data-mz="reset" aria-label="全体表示">⤢</button></div>
+    <div class="map-card" hidden></div></div>
+    <div class="mapcap">ピン・円・目印をタップで詳細。拡大すると店名が出ます。${outside ? `範囲外 ${outside}件。` : ""}</div></div>`;
+}
+const mapPoints = list => list.filter(p => typeof p.lat === "number" && typeof p.lng === "number");
+const legendHTML = (active, clickable) => `<div class="legend">${Object.keys(PIN).map(k => `<button type="button" ${clickable ? `data-toggle-pin="${k}"` : "disabled"} class="${active.has(k) ? "" : "off"}" aria-pressed="${active.has(k)}"><span class="dot ${k === "planned" ? "ring" : ""}" style="background:${PIN_COLOR[k]}"></span>${PIN[k]}</button>`).join("")}</div>`;
+
+S.mapView = {};
+function initMaps() {
+  if (window.L) {
+    for (const [id, { points, opts }] of Object.entries(LMAPS)) {
+      const el = document.getElementById(id); if (!el || el.__map) { if (!el) delete LMAPS[id]; continue; }
+      const m = L.map(el, { scrollWheelZoom: false, tap: true }); el.__map = m;
+      L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", { maxZoom: 18, attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>' }).addTo(m);
+      const sc = opts.scores || {};
+      for (const [zid, z] of Object.entries(ZONES_())) {
+        const a = cfg().areas.find(x => x.id === zid); if (!a) continue;
+        const col = zoneFill(sc[zid]);
+        L.circle([z[0], z[1]], { radius: z[2] * M_PER_UNIT(), color: "#1f2f4f", weight: 1.5, dashArray: "6 5", fillColor: col.startsWith("rgba(47") ? "#2f7d5b" : col.startsWith("rgba(181") ? "#b5302a" : "#888", fillOpacity: sc[zid] && sc[zid].hasData ? Math.min(.3, .08 + Math.abs(sc[zid].score - 50) / 60) : .06 }).addTo(m).bindPopup(() => zoneCardHtml(zid), { maxWidth: 300 });
+        L.marker([z[0], z[1]], { interactive: false, icon: L.divIcon({ className: "zlabel", html: `<span>${esc(a.name.split("／")[0].split("～")[0])}${sc[zid] && sc[zid].hasData ? " " + sc[zid].score + "点" : ""}</span>`, iconSize: null }) }).addTo(m);
+      }
+      const pts = mapPoints(points), ll = [];
+      for (const p of pts) {
+        const r = p.size === "LARGE" ? 10 : p.size === "MEDIUM" ? 8 : 6.5;
+        L.circleMarker([p.lat, p.lng], { radius: r, color: pinOf(p) === "planned" ? PIN_COLOR.planned : "#fff", weight: pinOf(p) === "planned" ? 3 : 2, fillColor: pinOf(p) === "planned" ? "#fff" : PIN_COLOR[pinOf(p)], fillOpacity: .95, opacity: p.latEst ? .75 : 1 }).addTo(m).bindPopup(() => pinCardHtml(p), { maxWidth: 300 }).bindTooltip(esc(p.name.replace(/（.*?）/g, "")), { direction: "right", offset: [8, 0] });
+        ll.push([p.lat, p.lng]);
+      }
+      if (ll.length > 1) m.fitBounds(ll, { padding: [30, 30], maxZoom: 15 }); else if (ll.length === 1) m.setView(ll[0], 16); else m.setView(curCity().center, 13);
+    }
+    return;
+  }
+  document.querySelectorAll(".mapbox").forEach(box => {
+    const svg = box.querySelector("svg.mapsvg"); if (!svg || svg.__init) return; svg.__init = true;
+    const key = box.dataset.mapkey;
+    const vb = Object.assign({ x: 0, y: 0, w: BB.W }, S.mapView[key] || {});
+    const apply = () => {
+      vb.w = Math.min(BB.W, Math.max(BB.W / 10, vb.w)); vb.h = vb.w * BB.H / BB.W;
+      vb.x = Math.min(BB.W - vb.w, Math.max(0, vb.x)); vb.y = Math.min(BB.H - vb.h, Math.max(0, vb.y));
+      svg.setAttribute("viewBox", `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
+      const z = BB.W / vb.w;
+      svg.querySelectorAll("[data-r]").forEach(el => el.setAttribute("r", (el.dataset.r / Math.pow(z, 0.8)).toFixed(2)));
+      svg.querySelectorAll("[data-fs]").forEach(el => el.setAttribute("font-size", (el.dataset.fs / Math.pow(z, 0.85)).toFixed(2)));
+      svg.classList.toggle("z2", z >= 1.8); svg.classList.toggle("z1", z < 1.2);
+      svg.style.touchAction = z > 1.05 ? "none" : "pan-y";
+      S.mapView[key] = { x: vb.x, y: vb.y, w: vb.w };
+    };
+    const toSvg = (cx, cy) => { const r = svg.getBoundingClientRect(); return [vb.x + (cx - r.left) / r.width * vb.w, vb.y + (cy - r.top) / r.height * vb.h]; };
+    const zoomAt = (f, cx, cy) => { const nw = Math.min(BB.W, Math.max(BB.W / 10, vb.w / f)), k = nw / vb.w; vb.x = cx - (cx - vb.x) * k; vb.y = cy - (cy - vb.y) * k; vb.w = nw; apply(); };
+    svg.__zoom = f => zoomAt(f, vb.x + vb.w / 2, vb.y + vb.w * BB.H / BB.W / 2);
+    svg.__reset = () => { vb.x = 0; vb.y = 0; vb.w = BB.W; apply(); };
+    svg.__toSvg = toSvg;
+    const ptrs = new Map(); let start = null, moved = false, pinch = null;
+    svg.addEventListener("pointerdown", e => {
+      ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (ptrs.size === 1) { start = { x: e.clientX, y: e.clientY, vx: vb.x, vy: vb.y }; moved = false; }
+      if (ptrs.size === 2) { const [a, b] = [...ptrs.values()]; pinch = { d: Math.hypot(a.x - b.x, a.y - b.y) || 1, w: vb.w }; }
+    });
+    svg.addEventListener("pointermove", e => {
+      if (!ptrs.has(e.pointerId)) return;
+      ptrs.set(e.pointerId, { x: e.clientX, y: e.clientY });
+      if (ptrs.size === 2 && pinch) {
+        const [a, b] = [...ptrs.values()], d = Math.hypot(a.x - b.x, a.y - b.y) || 1;
+        const [cx, cy] = toSvg((a.x + b.x) / 2, (a.y + b.y) / 2);
+        zoomAt(vb.w / (pinch.w * pinch.d / d), cx, cy); moved = true; return;
+      }
+      if (ptrs.size === 1 && start && BB.W / vb.w > 1.05) {
+        const dx = e.clientX - start.x, dy = e.clientY - start.y;
+        if (!moved && Math.hypot(dx, dy) < 6) return;
+        moved = true; const r = svg.getBoundingClientRect();
+        vb.x = start.vx - dx / r.width * vb.w; vb.y = start.vy - dy / r.height * vb.w * BB.H / BB.W; apply();
+      }
+    });
+    const end = e => {
+      ptrs.delete(e.pointerId); if (ptrs.size < 2) pinch = null;
+      if (ptrs.size === 0) { if (moved) { svg.dataset.dragged = "1"; setTimeout(() => delete svg.dataset.dragged, 60); } start = null; }
+    };
+    svg.addEventListener("pointerup", end); svg.addEventListener("pointercancel", end); svg.addEventListener("pointerleave", end);
+    svg.addEventListener("wheel", e => { e.preventDefault(); const [cx, cy] = toSvg(e.clientX, e.clientY); zoomAt(e.deltaY < 0 ? 1.25 : 0.8, cx, cy); }, { passive: false });
+    svg.addEventListener("dblclick", e => { e.preventDefault(); const [cx, cy] = toSvg(e.clientX, e.clientY); zoomAt(2, cx, cy); });
+    apply();
+  });
+}
+function pinCardHtml(p) {
+  const pc = pCard(p).match(/<div class="pc">(.*?)<\/div>/s)[1], pd = pCard(p).match(/<div class="pd">(.*?)<\/div>/s)[1];
+  return `<div class="pn" style="font-weight:700;padding-right:1.5rem">${esc(p.name)}</div><div class="pc" style="display:flex;flex-wrap:wrap;gap:.3rem;margin:.35rem 0">${pc}</div><div class="small muted">${pd}${p.address ? "・" + esc(p.address) : ""}</div><div class="row" style="margin:.5rem 0 0"><a class="btn sm" href="#/project/${p.id}">詳細</a><a class="btn secondary sm" href="${gmapUrl(p.lat, p.lng)}" target="_blank" rel="noopener noreferrer">Googleマップ</a></div>`;
+}
+function zoneCardHtml(zid) {
+  const { res } = analyze(), a = res.find(x => x.area.id === zid); if (!a) return "";
+  const o = outlookOf(a.area.id);
+  return `<div style="font-weight:700;padding-right:1.5rem">${esc(a.area.name)}　<span class="rscore" style="font-size:1.2rem">${a.hasData ? a.score + "点" : "データ不足"}</span></div><div class="rmeta">${momChip(a)}<span class="chip">案件 ${a.ps.length}件</span>${stanceChip(a.area.id)}${landChip(a.area.id)}</div>${o ? `<div class="small" style="margin-top:.4rem">${esc(o.headline)}</div>` : ""}<div class="row" style="margin:.5rem 0 0"><a class="btn sm" href="#/area/${a.area.id}">エリアの詳細</a></div>`;
+}
+function showMapCard(svg, html) {
+  const card = svg.closest(".mapwrap").querySelector(".map-card");
+  card.innerHTML = `<button type="button" class="mclose" data-mclose aria-label="閉じる">×</button>${html}`; card.hidden = false;
+}
+
+// ================= 部品 =================
+function scoreBar(a) {
+  if (!a.hasData) return `<div class="scorebar empty"></div>`;
+  const d = a.score - 50, w = Math.min(50, Math.abs(d) * 2);
+  return `<div class="scorebar" role="img" aria-label="発展度 ${a.score}点"><div class="fill ${d >= 0 ? "up" : "down"}" style="left:${d >= 0 ? 50 : 50 - w}%;width:${w}%"></div><div class="axis"></div></div>`;
+}
+const PAL = ["#3b5fa0", "#2f7d5b", "#c0392b", "#b07a1c", "#7a58a6", "#6b7280"];
+function trendChart(series, H = 220) {
+  if (!series.length) return "";
+  const W = 640, L = 34, R = 12, T = 12, B = 26, n = series[0].points.length;
+  const all = series.flatMap(s => s.points.map(p => p.score));
+  const mn = Math.min(40, Math.floor(Math.min(...all) / 10) * 10), mx = Math.max(60, Math.ceil(Math.max(...all) / 10) * 10);
+  const x = i => L + i * (W - L - R) / Math.max(1, n - 1), y = v => T + (mx - v) * (H - T - B) / (mx - mn);
+  let s = `<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="発展度スコアの推移">`;
+  for (const t of [mn, 50, mx]) s += `<line class="${t === 50 ? "a50" : "g"}" x1="${L}" x2="${W - R}" y1="${y(t)}" y2="${y(t)}"/><text x="${L - 6}" y="${y(t) + 4}" text-anchor="end">${t}</text>`;
+  series[0].points.forEach((p, i) => { if (i % 3 === (n - 1) % 3) s += `<text x="${x(i)}" y="${H - 6}" text-anchor="middle">${p.period.slice(2).replace("-", "/")}</text>`; });
+  series.forEach((se, si) => { s += `<polyline fill="none" stroke="${PAL[si % PAL.length]}" stroke-width="2" points="${se.points.map((p, i) => x(i) + "," + y(p.score)).join(" ")}"/>`; });
+  return `<figure class="trend">${s}</svg><figcaption>${series.map((se, si) => `<span><i style="background:${PAL[si % PAL.length]}"></i>${esc(se.name)}</span>`).join("")}</figcaption></figure>`;
+}
+const areaName = id => (cfg().areas.find(a => a.id === id) || {}).name || "—";
+const attTag = a => `<span class="tag ${a.attention === "高" ? "high" : a.attention === "中" ? "mid" : "low"}">注目度 ${a.attention}</span>`;
+const editable = () => S.canWrite !== false && !!S.db;
+
+// ================= 画面 =================
+const STANCE = { up: ["上向きの材料が多い", "up"], mixed: ["材料が拮抗", "mid"], down: ["下向きの材料が多い", "down"] };
+const outlookOf = id => (cfg().areas.find(a => a.id === id) || {}).outlook;
+const stanceChip = id => { const o = outlookOf(id); return o && STANCE[o.stance] ? `<span class="chip ${STANCE[o.stance][1]}">将来性：${STANCE[o.stance][0]}</span>` : ""; };
+const momChip = a => a.hasData ? `<span class="chip ${a.mom > 0 ? "up" : a.mom < 0 ? "down" : ""}">3か月 ${signed(a.mom)}</span>` : "";
+function rankCard(a, i) {
+  const [main, sub] = a.area.name.split("／");
+  const meta = [a.hasData ? `<span class="${a.mom > 0 ? "up" : a.mom < 0 ? "down" : ""}">3か月 ${signed(a.mom)}</span>` : "", `<span>案件 ${a.ps.length}件</span>`, (() => { const o = outlookOf(a.area.id); return o && STANCE[o.stance] ? `<span>将来性 ${STANCE[o.stance][0]}</span>` : ""; })()].join("");
+  return `<a class="rrow ${a.hasData ? "" : "nodata"}" href="#/area/${a.area.id}">
+    <span class="rk">${a.hasData ? i + 1 : "–"}</span>
+    <span class="rn">${esc(main)}${sub ? `<small>${esc(sub)}</small>` : ""}</span>
+    <span class="rs">${a.hasData ? a.score : "データ不足"}</span>
+    <span class="rb">${scoreBar(a)}</span>
+    <span class="rm">${meta}</span>
+  </a>`;
+}
+const scoreMap = res => Object.fromEntries(res.map(a => [a.area.id, a]));
+function viewDashboard() {
+  const asOf = new Date(), { all, res } = analyze(asOf), al = alertsOf(res, all, asOf);
+  const since = d => new Date(asOf - d * DAY);
+  const opened = d => all.filter(p => isShop(p) && p.changeType !== "CLOSURE" && within(p.od, since(d), asOf)).length;
+  const closed = d => all.filter(p => isShop(p) && (p.status === "CLOSED" || p.changeType === "CLOSURE") && (p.cd || p.fd) > since(d)).length;
+  const large90 = all.filter(p => (p.kind === "LARGE_COMMERCIAL" || p.size === "LARGE") && p.fd > since(90)).length;
+  const plannedList = all.filter(p => p.status === "PLANNED" || p.status === "CONFIRMED").sort((a, b) => (a.pd || 9e15) - (b.pd || 9e15));
+  const recent = [...all].sort((a, b) => b.cr - a.cr).slice(0, 8);
+  const city = res.filter(a => !a.area.peripheral), peri = res.filter(a => a.area.peripheral);
+  const top = city.find(a => a.hasData);
+  const withData = city.filter(a => a.hasData);
+  const why = top ? (top.reasons.length ? top.reasons.slice(0, 2).join("／") : (outlookOf(top.area.id) || {}).headline || "") : "";
+  return `
+  ${top ? `<section class="hero">
+    <div class="eyebrow">いちばん動いているエリア（${fmt(todayStr())}時点）</div>
+    <h1>${esc(top.area.name.split("／")[0])}${top.area.name.includes("／") ? `<small>${esc(top.area.name.split("／")[1])}</small>` : ""}</h1>
+    <div class="big"><b>${top.score}</b><span>点</span><em class="${top.mom < 0 ? "down" : ""}">3か月 ${signed(top.mom)}</em></div>
+    ${why ? `<div class="why">${esc(why)}</div>` : ""}
+  </section>` : `<h1>今、${esc(curCity().name)}のどこが動いているか</h1>`}
+  ${!all.length && S.loadedP ? `<div class="notice">まだ案件がありません。${editable() ? `<a href="#/edit/new">最初の案件を登録</a>してください。` : ""}</div>` : ""}
+  <h2>エリア別の発展度</h2>
+  <div class="grid2col">
+    <div><div class="panel">${city.map(rankCard).join("")}</div>
+      ${peri.some(a => a.hasData) ? `<details class="more"><summary>周辺市町（${peri.length}）</summary><div class="panel">${peri.map(rankCard).join("")}</div></details>` : ""}
+    </div>
+    <div>${mapSVG(mapPoints(all), { scores: scoreMap(res) })}</div>
+  </div>
+  <h2>主な数字</h2>
+  <div class="kpis">
+    <div class="kpi"><b>${opened(30)} <small class="muted">/ ${opened(90)}</small></b><span>新規出店 30日 / 90日</span></div>
+    <div class="kpi"><b>${closed(30)} <small class="muted">/ ${closed(90)}</small></b><span>閉店 30日 / 90日</span></div>
+    <div class="kpi"><b>${large90}</b><span>大型案件（90日以内に発見）</span></div>
+    <div class="kpi"><b>${plannedList.length}</b><span>予定・確定の案件</span></div>
+  </div>
+  <div class="grid2col">
+    <section>
+      <h2>注目のうごき</h2>
+      ${al.length ? `<ul class="alerts">${al.slice(0, 5).map(x => `<li class="${x.warn ? "warn" : ""}"><a href="${x.href}">${esc(x.text)}</a></li>`).join("")}</ul>
+      ${al.length > 5 ? `<details class="more"><summary>ほか${al.length - 5}件</summary><ul class="alerts">${al.slice(5).map(x => `<li class="${x.warn ? "warn" : ""}"><a href="${x.href}">${esc(x.text)}</a></li>`).join("")}</ul></details>` : ""}` : `<p class="muted">現在、目立ったうごきはありません。</p>`}
+    </section>
+    <section>
+      <h2>これからの予定</h2>
+      ${plannedList.length ? `<div class="stack">${plannedList.slice(0, 5).map(pCard).join("")}</div>` : `<p class="muted">予定・確定の案件はありません。</p>`}
+      <details class="more"><summary>最近追加された情報</summary><div class="stack">${recent.map(pCard).join("")}</div></details>
+    </section>
+  </div>
+  <h2>発展度の推移（過去12か月）</h2>
+  ${withData.length ? trendChart(withData.slice(0, 5).map(a => ({ name: a.area.name.split("／")[0], points: a.trend }))) : `<p class="muted">データが溜まると表示されます。</p>`}
+  <p class="row"><a class="btn secondary" href="#/outlook">都市計画からみた将来予測を見る</a>${editable() ? `<a class="btn secondary" href="#/admin">管理画面</a>` : ""}</p>`;
+}
+
+function viewMap() {
+  const f = S.mapFilter || (S.mapFilter = { days: 0, area: "", size: "", conf: "E", pins: new Set(Object.keys(PIN)) });
+  const { all, res } = analyze(), order = "ABCDE";
+  const since = f.days ? Date.now() - f.days * DAY : 0;
+  const vis = mapPoints(all).filter(p => f.pins.has(pinOf(p)) && (!since || +(p.cd || p.od || p.pd || p.fd) >= since) && (!f.area || p.area === f.area) && (!f.size || p.size === f.size) && order.indexOf(p.confidence) <= order.indexOf(f.conf));
+  const sel = (k, opts) => `<select data-mf="${k}">${opts.map(([v, l]) => `<option value="${v}" ${String(f[k]) === String(v) ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>`;
+  return `<h1>地図</h1>
+  <details class="filterbox" ${f.days || f.area || f.size || f.conf !== "E" ? "open" : ""}><summary>絞り込み</summary>
+  <div class="filters">
+    <label>期間${sel("days", [[0,"すべて"],[30,"30日"],[90,"90日"],[365,"1年"]])}</label>
+    <label>エリア${sel("area", [["", "すべて"], ...cfg().areas.map(a => [a.id, a.name])])}</label>
+    <label>規模${sel("size", [["", "すべて"], ...Object.entries(SIZE)])}</label>
+    <label>確度${sel("conf", [["E","すべて"],["D","D以上"],["C","C以上"],["B","B以上"],["A","Aのみ"]])}</label>
+  </div></details>
+  ${legendHTML(f.pins, true)}
+  ${mapSVG(vis, { scores: scoreMap(res) })}
+  <h2>表示中の案件（${vis.length}件）</h2>
+  <div class="stack">${vis.sort((a, b) => b.fd - a.fd).map(pCard).join("") || `<p class="muted">該当なし</p>`}</div>
+  <p class="muted small">位置が未登録の案件 ${all.length - mapPoints(all).length}件は表示されません。正確な位置は各案件の「Googleマップで開く」から確認できます。</p>`;
+}
+
+function projectFilter(q) {
+  const all = prepared(), order = "ABCDE";
+  return all.filter(p => {
+    if (q.q) { const t = q.q.toLowerCase(); const hay = [p.name, p.address, p.company, p.note, ...(p.events || []).map(e => e.source?.name || "")].join(" ").toLowerCase(); if (!hay.includes(t)) return false; }
+    if (q.kind && p.kind !== q.kind) return false;
+    if (q.area && p.area !== q.area) return false;
+    if (q.conf && order.indexOf(p.confidence) > order.indexOf(q.conf)) return false;
+    if (q.from && p.fd < toDate(q.from)) return false;
+    if (q.to && p.fd > toDate(q.to)) return false;
+    if (q.f === "new" && !(isShop(p) && p.status === "OPEN" && p.changeType !== "CLOSURE")) return false;
+    if (q.f === "closed" && !(p.status === "CLOSED" || p.changeType === "CLOSURE")) return false;
+    if (q.f === "planned" && !(p.status === "PLANNED" || p.status === "CONFIRMED")) return false;
+    if (q.f === "large" && !isLarge(p)) return false;
+    return true;
+  }).sort((a, b) => b.fd - a.fd);
+}
+function landBlock(id, compact = false) {
+  const a = cfg().areas.find(x => x.id === id), lp = a && a.landPrice; if (!lp) return "";
+  const rows = lp.points.map(([l, v, ch, u]) => `<li><span>${esc(l)}</span><span><b>${v.toLocaleString()}</b><small class="muted">円/㎡</small> <span class="chip ${ch > 0 ? "up" : ch < 0 ? "down" : ""}">${ch > 0 ? "+" : ""}${ch}%</span></span></li>`).join("");
+  return `<div class="card land">
+    <h3 style="margin-top:0">地価（2026年 公示地価ほか）</h3>
+    <ul class="lp">${compact ? rows.split("</li>").slice(0, 3).join("</li>") + "</li>" : rows}</ul>
+    <p style="margin:.4rem 0 0"><b>見通し：</b>${esc(lp.view)}</p>
+    <p class="sources" style="margin:.3rem 0 0">出典：${[...new Set(lp.points.map(p => p[3]))].map(u => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(new URL(u).hostname)}</a>`).join("、")}（坪単価の資料は㎡に換算）</p>
+  </div>`;
+}
+const landChip = id => { const a = cfg().areas.find(x => x.id === id), p = a && a.landPrice && a.landPrice.points[0]; return p ? `<span class="chip ${p[2] > 0 ? "up" : p[2] < 0 ? "down" : ""}">地価 ${p[2] > 0 ? "+" : ""}${p[2]}%</span>` : ""; };
+
+function viewSignals() {
+  const all = prepared(), DAYMS = 864e5;
+  const firstJob = p => (p.events || []).filter(e => e.type === "JOB_POSTING").map(e => e.date).sort()[0];
+  const leads = all.filter(p => firstJob(p) && p.openedDate && !(p.estimated || []).includes("openedDate")).map(p => ({ p, d: Math.round((toDate(p.openedDate) - toDate(firstJob(p))) / DAYMS) })).filter(x => x.d >= 0);
+  const avg = leads.length ? Math.round(leads.reduce((s, x) => s + x.d, 0) / leads.length) : 60;
+  const pending = all.filter(p => firstJob(p) && (p.status === "PLANNED" || p.status === "CONFIRMED"));
+  const pred = p => { if (p.plannedDate) return { date: p.plannedDate, how: "求人票・報道の記載" }; const d = new Date(toDate(firstJob(p)).getTime() + avg * DAYMS + JST).toISOString().slice(0, 10); return { date: d, how: `求人確認日＋平均${avg}日` }; };
+  const local = all.filter(p => (p.status === "PLANNED" || p.status === "CONFIRMED") && !firstJob(p) && (p.events || []).some(e => e.source && e.source.tier >= 2));
+  const gov = (S.config || {}).govInfo || [];
+  const today = todayStr();
+  return `<h1>出店・発展の予兆</h1>
+  <p class="muted small">正式発表の前に出る「兆し」を集めたページです。求人票やローカル情報からの推定は確度D（推測）として扱い、確認できしだい更新します。</p>
+  <h2>求人票からの出店予測</h2>
+  <div class="card">
+    <p style="margin:0">登録データでは、<b>オープニング求人の確認から開店まで平均 ${avg}日</b>${leads.length ? `（${leads.map(x => `${esc(x.p.name.replace(/（.*?）/g, ""))} ${x.d}日`).join("、")}）` : ""}。この日数で開店時期を予測しています。</p>
+  </div>
+  <div class="stack" style="margin-top:.75rem">${pending.length ? pending.sort((a, b) => pred(a).date > pred(b).date ? 1 : -1).map(p => { const pr = pred(p), past = pr.date < today; return `<a class="pcard" href="#/project/${p.id}">
+    <div class="pn"><span class="pin-dot" style="background:${PIN_COLOR[pinOf(p)]}"></span>${esc(p.name)}</div>
+    <div class="pc"><span class="chip mid">開店予測 ${fmt(pr.date).slice(0, 7)}頃</span><span class="chip">${esc(areaName(p.area).split("／")[0])}</span><span class="chip">確度${p.confidence}</span>${past ? `<span class="chip down">予測時期を経過・要確認</span>` : ""}</div>
+    <div class="pd">根拠：${pr.how}。求人確認 ${fmt(firstJob(p))}</div></a>`; }).join("") : `<p class="muted">求人から見つかった未開店の案件はありません。</p>`}</div>
+  <h2>ローカル情報からの予兆</h2>
+  <p class="muted small">地元メディア・ブログ・口コミなどで「予定」とされている案件です。Xなどのリアルタイム投稿は検索で十分に拾えないため、現在は地元メディアと公開ブログが中心です。</p>
+  <div class="stack">${local.length ? local.map(pCard).join("") : `<p class="muted">現在、該当する案件はありません。</p>`}</div>
+  <h2>県・国・市の動き</h2>
+  <div class="stack">${gov.map(g => `<div class="card gov">
+    <div class="rmeta" style="margin-top:0"><span class="chip">${esc(g.level)}</span><span class="chip">${esc(g.date)}</span>${g.area ? `<a class="chip" href="#/area/${g.area}">${esc(areaName(g.area).split("／")[0])}</a>` : `<span class="chip">市全体</span>`}</div>
+    <h3 style="margin:.4rem 0 .2rem">${esc(g.title)}</h3>
+    <p style="margin:.2rem 0">${esc(g.body)}</p>
+    <p class="small" style="margin:.2rem 0"><b>影響しそうな所：</b>${esc(g.impact)}</p>
+    <p class="sources" style="margin:.2rem 0 0">出典：<a href="${esc(g.src[1])}" target="_blank" rel="noopener noreferrer">${esc(g.src[0])}</a></p>
+  </div>`).join("")}</div>`;
+}
+
+function pCard(p) {
+  const st = p.status === "CLOSED" || p.changeType === "CLOSURE" ? "down" : p.status === "OPEN" ? "up" : "mid";
+  const d = p.closedDate ? `閉店 ${fmt(p.closedDate)}` : p.openedDate ? `開店 ${fmt(p.openedDate)}` : p.plannedDate ? `予定 ${fmt(p.plannedDate)}` : `発見 ${fmt(p.firstDiscoveredAt)}`;
+  return `<a class="pcard" href="#/project/${p.id}">
+    <div class="pn"><span class="pin-dot" style="background:${PIN_COLOR[pinOf(p)]}"></span>${esc(p.name)}</div>
+    <div class="pc"><span class="chip ${st}">${STATUS[p.status]}</span><span class="chip">${esc(catLabel(p.kind, p.category))}</span><span class="chip">${esc(areaName(p.area).split("／")[0])}</span><span class="chip">確度${p.confidence}</span></div>
+    <div class="pd">${d}${(p.estimated || []).length ? "（一部推定）" : ""}</div>
+  </a>`;
+}
+function viewProjects(q) {
+  const list = projectFilter(q), opt = (o, v) => Object.entries(o).map(([k, l]) => `<option value="${k}" ${v === k ? "selected" : ""}>${esc(l)}</option>`).join("");
+  const active = Object.values(q).some(Boolean);
+  return `<h1>案件一覧</h1>
+  <details class="filterbox" ${active ? "open" : ""}><summary>検索・絞り込み${active ? "（適用中）" : ""}</summary>
+  <form class="filters" data-form="search">
+    <label>キーワード<input name="q" value="${esc(q.q)}" placeholder="店名・住所・企業・情報源"></label>
+    <label>区分<select name="f"><option value="">すべて</option>${opt({ new: "新規出店", closed: "閉店", planned: "出店予定", large: "大型案件" }, q.f)}</select></label>
+    <label>種類<select name="kind"><option value="">すべて</option>${opt(KIND, q.kind)}</select></label>
+    <label>エリア<select name="area"><option value="">すべて</option>${opt(Object.fromEntries(cfg().areas.map(a => [a.id, a.name])), q.area)}</select></label>
+    <label>確度<select name="conf"><option value="">すべて</option>${opt({ A: "Aのみ", B: "B以上", C: "C以上", D: "D以上" }, q.conf)}</select></label>
+    <label>発見日（から）<input type="date" name="from" value="${esc(q.from)}"></label>
+    <label>発見日（まで）<input type="date" name="to" value="${esc(q.to)}"></label>
+    <div class="row" style="margin:0;align-self:end"><button class="btn" type="submit">絞り込む</button><a class="btn secondary" href="#/projects">クリア</a></div>
+  </form></details>
+  <p class="muted small">${list.length}件</p>
+  ${list.length ? `<div class="stack">${list.map(pCard).join("")}</div>` : `<div class="empty">条件に合う案件はありません。</div>`}`;
+}
+
+function viewProject(id) {
+  const p = prepared().find(x => x.id === id);
+  if (!p) return S.loadedP ? `<p>案件が見つかりません。<a href="#/projects">一覧へ</a></p>` : `<p class="muted">読み込み中</p>`;
+  const est = f => (p.estimated || []).includes(f) ? `<span class="est">推定</span>` : "";
+  const ev = [...(p.events || [])].sort((a, b) => (a.date > b.date ? 1 : -1));
+  const src = s => s ? `<div class="small">出典：${s.url ? `<a href="${esc(s.url)}" target="_blank" rel="noopener noreferrer">${esc(s.title || s.name || s.url)}</a>` : esc(s.title || s.name)}<span class="muted">（${esc(s.name || "")}${s.tier ? "・" + TIER[s.tier] : ""}${s.publishedAt ? "・" + fmt(s.publishedAt) + "掲載" : ""}）</span></div>` : "";
+  const hasLoc = typeof p.lat === "number";
+  return `<p class="small"><a href="#/projects">← 案件一覧</a></p>
+  <h1>${esc(p.name)}</h1>
+  <div class="pc" style="display:flex;flex-wrap:wrap;gap:.3rem">${pCard(p).match(/<div class="pc">(.*?)<\/div>/s)[1]}</div>
+  <div class="grid2col" style="margin-top:1rem">
+    <div class="card"><dl class="facts">
+      <dt>住所</dt><dd>${esc(p.address || "—")}${est("address")}</dd>
+      <dt>エリア</dt><dd><a href="#/area/${p.area}">${esc(areaName(p.area))}</a></dd>
+      <dt>企業</dt><dd>${esc(p.company || "—")}${est("company")}</dd>
+      <dt>区分</dt><dd>${CHANGE[p.changeType]}・${CHAIN[p.chain || "UNKNOWN"]}・規模${SIZE[p.size]}${est("size")}</dd>
+      <dt>開店予定日</dt><dd>${fmt(p.plannedDate)}${est("plannedDate")}</dd>
+      <dt>開店日</dt><dd>${fmt(p.openedDate)}${est("openedDate")}</dd>
+      ${p.closedDate ? `<dt>閉店日</dt><dd>${fmt(p.closedDate)}</dd>` : ""}
+      <dt>最初の発見</dt><dd>${fmt(p.firstDiscoveredAt)}${ev[0] ? `（${EVENT[ev[0].type]}）` : ""}</dd>
+      <dt>信頼度</dt><dd>${CONF[p.confidence]}</dd>
+      ${p.note ? `<dt>備考</dt><dd>${esc(p.note)}</dd>` : ""}
+    </dl>
+    ${hasLoc ? `<p class="row"><a class="btn secondary sm" href="${gmapUrl(p.lat, p.lng)}" target="_blank" rel="noopener noreferrer">Googleマップで開く</a>${p.latEst ? `<span class="muted small">位置は推定</span>` : ""}</p>` : ""}
+    </div>
+    <div>${hasLoc ? mapSVG([p]) : `<div class="empty">位置情報が未登録です。</div>`}</div>
+  </div>
+  <h2>更新履歴</h2>
+  ${ev.length ? `<div class="card"><ol class="timeline">${ev.map(e => `<li><span class="date">${fmt(e.date)}</span>${EVENT[e.type]}<span class="muted small">（確度${e.confidence}）</span>${e.description ? `<div>${esc(e.description)}</div>` : ""}${src(e.source)}</li>`).join("")}</ol></div>` : `<p class="muted">履歴はまだありません。</p>`}
+  ${editable() ? `<p class="row"><a class="btn secondary" href="#/edit/${p.id}">この案件を編集</a></p>` : ""}`;
+}
+
+function statsGrid(a) {
+  return `<div class="stats">
+    <div><b>${a.st.open3}</b><span>出店 3か月</span></div><div><b>${a.st.open12}</b><span>出店 12か月</span></div>
+    <div><b class="${a.st.close12 ? "down" : ""}">${a.st.close12}</b><span>閉店 12か月</span></div><div><b>${a.st.large}</b><span>大型案件</span></div>
+    <div><b>${a.st.construction}</b><span>建設</span></div><div><b>${a.st.housing}</b><span>住宅</span></div>
+    <div><b>${a.st.jobs}</b><span>求人・事業所</span></div><div><b>${a.st.infra}</b><span>道路・インフラ</span></div>
+  </div>`;
+}
+function viewAreas() {
+  const { res } = analyze();
+  return `<h1>エリア比較</h1>
+  <p class="muted small">登録データから自動計算（50点＝変化なし）。件数は直近12か月に発見された案件です。</p>
+  <div class="stack">${res.map((a, i) => `<div class="acard">
+    <a href="#/area/${a.area.id}" style="text-decoration:none;color:inherit"><div class="rhead"><span class="rank">${a.hasData ? i + 1 : "–"}</span><span class="rname">${esc(a.area.name)}${a.area.peripheral ? ` <span class="chip">周辺</span>` : ""}</span><span class="rscore">${a.hasData ? a.score : "—"}<small>${a.hasData ? "点" : ""}</small></span></div></a>
+    ${scoreBar(a)}
+    <div class="rmeta">${momChip(a)}${stanceChip(a.area.id)}${landChip(a.area.id)}</div>
+    ${statsGrid(a)}
+  </div>`).join("")}</div>`;
+}
+
+function outlookBlock(id, withTitle = true) {
+  const o = outlookOf(id); if (!o) return "";
+  return `<div class="card ol">
+    ${withTitle ? `<h3>都市計画からみた将来性</h3>` : ""}
+    <p style="margin:.2rem 0 .5rem"><span class="chip ${STANCE[o.stance][1]}">${STANCE[o.stance][0]}</span></p>
+    <p style="margin:.2rem 0 .6rem;font-weight:700">${esc(o.headline)}</p>
+    <ul class="plus">${o.plus.map(t => `<li>${esc(t)}</li>`).join("")}</ul>
+    ${o.minus.length ? `<ul class="minus">${o.minus.map(t => `<li>${esc(t)}</li>`).join("")}</ul>` : ""}
+  </div>`;
+}
+const planSources = () => { const p = (S.config || {}).plan; return p && p.sources ? `<p class="sources">出典：${p.sources.map(([n, u]) => `<a href="${esc(u)}" target="_blank" rel="noopener noreferrer">${esc(n)}</a>`).join("、")}</p>` : ""; };
+function viewArea(id) {
+  const { res, all } = analyze(), a = res.find(x => x.area.id === id);
+  if (!a) return `<p>エリアが見つかりません。<a href="#/areas">エリア比較へ</a></p>`;
+  const byId = Object.fromEntries(all.map(p => [p.id, p]));
+  const ps = [...a.ps].sort((x, y) => y.fd - x.fd);
+  return `<p class="small"><a href="#/areas">← エリア比較</a></p>
+  <h1>${esc(a.area.name)}</h1>
+  <div class="grid2col">
+    <div class="stack">
+      <div class="card">
+        <div class="rhead"><span class="rname">現在の発展度</span><span class="rscore">${a.hasData ? a.score : "—"}<small>${a.hasData ? "点" : ""}</small></span></div>
+        ${scoreBar(a)}
+        <div class="rmeta">${momChip(a)}${a.hasData ? `<span class="chip">注目度 ${a.attention}</span>` : ""}</div>
+        ${statsGrid(a)}
+      </div>
+      ${a.reasons.length ? `<div class="card"><h3 style="margin-top:0">データに表れている変化</h3><ul class="list">${a.reasons.map(r => `<li>${esc(r)}</li>`).join("")}</ul></div>` : ""}
+      ${outlookBlock(id)}
+      ${landBlock(id)}
+    </div>
+    <div class="stack">
+      ${mapSVG(mapPoints(ps), { scores: scoreMap(res) })}
+      <div class="card"><h3 style="margin-top:0">スコアの内訳</h3>
+        ${Object.keys(a.breakdown).length ? `<ul class="list">${Object.entries(a.breakdown).map(([g, v]) => `<li>${GROUP_LABEL[g]}：<b class="${v >= 0 ? "up" : "down"}">${signed(r1(v))}</b></li>`).join("")}</ul>` : `<p class="muted">寄与している案件はありません。</p>`}
+        ${a.top.length ? `<h3>影響の大きい案件</h3><ul class="list">${a.top.map(c => `<li><a href="#/project/${c.id}">${esc(byId[c.id]?.name)}</a>　<b class="${c.value >= 0 ? "up" : "down"}">${signed(r1(c.value))}</b></li>`).join("")}</ul>` : ""}
+      </div>
+    </div>
+  </div>
+  <h2>推移</h2>${trendChart([{ name: a.area.name, points: a.trend }], 180)}
+  <h2>このエリアの案件（${ps.length}件）</h2>
+  ${ps.length ? `<div class="stack">${ps.map(pCard).join("")}</div>` : `<p class="muted">まだ案件がありません。</p>`}
+  <p class="muted small">対象の町名：${a.area.towns?.length ? esc(a.area.towns.join("、")) : "（町名に当たらない住所の受け皿）"}</p>
+  ${planSources()}`;
+}
+
+function viewOutlook() {
+  const { res } = analyze(), plan = (S.config || {}).plan;
+  const order = ["east", "center", "north", "south", "other", "kitakata"];
+  const items = order.map(id => res.find(a => a.area.id === id)).filter(a => a && outlookOf(a.area.id));
+  return `<h1>将来予測</h1>
+  <p class="muted small">会津若松市・福島県の都市計画と、このサイトに登録した出店・閉店などの実データを組み合わせた見立てです。発展を断定するものではなく、判断材料の整理です。</p>
+  ${plan ? `<div class="card"><h3 style="margin-top:0">市全体の前提</h3><p style="margin:0">${esc(plan.summary)}</p>${plan.landCity ? `<p style="margin:.5rem 0 0"><b>地価：</b>${esc(plan.landCity.text)}</p>` : ""}</div>` : ""}
+  <p class="row"><a class="btn secondary" href="#/signals">出店の予兆・県と国の動きを見る</a></p>
+  <h2>エリア別の見立て</h2>
+  <div class="stack">${items.map(a => `<div>
+    <a href="#/area/${a.area.id}" class="rcard" style="border-radius:12px 12px 0 0;box-shadow:none">
+      <div class="rhead"><span class="rname">${esc(a.area.name)}</span><span class="rscore">${a.hasData ? a.score : "—"}<small>${a.hasData ? "点" : ""}</small></span></div>
+      <div class="rmeta">${momChip(a)}<span class="chip">案件 ${a.ps.length}件</span></div>
+    </a>
+    <div style="margin-top:-4px">${outlookBlock(a.area.id, false)}</div>
+    <div style="margin-top:.5rem">${landBlock(a.area.id, true)}</div>
+  </div>`).join("")}</div>
+  ${planSources()}`;
+}
+
+// ---------- 管理 ----------
+function normName(s) { return (s || "").normalize("NFKC").toLowerCase().replace(/[\s　・\-ー－()（）「」]/g, "").replace(/(会津若松|店|支店|新店舗?)$/g, ""); }
+function dist(a, b) { const R = 6371e3, r = Math.PI / 180, dl = (b.lat - a.lat) * r, dg = (b.lng - a.lng) * r; const h = Math.sin(dl / 2) ** 2 + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dg / 2) ** 2; return 2 * R * Math.asin(Math.sqrt(h)); }
+function duplicates(all) {
+  const out = [];
+  for (let i = 0; i < all.length; i++) for (let j = i + 1; j < all.length; j++) {
+    const a = all[i], b = all[j];
+    if (normName(a.name) && normName(a.name) === normName(b.name)) out.push([a, b, "名称が一致"]);
+    else if (a.kind === b.kind && typeof a.lat === "number" && typeof b.lat === "number") { const d = dist(a, b); if (d < 80) out.push([a, b, `同種類で${Math.round(d)}m以内`]); }
+  }
+  return out.slice(0, 30);
+}
+const noEdit = () => `<h1>管理</h1><div class="notice">${S.db ? "この画面は編集権限のある人だけが使えます。" : "データベースに接続できません。claude.ai にサインインした状態で開いてください。"}</div>`;
+function viewAdmin() {
+  if (!editable()) return noEdit();
+  const all = prepared(), dups = duplicates(all), noLoc = all.filter(p => typeof p.lat !== "number").length;
+  return `<h1>管理</h1>
+  <div class="row"><a class="btn" href="#/edit/new">案件を登録</a><a class="btn secondary" href="#/settings">スコア係数とエリア</a></div>
+  ${noLoc ? `<div class="notice">位置が未登録の案件が ${noLoc}件あります。地図に表示されません。</div>` : ""}
+  <h2>重複の候補</h2>
+  ${dups.length ? `<ul class="list">${dups.map(([a, b, r]) => `<li><a href="#/edit/${a.id}">${esc(a.name)}</a> と <a href="#/edit/${b.id}">${esc(b.name)}</a><span class="muted small">　${r}</span></li>`).join("")}</ul>` : `<p class="muted">候補はありません。</p>`}
+  <h2>案件（更新順）</h2>
+  ${all.length ? `<div class="table-wrap"><table><thead><tr><th>名称</th><th>種類</th><th>エリア</th><th>状態</th><th>確度</th><th>更新</th></tr></thead><tbody>${[...all].sort((a, b) => (b.updatedAt || "") > (a.updatedAt || "") ? 1 : -1).map(p => `<tr><td class="wrap"><a href="#/edit/${p.id}">${esc(p.name)}</a></td><td>${KIND[p.kind]}</td><td>${esc(areaName(p.area))}</td><td>${STATUS[p.status]}</td><td>${p.confidence}</td><td>${fmt((p.updatedAt || "").slice(0, 10))}</td></tr>`).join("")}</tbody></table></div>` : `<div class="empty">まだ案件がありません。「案件を登録」から始めてください。</div>`}`;
+}
+
+function viewEdit(id) {
+  if (!editable()) return noEdit();
+  const isNew = id === "new", p = isNew ? null : S.projects.find(x => x.id === id);
+  if (!isNew && !p) return S.loadedP ? `<p>案件が見つかりません。</p>` : `<p class="muted">読み込み中</p>`;
+  const v = p || { kind: "STORE", category: "food", size: "SMALL", chain: "UNKNOWN", parking: "", status: "PLANNED", changeType: "NEW", confidence: "C", firstDiscoveredAt: todayStr(), lastCheckedAt: todayStr(), estimated: [] };
+  const sel = (name, obj, val) => `<select name="${name}">${Object.entries(obj).map(([k, l]) => `<option value="${k}" ${val === k ? "selected" : ""}>${esc(l)}</option>`).join("")}</select>`;
+  const pick = S.pickTarget && S.pickTarget.id === id ? S.pickTarget : (typeof v.lat === "number" ? { lat: v.lat, lng: v.lng } : null);
+  const others = S.projects.filter(x => x.id !== id).sort((a, b) => a.name.localeCompare(b.name, "ja"));
+  const ev = p ? [...(p.events || [])].sort((a, b) => (a.date > b.date ? 1 : -1)) : [];
+  return `<p class="small"><a href="#/admin">管理</a>${p ? `　<a href="#/project/${p.id}">公開ページを見る</a>` : ""}</p>
+  <h1>${p ? esc(p.name) + " を編集" : "案件を登録"}</h1>
+  ${isNew ? `<p class="muted small">同じ店舗の続報（求人→掲載→公式発表→開店）は新規登録せず、既存案件の「履歴を追加」から足してください。</p>` : ""}
+  <form class="stack" data-form="project" data-id="${esc(id)}">
+    <div class="grid2">
+      <label class="field">名称（必須）<input name="name" required value="${esc(v.name)}"></label>
+      <label class="field">種類・業種<select name="kc">${Object.entries(CATS).map(([k, cs]) => `<optgroup label="${KIND[k]}">${cs.map(([c, l]) => `<option value="${k}|${c}" ${v.kind === k && v.category === c ? "selected" : ""}>${l}</option>`).join("")}</optgroup>`).join("")}</select></label>
+      <label class="field">企業名<input name="company" value="${esc(v.company)}"></label>
+      <label class="field">住所<input name="address" value="${esc(v.address)}" placeholder="会津若松市一箕町…"></label>
+      <label class="field">エリア（空欄なら住所の町名で自動判定）<select name="areaId"><option value="">自動判定</option>${cfg().areas.map(a => `<option value="${a.id}" ${v.areaManual && v.areaId === a.id ? "selected" : ""}>${esc(a.name)}</option>`).join("")}</select></label>
+      <label class="field">ステータス${sel("status", STATUS, v.status)}</label>
+      <label class="field">区分${sel("changeType", CHANGE, v.changeType)}</label>
+      <label class="field">規模${sel("size", SIZE, v.size)}</label>
+      <label class="field">チェーン／個人店${sel("chain", CHAIN, v.chain)}</label>
+      <label class="field">駐車場${sel("parking", { "": "不明", yes: "あり", no: "なし" }, v.parking || "")}</label>
+      <label class="field">信頼度${sel("confidence", CONF, v.confidence)}</label>
+      <label class="field">開店予定日<input type="date" name="plannedDate" value="${esc(v.plannedDate)}"></label>
+      <label class="field">開店日<input type="date" name="openedDate" value="${esc(v.openedDate)}"></label>
+      <label class="field">閉店日<input type="date" name="closedDate" value="${esc(v.closedDate)}"></label>
+      <label class="field">最初の発見日<input type="date" name="firstDiscoveredAt" value="${esc(v.firstDiscoveredAt)}"></label>
+      <label class="field">情報確認日<input type="date" name="lastCheckedAt" value="${esc(v.lastCheckedAt)}"></label>
+    </div>
+    <fieldset>
+      <legend class="small muted">位置：模式図をタップするか、Googleマップの座標（例：37.4947, 139.9298）を貼り付け</legend>
+      <div class="grid2">
+        <label class="field">緯度, 経度<input name="latlng" id="latlng" inputmode="decimal" value="${pick ? pick.lat.toFixed(5) + ", " + pick.lng.toFixed(5) : ""}" placeholder="37.4947, 139.9298"></label>
+        <label class="field" style="align-self:end"><span><input type="checkbox" name="latEst" ${v.latEst || (pick && pick.fromTap) ? "checked" : ""}> 位置は推定</span></label>
+      </div>
+      <div style="max-width:420px;margin-top:.5rem">${mapSVG([], { id: "pickmap", pick: pick ? [pick.lat, pick.lng] : null })}</div>
+    </fieldset>
+    <fieldset><legend class="small muted">推定値の項目（確定情報と区別して表示）</legend>
+      ${ESTIMABLE.map(([k, l]) => `<label style="margin-right:1rem"><input type="checkbox" name="estimated" value="${k}" ${(v.estimated || []).includes(k) ? "checked" : ""}> ${l}</label>`).join("")}
+    </fieldset>
+    <label class="field">備考<textarea name="note">${esc(v.note)}</textarea></label>
+    ${isNew ? `<fieldset class="grid2"><legend class="small muted">最初の情報源（任意）</legend>
+      <label class="field">きっかけ${sel("evType", EVENT, "MEDIA_REPORT")}</label>
+      ${sourceFields()}</fieldset>` : ""}
+    <div><button class="btn" type="submit">${p ? "変更を保存" : "案件を登録"}</button></div>
+  </form>
+  ${p ? `
+  <h2>履歴</h2>
+  ${ev.length ? `<ol class="timeline">${ev.map(e => `<li><span class="date">${fmt(e.date)}</span>${EVENT[e.type]}（確度${e.confidence}）${e.description ? `<div>${esc(e.description)}</div>` : ""}${e.source ? `<div class="small">出典：${esc(e.source.name || "")} ${esc(e.source.url || "")}</div>` : ""}<button class="btn secondary sm" data-del-event="${e.id}">この履歴を削除</button></li>`).join("")}</ol>` : `<p class="muted">履歴はありません。</p>`}
+  <h2>履歴を追加</h2>
+  <form class="stack" data-form="event" data-id="${p.id}">
+    <div class="grid2">
+      <label class="field">出来事${sel("type", EVENT, "MEDIA_REPORT")}</label>
+      <label class="field">日付<input type="date" name="date" value="${todayStr()}"></label>
+      <label class="field">確度${sel("confidence", CONF, "C")}</label>
+      ${sourceFields()}
+    </div>
+    <p class="muted small">「開店」「閉店」を追加するとステータスと日付も更新されます。「公式発表」で予定→確定になります。</p>
+    <div><button class="btn" type="submit">履歴を追加</button></div>
+  </form>
+  <h2>重複を統合</h2>
+  <form class="stack" data-form="merge" data-id="${p.id}">
+    <label class="field">この案件の履歴を統合先へ移し、この案件を削除します。統合先
+      <select name="into" required><option value="">選んでください</option>${others.map(o => `<option value="${o.id}">${esc(o.name)}</option>`).join("")}</select></label>
+    <div><button class="btn secondary" type="submit">統合する</button></div>
+  </form>
+  <h2>削除</h2>
+  <button class="btn danger" data-del-project="${p.id}">この案件を削除</button>` : ""}`;
+}
+const sourceFields = () => `
+  <label class="field">内容メモ<input name="description"></label>
+  <label class="field">情報源名<input name="sName" placeholder="号外NET 会津若松市・喜多方市"></label>
+  <label class="field">URL<input name="sUrl" type="url"></label>
+  <label class="field">記事・求人タイトル<input name="sTitle"></label>
+  <label class="field">種別<select name="sTier">${Object.entries(TIER).map(([k, l]) => `<option value="${k}" ${k === "2" ? "selected" : ""}>${l}</option>`).join("")}</select></label>
+  <label class="field">掲載日<input type="date" name="sPub"></label>`;
+
+function viewSettings() {
+  if (!editable()) return noEdit();
+  const { areas, weights } = cfg();
+  return `<p class="small"><a href="#/admin">管理</a></p>
+  <h1>スコア係数とエリア（${esc(curCity().name)}）</h1>
+  <form class="stack" data-form="settings">
+    <p class="muted small">点数 ＝ 50 ＋ 倍率 × Σ（基本点 × 確度係数 × 状態係数 × 時間減衰）。初期値は仕様の仮説です。実データを見ながら調整してください。</p>
+    ${Object.keys(GROUP_LABEL).map(g => `<fieldset class="grid2"><legend><strong>${GROUP_LABEL[g]}</strong></legend>${WEIGHT_DEFS.filter(d => d[2] === g).map(d => `<label class="field">${d[1]}<input type="number" step="0.1" name="w:${d[0]}" value="${weights[d[0]]}"></label>`).join("")}</fieldset>`).join("")}
+    <h2>エリアと町名</h2>
+    <div class="notice">初期の町名は仮の設定です。会津若松市の町名一覧と照合して直してください。住所に含まれる町名の最長一致でエリアを決め、変更はすぐ全案件に反映されます。</div>
+    ${areas.map((a, i) => `<fieldset class="grid2"><legend><strong>${esc(a.name)}</strong>${a.fallback ? "（受け皿）" : ""}</legend>
+      <input type="hidden" name="a${i}:id" value="${esc(a.id)}">
+      <label class="field">名前<input name="a${i}:name" value="${esc(a.name)}"></label>
+      <label class="field">町名（読点区切り）<textarea name="a${i}:towns">${esc((a.towns || []).join("、"))}</textarea></label>
+      <label class="field"><span><input type="checkbox" name="a${i}:peripheral" ${a.peripheral ? "checked" : ""}> 周辺市町</span><span><input type="checkbox" name="a${i}:fallback" ${a.fallback ? "checked" : ""}> 受け皿（町名に当たらない住所）</span></label>
+    </fieldset>`).join("")}
+    <fieldset class="grid2"><legend><strong>エリアを追加</strong>（空欄なら追加しません）</legend>
+      <label class="field">名前<input name="newName"></label>
+      <label class="field">町名（読点区切り）<textarea name="newTowns"></textarea></label>
+      <label class="field"><span><input type="checkbox" name="newPeripheral"> 周辺市町</span></label>
+    </fieldset>
+    <div><button class="btn" type="submit">保存する</button></div>
+  </form>
+  <h2 id="addcity">都市を追加</h2>
+  <form class="stack" data-form="addcity">
+    <p class="muted small" style="margin:0">都道府県と市区町村名だけで追加できます。エリア区分・町名・駅などの目印はAIが自動で作成します（推定なので、あとで確認・修正してください）。</p>
+    <div class="grid2">
+      <label class="field">都道府県<select name="cpref"><option value="">選んでください</option>${PREFS.map(p => `<option>${p}</option>`).join("")}</select></label>
+      <label class="field">市区町村名<input name="cname" placeholder="例：郡山市"></label>
+    </div>
+    <div class="manual" hidden><label class="field">中心の座標（自動設定ができない場合のみ。Googleマップで長押し）<input name="ccenter" placeholder="37.4005, 140.3597"></label></div>
+    <div><button class="btn" type="submit">都市を追加</button></div>
+  </form>`;
+}
+
+// ================= ルーティング =================
+function parseRoute() {
+  const h = location.hash.slice(1) || "/";
+  const [path, qs] = h.split("?");
+  return { parts: path.split("/").filter(Boolean), q: Object.fromEntries(new URLSearchParams(qs || "")) };
+}
+function render() {
+  const { parts, q } = parseRoute(), [p0, p1] = parts;
+  const NAV = [["", "概要"], ["map", "地図"], ["areas", "エリア"], ["outlook", "予測"], ["signals", "予兆"], ["projects", "案件"]];
+  const ICON = {"signals": "<path d=\"M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1\"/><circle cx=\"12\" cy=\"12\" r=\"3\"/>", "": "<path d=\"M3 11l9-7 9 7v9a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z\"/>", "map": "<path d=\"M9 4L3 6v14l6-2 6 2 6-2V4l-6 2-6-2zM9 4v14M15 6v14\"/>", "areas": "<path d=\"M4 20V10M10 20V4M16 20v-7M2 20h20\"/>", "outlook": "<path d=\"M3 17l6-6 4 4 8-8M15 7h6v6\"/>", "projects": "<path d=\"M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01\"/>"};
+  const cur = ["project"].includes(p0) ? "projects" : ["area"].includes(p0) ? "areas" : ["edit", "settings"].includes(p0) ? "admin" : (p0 || "");
+  const topItems = editable() ? [...NAV, ["admin", "管理"]] : NAV;
+  document.getElementById("nav").innerHTML = topItems.map(([k, l]) => `<a href="#/${k}" class="${cur === k ? "active" : ""}">${l}</a>`).join("");
+  document.getElementById("tabbar").innerHTML = NAV.map(([k, l]) => `<a href="#/${k}" class="${cur === k ? "active" : ""}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${ICON[k]}</svg>${l}</a>`).join("");
+  const cs = document.getElementById("citysel");
+  if (cs) cs.innerHTML = cities().map(c => `<option value="${esc(c.id)}" ${c.id === S.city ? "selected" : ""}>${esc(c.name)}</option>`).join("") + (editable() ? `<option value="__add">＋ 都市を追加</option>` : "");
+  document.title = curCity().name + " 街の変化ウォッチ";
+  let html;
+  switch (p0) {
+    case "map": html = viewMap(); break;
+    case "areas": html = viewAreas(); break;
+    case "area": html = viewArea(p1); break;
+    case "projects": html = viewProjects(q); break;
+    case "project": html = viewProject(p1); break;
+    case "admin": html = viewAdmin(); break;
+    case "edit": html = viewEdit(p1); break;
+    case "settings": html = viewSettings(); break;
+    case "outlook": html = viewOutlook(); break;
+    case "signals": html = viewSignals(); break;
+    default: html = viewDashboard();
+  }
+  if (S.dbMissing) html = `<div class="notice">データベースに接続できないため、登録データを表示できません。claude.ai にサインインした状態で開いてください。</div>` + html;
+  if (!isAizu() && S.loadedP && !["settings", "edit", "admin"].includes(p0)) {
+    const c = curCity(), empty = !prepared().length;
+    html = `<div class="notice">${empty ? `<b>${esc(c.name)}</b>はまだ出店などのデータがありません。最新情報の収集はチャットで行います。下の依頼文をコピーして、Claudeとのチャットに貼り付けてください。` : `${esc(c.name)}の最新情報を追加したいときは、下の依頼文をチャットに貼り付けてください。`}
+      <div class="row"><input readonly value="${esc(collectPrompt(c))}" style="flex:1;min-width:12rem"><button class="btn sm" type="button" data-copy="${esc(collectPrompt(c))}">コピー</button></div>
+      ${c.generated ? `<div class="small muted">エリア区分・町名・目印の位置はAIによる推定です。管理→「スコア係数とエリア」で確認・修正できます。</div>` : ""}</div>` + html;
+  }
+  document.getElementById("app").innerHTML = html;
+  initMaps();
+}
+let renderQueued = false;
+function scheduleRender() {
+  if (renderQueued) return; renderQueued = true;
+  requestAnimationFrame(() => {
+    renderQueued = false;
+    const a = document.activeElement;
+    if (a && /^(INPUT|TEXTAREA|SELECT)$/.test(a.tagName) && a.closest("form.stack")) return; // 入力中の画面は書き換えない
+    render();
+  });
+}
+window.addEventListener("hashchange", () => { S.pickTarget = null; render(); window.scrollTo(0, 0); });
+
+// ================= 書き込み =================
+async function write(fn, okMsg) {
+  try { await fn(); if (okMsg) toast(okMsg); return true; }
+  catch (e) {
+    if (e && e.code === "invalid_argument") { S.canWrite = false; toast("編集権限がないため保存できませんでした。"); render(); }
+    else if (e && e.code === "quota_exceeded") toast("保存容量の上限に達しました。古い案件を整理してください。");
+    else toast("保存できませんでした。時間をおいてもう一度試してください。");
+    return false;
+  }
+}
+const projRef = id => S.db.collection("projects").doc(id);
+const clean = o => JSON.parse(JSON.stringify(o));
+function readSource(fd) {
+  const name = (fd.get("sName") || "").trim(), url = (fd.get("sUrl") || "").trim();
+  if (!name && !url) return null;
+  let host = ""; try { host = url ? new URL(url).hostname : ""; } catch {}
+  return { name: name || host, url, title: (fd.get("sTitle") || "").trim(), tier: Number(fd.get("sTier") || 2), publishedAt: fd.get("sPub") || "" };
+}
+function parseLatLng(s) {
+  const m = String(s || "").match(/(-?\d+(?:\.\d+)?)\s*[,，、\s]\s*(-?\d+(?:\.\d+)?)/);
+  if (!m) return null;
+  const lat = +m[1], lng = +m[2];
+  return (lat > 30 && lat < 46 && lng > 128 && lng < 146) ? { lat, lng } : null;
+}
+
+async function saveProject(form) {
+  const fd = new FormData(form), id = form.dataset.id, isNew = id === "new";
+  const before = isNew ? null : S.projects.find(x => x.id === id);
+  const [kind, category] = String(fd.get("kc")).split("|");
+  const ll = parseLatLng(fd.get("latlng"));
+  if (String(fd.get("latlng") || "").trim() && !ll) { toast("緯度・経度の形式を確認してください（例：37.4947, 139.9298）"); return; }
+  const areaId = fd.get("areaId") || "";
+  const now = new Date().toISOString();
+  const doc = {
+    ...(before || {}),
+    name: String(fd.get("name")).trim(), kind, category,
+    company: fd.get("company").trim(), address: fd.get("address").trim(),
+    areaId, areaManual: !!areaId,
+    status: fd.get("status"), changeType: fd.get("changeType"), size: fd.get("size"), chain: fd.get("chain"), parking: fd.get("parking"),
+    confidence: fd.get("confidence"),
+    plannedDate: fd.get("plannedDate"), openedDate: fd.get("openedDate"), closedDate: fd.get("closedDate"),
+    firstDiscoveredAt: fd.get("firstDiscoveredAt") || todayStr(), lastCheckedAt: fd.get("lastCheckedAt") || todayStr(),
+    estimated: fd.getAll("estimated"), latEst: fd.get("latEst") === "on", note: fd.get("note").trim(),
+    updatedAt: now,
+    city: before ? (before.city || DEFAULT_CITY) : S.city,
+  };
+  delete doc.id;
+  if (ll) { doc.lat = ll.lat; doc.lng = ll.lng; } else { delete doc.lat; delete doc.lng; }
+  if (!doc.name) { toast("名称を入力してください。"); return; }
+  const events = [...(before?.events || [])];
+  if (isNew) {
+    doc.createdAt = now;
+    const src = readSource(fd);
+    events.push({ id: rid(), type: fd.get("evType") || "NOTE", date: doc.firstDiscoveredAt, confidence: doc.confidence, description: (fd.get("description") || "").trim() || "案件を登録", ...(src ? { source: src } : {}) });
+  } else if (before.status !== doc.status) {
+    events.push({ id: rid(), type: "STATUS_CHANGE", date: todayStr(), confidence: doc.confidence, description: `ステータス変更：${STATUS[before.status]} → ${STATUS[doc.status]}` });
+  }
+  doc.events = events;
+  const ref = isNew ? S.db.collection("projects").doc() : projRef(id);
+  const ok = await write(() => ref.set(clean(doc)), isNew ? "登録しました" : "保存しました");
+  if (ok) { S.pickTarget = null; location.hash = "#/edit/" + ref.id; }
+}
+async function addEvent(form) {
+  const fd = new FormData(form), id = form.dataset.id, p = S.projects.find(x => x.id === id); if (!p) return;
+  const type = fd.get("type"), date = fd.get("date") || todayStr(), src = readSource(fd);
+  const doc = { ...p }; delete doc.id;
+  doc.events = [...(p.events || []), { id: rid(), type, date, confidence: fd.get("confidence"), description: (fd.get("description") || "").trim(), ...(src ? { source: src } : {}) }];
+  doc.lastCheckedAt = todayStr(); doc.updatedAt = new Date().toISOString();
+  if (date < (p.firstDiscoveredAt || "9")) doc.firstDiscoveredAt = date;
+  if (type === "OPENED") { doc.status = "OPEN"; doc.openedDate = p.openedDate || date; }
+  if (type === "CLOSED") { doc.status = "CLOSED"; doc.closedDate = p.closedDate || date; }
+  if (type === "OFFICIAL_ANNOUNCEMENT" && p.status === "PLANNED") doc.status = "CONFIRMED";
+  if (await write(() => projRef(id).set(clean(doc)), "履歴を追加しました")) form.reset();
+}
+async function mergeInto(form) {
+  const fd = new FormData(form), fromId = form.dataset.id, intoId = fd.get("into");
+  const from = S.projects.find(x => x.id === fromId), into = S.projects.find(x => x.id === intoId);
+  if (!from || !into) { toast("統合先を選んでください。"); return; }
+  if (!confirm(`「${from.name}」を「${into.name}」に統合して削除します。よろしいですか？`)) return;
+  const BETTER = (a, b) => (a < b ? a : b);
+  const doc = { ...into }; delete doc.id;
+  doc.events = [...(into.events || []), ...(from.events || []), { id: rid(), type: "NOTE", date: todayStr(), confidence: into.confidence, description: `案件「${from.name}」を統合` }];
+  doc.firstDiscoveredAt = BETTER(from.firstDiscoveredAt || "9", into.firstDiscoveredAt || "9");
+  doc.confidence = BETTER(from.confidence, into.confidence);
+  for (const k of ["company", "address", "plannedDate", "openedDate"]) if (!doc[k] && from[k]) doc[k] = from[k];
+  if (typeof doc.lat !== "number" && typeof from.lat === "number") { doc.lat = from.lat; doc.lng = from.lng; doc.latEst = from.latEst; }
+  doc.note = [into.note, from.note].filter(Boolean).join("\n");
+  doc.updatedAt = new Date().toISOString();
+  if (await write(() => projRef(intoId).set(clean(doc)))) {
+    if (await write(() => projRef(fromId).delete(), "統合しました")) location.hash = "#/edit/" + intoId;
+  }
+}
+const PREFS = "北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県".split(" ");
+const collectPrompt = c => `【街の変化ウォッチ】${c.prefecture || ""}${c.name}の情報を集めて登録してください（出店・閉店・大型店・都市計画・地価・求人からの出店予兆・県と国の動き）。`;
+async function genCitySetup(pref, name) {
+  const sample = await window.claude?.use?.("sample");
+  if (!sample) return null;
+  const prompt = `あなたは日本の都市地理に詳しいアシスタントです。${pref}${name}について、地域の変化を観測するサイトの初期設定をJSONだけで返してください。説明文やコードブロックは不要です。
+形式: {"id":"ローマ字の英小文字ID（例 koriyama）","name":"正式な市区町村名","prefecture":"${pref}","center":[市役所付近の緯度,経度],
+"areas":[{"id":"英小文字","name":"エリア名（例 駅前・中心市街地）","towns":["そのエリアに含まれる町名や地名（住所に現れる表記）",...],"center":[緯度,経度],"radius_m":半径メートル}],
+"landmarks":[["名前",緯度,経度,"種類"]]}
+条件: areasは市の中心部と主な郊外を4〜6区分。最後に {"id":"other","name":"その他","towns":[],"fallback":true} を加える。landmarksは主要駅・市役所・主要病院・高速IC・城や大型の観光地など最大12件で、種類は st(駅) gov(役所) hosp(病院) ic(IC) castle(城) univ(大学) sight(名所) shop(大型店) のいずれか。座標は小数4桁程度。分からない項目は推測で埋めず省略してください。`;
+  const r = await sample.json(prompt, { modelTier: "default" });
+  if (!r || !Array.isArray(r.center) || r.center.length !== 2) throw new Error("bad");
+  return r;
+}
+async function addCity(form) {
+  const fd = new FormData(form), pref = String(fd.get("cpref") || ""), name = String(fd.get("cname") || "").trim();
+  if (!pref || !name) { toast("都道府県と市区町村名を入力してください。"); return; }
+  const btn = form.querySelector("button[type=submit]"); btn.disabled = true; btn.textContent = "地域の設定を作成中…（数十秒）";
+  let g = null, ll = parseLatLng(fd.get("ccenter"));
+  try { g = await genCitySetup(pref, name); } catch (e) { g = null; }
+  btn.disabled = false; btn.textContent = "都市を追加";
+  if (!g && !ll) { toast("自動設定ができませんでした。中心の座標を入力して、もう一度お試しください。"); form.querySelector(".manual").hidden = false; return; }
+  const center = g ? g.center.map(Number) : [ll.lat, ll.lng];
+  let id = String((g && g.id) || "").toLowerCase().replace(/[^a-z0-9-]/g, "") || ("c" + rid());
+  if (id === "main" || cities().some(c => c.id === id)) id = id + "-" + rid().slice(0, 3);
+  const city = { id, name: (g && g.name) || name, prefecture: pref, center, generated: !!g };
+  const doc = { city, areas: [{ id: "other", name: "その他", towns: [], fallback: true }] };
+  if (g) {
+    const areas = (g.areas || []).filter(a => a && a.id && a.name).map(a => ({ id: String(a.id).toLowerCase().replace(/[^a-z0-9-]/g, "") || rid(), name: String(a.name), towns: (a.towns || []).map(String).slice(0, 40), ...(a.fallback ? { fallback: true } : {}) }));
+    if (!areas.some(a => a.fallback)) areas.push({ id: "other", name: "その他", towns: [], fallback: true });
+    doc.areas = areas;
+    const unit = 0.12 * 111320 * Math.cos(center[0] * Math.PI / 180) / 600;
+    doc.zones = Object.fromEntries((g.areas || []).filter(a => !a.fallback && Array.isArray(a.center) && a.center.length === 2).map(a => [String(a.id).toLowerCase().replace(/[^a-z0-9-]/g, ""), [Number(a.center[0]), Number(a.center[1]), Math.max(25, Math.min(140, (Number(a.radius_m) || 1200) / unit))]]));
+    doc.landmarks = (g.landmarks || []).filter(l => Array.isArray(l) && l.length >= 3 && isFinite(l[1]) && isFinite(l[2])).slice(0, 12).map(l => [String(l[0]), Number(l[1]), Number(l[2]), LM_ICON[l[3]] ? l[3] : "sight"]);
+  }
+  if (await write(() => S.db.doc("config/" + id).set(clean(doc)), city.name + "を追加しました")) { S.configs[id] = doc; setCity(id); }
+}
+async function saveSettings(form) {
+  const fd = new FormData(form), weights = {};
+  for (const d of WEIGHT_DEFS) { const v = Number(fd.get("w:" + d[0])); if (Number.isFinite(v)) weights[d[0]] = v; }
+  const areas = [], split = s => String(s || "").split(/[、,，\n]/).map(t => t.trim()).filter(Boolean);
+  for (let i = 0; fd.has(`a${i}:id`); i++) {
+    areas.push({ id: fd.get(`a${i}:id`), name: String(fd.get(`a${i}:name`)).trim() || fd.get(`a${i}:id`), towns: split(fd.get(`a${i}:towns`)), peripheral: fd.get(`a${i}:peripheral`) === "on", fallback: fd.get(`a${i}:fallback`) === "on" });
+  }
+  const nn = String(fd.get("newName") || "").trim();
+  if (nn) areas.push({ id: "a" + rid(), name: nn, towns: split(fd.get("newTowns")), peripheral: fd.get("newPeripheral") === "on" });
+  const prev = S.config || {}, prevAreas = Object.fromEntries((prev.areas || []).map(a => [a.id, a]));
+  const merged = areas.map(a => ({ ...(prevAreas[a.id] || {}), ...a }));
+  await write(() => S.db.doc("config/" + cityDocId(S.city)).set(clean({ ...prev, areas: merged, weights })), "保存しました。スコアに反映されます");
+}
+
+// ================= イベント =================
+document.addEventListener("submit", e => {
+  const f = e.target; if (!(f instanceof HTMLFormElement)) return;
+  const kind = f.dataset.form; if (!kind) return;
+  e.preventDefault();
+  if (kind === "search") { const fd = new FormData(f), qs = new URLSearchParams(); for (const [k, v] of fd) if (v) qs.set(k, v); location.hash = "#/projects" + (qs.toString() ? "?" + qs : ""); return; }
+  if (!editable()) return;
+  ({ project: saveProject, event: addEvent, merge: mergeInto, settings: saveSettings, addcity: addCity })[kind]?.(f);
+});
+document.addEventListener("change", e => {
+  const t = e.target;
+  if (t.id === "citysel") { if (t.value === "__add") { t.value = S.city; location.hash = "#/settings"; setTimeout(() => document.getElementById("addcity")?.scrollIntoView(), 50); } else setCity(t.value); return; }
+  if (t.dataset && t.dataset.mf) { const f = S.mapFilter; f[t.dataset.mf] = t.dataset.mf === "days" ? Number(t.value) : t.value; render(); }
+});
+document.addEventListener("click", async e => {
+  const tp = e.target.closest("[data-toggle-pin]");
+  if (tp) { const k = tp.dataset.togglePin, s = S.mapFilter.pins; s.has(k) ? s.delete(k) : s.add(k); render(); return; }
+  const cp = e.target.closest("[data-copy]");
+  if (cp) { try { await navigator.clipboard.writeText(cp.dataset.copy); toast("コピーしました。チャットに貼り付けてください"); } catch { toast("コピーできませんでした。文字を長押しして選択してください"); } return; }
+  const mz = e.target.closest("[data-mz]");
+  if (mz) { const svg = mz.closest(".mapwrap").querySelector("svg.mapsvg"); if (mz.dataset.mz === "reset") svg.__reset(); else svg.__zoom(mz.dataset.mz === "in" ? 1.6 : 1 / 1.6); return; }
+  if (e.target.closest("[data-mclose]")) { e.target.closest(".map-card").hidden = true; return; }
+  const msvg = e.target.closest("svg.mapsvg");
+  if (msvg && msvg.dataset.dragged) return;
+  if (msvg && msvg.id === "pickmap") {
+    const [x, y] = msvg.__toSvg(e.clientX, e.clientY), [lat, lng] = unproj(x, y);
+    document.getElementById("latlng").value = lat.toFixed(5) + ", " + lng.toFixed(5);
+    const est = document.querySelector('input[name="latEst"]'); if (est) est.checked = true;
+    msvg.querySelectorAll(".pick").forEach(n => n.remove());
+    const r = 12 / Math.pow(BB.W / (parseFloat(msvg.getAttribute("viewBox").split(" ")[2]) || BB.W), 0.8);
+    msvg.insertAdjacentHTML("beforeend", `<circle class="pick" vector-effect="non-scaling-stroke" cx="${x}" cy="${y}" r="${r}" data-r="12"/>`);
+    return;
+  }
+  const pin = e.target.closest("[data-pin]");
+  if (pin && msvg) { const p = prepared().find(x => x.id === pin.dataset.pin); if (p) showMapCard(msvg, pinCardHtml(p)); return; }
+  const zone = e.target.closest("[data-zone]");
+  if (zone && msvg) { showMapCard(msvg, zoneCardHtml(zone.dataset.zone)); return; }
+  const lm = e.target.closest("[data-lm]");
+  if (lm && msvg) { showMapCard(msvg, `<div style="font-weight:700;padding-right:1.5rem">${esc(lm.dataset.lm)}</div><div class="row" style="margin:.5rem 0 0"><a class="btn secondary sm" href="${gmapUrl(lm.dataset.lat, lm.dataset.lng)}" target="_blank" rel="noopener noreferrer">Googleマップで開く</a></div>`); return; }
+  const de = e.target.closest("[data-del-event]");
+  if (de) {
+    const id = parseRoute().parts[1], p = S.projects.find(x => x.id === id); if (!p || !confirm("この履歴を削除しますか？")) return;
+    const doc = { ...p }; delete doc.id; doc.events = (p.events || []).filter(ev => ev.id !== de.dataset.delEvent); doc.updatedAt = new Date().toISOString();
+    await write(() => projRef(id).set(clean(doc)), "削除しました"); return;
+  }
+  const dp = e.target.closest("[data-del-project]");
+  if (dp) {
+    const p = S.projects.find(x => x.id === dp.dataset.delProject); if (!p || !confirm(`「${p.name}」を削除しますか？元に戻せません。`)) return;
+    if (await write(() => projRef(p.id).delete(), "削除しました")) location.hash = "#/admin";
+  }
+});
+
+// ================= 起動 =================
+setBB();
+if (window.EMBED) {
+  S.projects = window.EMBED.projects; S.configs = window.EMBED.configs; S.canWrite = false; S.loadedP = S.loadedC = true;
+  syncConfig(); render();
+} else { render(); bootDb(); }
+async function bootDb() {
+  const [db, user] = await Promise.all([window.claude?.use?.("db") ?? null, window.claude?.use?.("user") ?? null]);
+  if (!db) { S.dbMissing = true; S.canWrite = false; S.loadedP = S.loadedC = true; render(); return; }
+  S.db = db;
+  S.canWrite = user ? await user.can("data.write") : null;
+  db.collection("projects").onSnapshot(snap => {
+    S.projects = snap.docs.map(d => ({ id: d.id, ...d.data() })); S.loadedP = true; scheduleRender();
+  }, err => { if (err.code === "revoked") { S.dbMissing = true; S.canWrite = false; render(); } });
+  db.collection("config").onSnapshot(snap => {
+    S.configs = Object.fromEntries(snap.docs.map(d => [d.id, d.data()])); syncConfig(); S.loadedC = true; scheduleRender();
+  }, () => {});
+  render();
+}
+</script>
+</body>
+</html>
