@@ -257,6 +257,28 @@ details.filterbox > summary { cursor: pointer; padding: .65rem 0; font-weight: 7
 .leaflet-popup-content .btn.secondary { color: #1d2b45; }
 .leaflet-container a.btn { color: #fff; }
 .leaflet-container a.btn.secondary { color: #1d2b45; }
+.mpin-wrap { background: none; border: none; }
+.mpin { position: absolute; left: 50%; top: 0; width: calc(26px * var(--s, 1)); height: calc(26px * var(--s, 1)); margin-left: calc(-13px * var(--s, 1)); background: var(--c); border: 2px solid #fff; border-radius: 50% 50% 50% 0; transform: rotate(-45deg); box-shadow: 0 2px 6px rgba(0,0,0,.35); display: flex; align-items: center; justify-content: center; transition: transform .12s; }
+.mpin span { transform: rotate(45deg); color: #fff; font-size: calc(12px * var(--s, 1)); font-weight: 700; line-height: 1; }
+.mpin.hollow { background: #fff; border: 3px solid var(--c); }
+.mpin.hollow span { color: var(--c); }
+.mpin.est { opacity: .8; }
+.mpin.sel { transform: rotate(-45deg) scale(1.25); box-shadow: 0 0 0 3px rgba(217,168,78,.9), 0 3px 8px rgba(0,0,0,.4); z-index: 1; }
+.mapwrap .map-card { z-index: 1001; max-height: 78%; }
+.mapsvg .pin-g { cursor: pointer; }
+.mapsvg .pin-g path { filter: drop-shadow(0 1px 1.5px rgba(0,0,0,.35)); }
+.mapsvg .pin-g.est { opacity: .8; }
+.mapsvg .pin-g.sel path { stroke: #d9a84e; stroke-width: 3; }
+.mapsvg .tglyph { font-size: 9px; font-weight: 700; pointer-events: none; }
+.mapsvg .plabel { font-size: 10px; }
+.tiles-simple { filter: saturate(.55) contrast(.95) brightness(1.03); }
+.lmap .leaflet-tile-pane { }
+.lmap { background: #eef0ee; }
+.lmap { height: 70vh; max-height: 560px; min-height: 340px; width: 100%; position: relative; z-index: 0; }
+.zlabel span { display: inline-block; transform: translate(-50%, -50%); white-space: nowrap; font-weight: 700; font-size: 13px; color: #1d2b45; text-shadow: 0 0 3px #fff, 0 0 3px #fff, 0 0 3px #fff; }
+.leaflet-popup-content { margin: 12px 14px; font-family: inherit; }
+.leaflet-popup-content .btn { color: #fff; }
+.leaflet-popup-content .btn.secondary { color: #1d2b45; }
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
@@ -511,6 +533,7 @@ const ZONES_ = () => isAizu() ? AIZU_ZONES : ((S.config || {}).zones || {});
 const LANDMARKS_ = () => isAizu() ? AIZU_LANDMARKS : ((S.config || {}).landmarks || []);
 const TOWNS_ = () => isAizu() ? AIZU_TOWNS : ((S.config || {}).towns || []);
 const RAIL_ = () => isAizu() ? AIZU_RAIL : [];
+const PIN_GLYPH = { new: "店", planned: "予", large: "大", closed: "閉", construction: "建", housing: "住", infra: "道", job: "求" };
 const LM_ICON = { st: "■", castle: "◆", gov: "●", hosp: "✚", univ: "▲", ic: "IC", sight: "△", shop: "●" };
 const gmapUrl = (lat, lng) => `https://www.google.com/maps/search/?api=1&query=${lat},${lng}`;
 function zoneFill(a) {
@@ -519,7 +542,7 @@ function zoneFill(a) {
   return d >= 0 ? `rgba(47,125,91,${(.10 + .25 * t).toFixed(2)})` : `rgba(181,48,42,${(.10 + .25 * t).toFixed(2)})`;
 }
 function mapSVG(points, opts = {}) {
-  if (window.L && !opts.id) { const id = "lmap" + (++LSEQ); LMAPS[id] = { points, opts }; return `<div class="mapbox"><div id="${id}" class="lmap"></div><div class="mapcap">地図：国土地理院（地理院タイル）。ピン・エリアの円をタップすると情報を表示します。${mapPoints(points).length < points.length ? "位置未登録の案件は表示されません。" : ""}</div></div>`; }
+  if (window.L && !opts.id) { const id = "lmap" + (++LSEQ); LMAPS[id] = { points, opts }; return `<div class="mapbox"><div class="mapwrap"><div id="${id}" class="lmap"></div><div class="map-card" hidden></div></div><div class="mapcap">地図：国土地理院（地理院タイル）。ピンをタップすると詳細を表示します。${mapPoints(points).length < points.length ? "位置未登録の案件は表示されません。" : ""}</div></div>`; }
   const areas = cfg().areas, scores = opts.scores || {};
   const key = (location.hash || "#/") + "|" + (opts.key || opts.id || "m");
   let s = `<svg class="mapsvg" viewBox="0 0 ${BB.W} ${BB.H}" ${opts.id ? `id="${opts.id}"` : ""} role="img" aria-label="会津若松市の地図">`;
@@ -545,7 +568,8 @@ function mapSVG(points, opts = {}) {
     const [x, y] = proj(p.lat, p.lng);
     if (x < 0 || y < 0 || x > BB.W || y > BB.H) { outside++; continue; }
     const r = p.size === "LARGE" ? 10 : p.size === "MEDIUM" ? 8 : 6.5;
-    s += `<g class="pin-g"><circle class="pin ${pinOf(p) === "planned" ? "planned" : ""} ${p.latEst ? "est" : ""}" vector-effect="non-scaling-stroke" data-pin="${esc(p.id)}" data-r="${r}" cx="${x.toFixed(1)}" cy="${y.toFixed(1)}" r="${r}" fill="${pinOf(p) === "planned" ? "#fff" : PIN_COLOR[pinOf(p)]}" ${pinOf(p) === "planned" ? `style="stroke:${PIN_COLOR.planned}"` : ""}/><text class="plabel" data-fs="10" x="${(x + r + 3).toFixed(1)}" y="${(y + 3).toFixed(1)}">${esc(p.name.replace(/（.*?）/g, "").slice(0, 14))}</text></g>`;
+    const pt = pinOf(p), k = (p.size === "LARGE" ? 1.2 : 1);
+    s += `<g class="pin-g ${p.latEst ? "est" : ""}" data-pin="${esc(p.id)}" data-x="${x.toFixed(1)}" data-y="${y.toFixed(1)}" data-k="${k}" transform="translate(${x.toFixed(1)} ${y.toFixed(1)}) scale(${k})"><path class="tear ${pt === "planned" ? "hollow" : ""}" d="M0 0 C-2.5 -6 -9 -10 -9 -17 A9 9 0 1 1 9 -17 C9 -10 2.5 -6 0 0Z" fill="${pt === "planned" ? "#fff" : PIN_COLOR[pt]}" stroke="${pt === "planned" ? PIN_COLOR[pt] : "#fff"}" stroke-width="${pt === "planned" ? 2.5 : 1.5}"/><text class="tglyph" x="0" y="-13.5" text-anchor="middle" fill="${pt === "planned" ? PIN_COLOR[pt] : "#fff"}">${PIN_GLYPH[pt]}</text><text class="plabel" x="11" y="-13">${esc(p.name.replace(/（.*?）/g, "").slice(0, 14))}</text></g>`;
   }
   if (opts.pick) { const [x, y] = proj(opts.pick[0], opts.pick[1]); s += `<circle class="pick" vector-effect="non-scaling-stroke" cx="${x}" cy="${y}" r="12" data-r="12"/>`; }
   s += `</svg>`;
@@ -565,22 +589,30 @@ function initMaps() {
     for (const [id, { points, opts }] of Object.entries(LMAPS)) {
       const el = document.getElementById(id); if (!el || el.__map) { if (!el) delete LMAPS[id]; continue; }
       let m; try { m = L.map(el, { scrollWheelZoom: false }); } catch (err) { console.error(err); continue; } el.__map = m;
-      L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/std/{z}/{x}/{y}.png", { maxZoom: 18, attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>' }).addTo(m);
+      const simple = L.tileLayer("https://{s}.basemaps.cartocdn.com/rastertiles/voyager_labels_under/{z}/{x}/{y}{r}.png", { maxZoom: 19, subdomains: "abcd", className: "tiles-simple", attribution: '&copy; <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> &copy; <a href="https://carto.com/attributions" target="_blank" rel="noopener">CARTO</a>' });
+      const pale = L.tileLayer("https://cyberjapandata.gsi.go.jp/xyz/pale/{z}/{x}/{y}.png", { maxZoom: 18, attribution: '<a href="https://maps.gsi.go.jp/development/ichiran.html" target="_blank" rel="noopener">国土地理院</a>' });
+      simple.addTo(m);
+      L.control.layers({ "シンプル": simple, "淡色（国土地理院）": pale }, null, { position: "topright" }).addTo(m);
       const sc = opts.scores || {};
       for (const [zid, z] of Object.entries(ZONES_())) {
         const a = cfg().areas.find(x => x.id === zid); if (!a) continue;
         const col = zoneFill(sc[zid]);
-        L.circle([z[0], z[1]], { radius: z[2] * M_PER_UNIT(), color: "#1f2f4f", weight: 1.5, dashArray: "6 5", fillColor: col.startsWith("rgba(47") ? "#2f7d5b" : col.startsWith("rgba(181") ? "#b5302a" : "#888", fillOpacity: sc[zid] && sc[zid].hasData ? Math.min(.3, .08 + Math.abs(sc[zid].score - 50) / 60) : .06 }).addTo(m).bindPopup(() => zoneCardHtml(zid), { maxWidth: 300 });
+        L.circle([z[0], z[1]], { bubblingMouseEvents: false, radius: z[2] * M_PER_UNIT(), color: "#1f2f4f", weight: 1.5, dashArray: "6 5", fillColor: col.startsWith("rgba(47") ? "#2f7d5b" : col.startsWith("rgba(181") ? "#b5302a" : "#888", fillOpacity: sc[zid] && sc[zid].hasData ? Math.min(.3, .08 + Math.abs(sc[zid].score - 50) / 60) : .06 }).addTo(m).on("click", () => showMapCard(el, zoneCardHtml(zid)));
         L.marker([z[0], z[1]], { interactive: false, icon: L.divIcon({ className: "zlabel", html: `<span>${esc(a.name.split("／")[0].split("～")[0])}${sc[zid] && sc[zid].hasData ? " " + sc[zid].score + "点" : ""}</span>`, iconSize: null }) }).addTo(m);
       }
       const pts = mapPoints(points), ll = [];
       for (const p of pts) {
         const r = p.size === "LARGE" ? 10 : p.size === "MEDIUM" ? 8 : 6.5;
-        L.circleMarker([p.lat, p.lng], { radius: r, color: pinOf(p) === "planned" ? PIN_COLOR.planned : "#fff", weight: pinOf(p) === "planned" ? 3 : 2, fillColor: pinOf(p) === "planned" ? "#fff" : PIN_COLOR[pinOf(p)], fillOpacity: .95, opacity: p.latEst ? .75 : 1 }).addTo(m).bindPopup(() => pinCardHtml(p), { maxWidth: 300 }).bindTooltip(esc(p.name.replace(/（.*?）/g, "")), { direction: "right", offset: [8, 0] });
+        const pt = pinOf(p), big = p.size === "LARGE" ? 1.2 : 1;
+        const icon = L.divIcon({ className: "mpin-wrap", html: `<div class="mpin ${pt === "planned" ? "hollow" : ""} ${p.latEst ? "est" : ""}" style="--c:${PIN_COLOR[pt]};--s:${big}"><span>${PIN_GLYPH[pt]}</span></div>`, iconSize: [30 * big, 38 * big], iconAnchor: [15 * big, 38 * big] });
+        const mk = L.marker([p.lat, p.lng], { icon, riseOnHover: true, title: p.name }).addTo(m);
+        mk.on("click", () => { el.querySelectorAll(".mpin.sel").forEach(n => n.classList.remove("sel")); mk.getElement()?.querySelector(".mpin")?.classList.add("sel"); showMapCard(el, pinDetailHtml(p)); m.panTo([p.lat, p.lng], { animate: true }); });
         ll.push([p.lat, p.lng]);
       }
+      m.on("click", () => { const c = el.closest(".mapwrap").querySelector(".map-card"); if (c) c.hidden = true; el.querySelectorAll(".mpin.sel").forEach(n => n.classList.remove("sel")); });
       setTimeout(() => m.invalidateSize(), 150);
-      if (ll.length > 1) m.fitBounds(ll, { padding: [30, 30], maxZoom: 15 }); else if (ll.length === 1) m.setView(ll[0], 16); else m.setView(curCity().center, 13);
+      const fit = () => { m.invalidateSize(); if (ll.length > 1) m.fitBounds(ll, { padding: [30, 30], maxZoom: 15 }); else if (ll.length === 1) m.setView(ll[0], 16); else m.setView(curCity().center, 13); };
+      fit(); setTimeout(fit, 250);
     }
     return;
   }
@@ -594,6 +626,7 @@ function initMaps() {
       svg.setAttribute("viewBox", `${vb.x} ${vb.y} ${vb.w} ${vb.h}`);
       const z = BB.W / vb.w;
       svg.querySelectorAll("[data-r]").forEach(el => el.setAttribute("r", (el.dataset.r / Math.pow(z, 0.8)).toFixed(2)));
+      svg.querySelectorAll(".pin-g").forEach(g => g.setAttribute("transform", `translate(${g.dataset.x} ${g.dataset.y}) scale(${(g.dataset.k / Math.pow(z, 0.8)).toFixed(3)})`));
       svg.querySelectorAll("[data-fs]").forEach(el => el.setAttribute("font-size", (el.dataset.fs / Math.pow(z, 0.85)).toFixed(2)));
       svg.classList.toggle("z2", z >= 1.8); svg.classList.toggle("z1", z < 1.2);
       svg.style.touchAction = z > 1.05 ? "none" : "pan-y";
@@ -639,13 +672,26 @@ function pinCardHtml(p) {
   const pc = pCard(p).match(/<div class="pc">(.*?)<\/div>/s)[1], pd = pCard(p).match(/<div class="pd">(.*?)<\/div>/s)[1];
   return `<div class="pn" style="font-weight:700;padding-right:1.5rem">${esc(p.name)}</div><div class="pc" style="display:flex;flex-wrap:wrap;gap:.3rem;margin:.35rem 0">${pc}</div><div class="small muted">${pd}${p.address ? "・" + esc(p.address) : ""}</div><div class="row" style="margin:.5rem 0 0"><a class="btn sm" href="#/project/${p.id}">詳細</a><a class="btn secondary sm" href="${gmapUrl(p.lat, p.lng)}" target="_blank" rel="noopener noreferrer">Googleマップ</a></div>`;
 }
+function pinDetailHtml(p) {
+  const ev = [...(p.events || [])].sort((a, b) => (a.date > b.date ? -1 : 1))[0];
+  const pc = pCard(p).match(/<div class="pc">(.*?)<\/div>/s)[1], pd = pCard(p).match(/<div class="pd">(.*?)<\/div>/s)[1];
+  return `<div class="pn" style="font-weight:700;font-size:1.02rem;padding-right:1.6rem;line-height:1.45">${esc(p.name)}</div>
+    <div class="pc" style="display:flex;flex-wrap:wrap;gap:.3rem;margin:.45rem 0">${pc}</div>
+    <dl class="facts" style="font-size:.85rem">
+      <dt>時期</dt><dd>${pd}</dd>
+      ${p.address ? `<dt>住所</dt><dd>${esc(p.address)}</dd>` : ""}
+      ${ev ? `<dt>最新</dt><dd>${fmt(ev.date)} ${EVENT[ev.type]}${ev.description && ev.description !== EVENT[ev.type] ? "：" + esc(ev.description) : ""}</dd>` : ""}
+      ${p.note ? `<dt>備考</dt><dd>${esc(p.note)}</dd>` : ""}
+    </dl>
+    <div class="row" style="margin:.6rem 0 0"><a class="btn sm" href="#/project/${p.id}">すべての情報</a><a class="btn secondary sm" href="${gmapUrl(p.lat, p.lng)}" target="_blank" rel="noopener noreferrer">Googleマップで開く</a></div>`;
+}
 function zoneCardHtml(zid) {
   const { res } = analyze(), a = res.find(x => x.area.id === zid); if (!a) return "";
   const o = outlookOf(a.area.id);
   return `<div style="font-weight:700;padding-right:1.5rem">${esc(a.area.name)}　<span class="rscore" style="font-size:1.2rem">${a.hasData ? a.score + "点" : "データ不足"}</span></div><div class="rmeta">${momChip(a)}<span class="chip">案件 ${a.ps.length}件</span>${stanceChip(a.area.id)}${landChip(a.area.id)}</div>${o ? `<div class="small" style="margin-top:.4rem">${esc(o.headline)}</div>` : ""}<div class="row" style="margin:.5rem 0 0"><a class="btn sm" href="#/area/${a.area.id}">エリアの詳細</a></div>`;
 }
-function showMapCard(svg, html) {
-  const card = svg.closest(".mapwrap").querySelector(".map-card");
+function showMapCard(node, html) {
+  const card = node.closest(".mapwrap").querySelector(".map-card"); if (!card) return;
   card.innerHTML = `<button type="button" class="mclose" data-mclose aria-label="閉じる">×</button>${html}`; card.hidden = false;
 }
 
@@ -1336,7 +1382,7 @@ document.addEventListener("click", async e => {
     return;
   }
   const pin = e.target.closest("[data-pin]");
-  if (pin && msvg) { const p = prepared().find(x => x.id === pin.dataset.pin); if (p) showMapCard(msvg, pinCardHtml(p)); return; }
+  if (pin && msvg) { const p = prepared().find(x => x.id === pin.dataset.pin); if (p) { msvg.querySelectorAll(".pin-g.sel").forEach(n => n.classList.remove("sel")); pin.classList.add("sel"); showMapCard(msvg, pinDetailHtml(p)); } return; }
   const zone = e.target.closest("[data-zone]");
   if (zone && msvg) { showMapCard(msvg, zoneCardHtml(zone.dataset.zone)); return; }
   const lm = e.target.closest("[data-lm]");
