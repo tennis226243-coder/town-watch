@@ -162,7 +162,7 @@ details.more[open] > summary::before { content: "－ "; }
 
 /* 地図 */
 .mapbox { padding: 0; overflow: hidden; }
-.mapbox svg { width: 100%; height: auto; display: block; }
+.mapbox svg.mapsvg { width: 100%; height: auto; display: block; }
 .mapcap { font-size: .72rem; color: var(--faint); padding: .5rem .8rem .6rem; }
 .legend { display: flex; flex-wrap: wrap; gap: .35rem; margin: .6rem 0; }
 .legend button { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: .2rem .7rem; font: inherit; font-size: .78rem; color: var(--ink); cursor: pointer; display: inline-flex; gap: .4rem; align-items: center; }
@@ -284,6 +284,7 @@ details.filterbox > summary { cursor: pointer; padding: .65rem 0; font-weight: 7
 .mapsvg .road { fill: none; stroke-width: 5.5; stroke-linecap: round; stroke-linejoin: round; cursor: pointer; }
 .roadkey { display: inline-flex; align-items: center; gap: .35rem; font-size: .78rem; padding: .2rem .6rem; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); }
 .roadkey i { display: inline-block; width: 16px; height: 4px; border-radius: 2px; }
+.lmap .leaflet-overlay-pane svg { max-width: none !important; }
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
@@ -619,7 +620,7 @@ function initMaps() {
       const pts = mapPoints(points), ll = [];
       for (const p of points.filter(hasRoute)) {
         L.polyline(p.route, { color: "#fff", weight: 11, opacity: .9, lineCap: "round", interactive: false }).addTo(m);
-        L.polyline(p.route, { color: ROAD_COLOR(p), weight: 7, opacity: .95, lineCap: "round", dashArray: p.routeEst ? "12 8" : null }).addTo(m).bindPopup(() => pinCardHtml(p), { maxWidth: 300 }).bindTooltip(esc(p.name.replace(/（.*?）/g, "")) + "（" + ROAD_LABEL(p) + "）", { sticky: true });
+        L.polyline(p.route, { bubblingMouseEvents: false, color: ROAD_COLOR(p), weight: 7, opacity: .95, lineCap: "round", dashArray: p.routeEst ? "12 8" : null }).addTo(m).on("click", ev => { L.DomEvent.stopPropagation(ev); showMapCard(el, pinDetailHtml(p)); }).bindTooltip(esc(p.name.replace(/（.*?）/g, "")) + "（" + ROAD_LABEL(p) + "）", { sticky: true });
         p.route.forEach(x => ll.push(x));
       }
       for (const p of pts) {
