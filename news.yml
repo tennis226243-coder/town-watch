@@ -1,0 +1,56 @@
+name: news
+on:
+  schedule:
+    - cron: "17 */3 * * *"
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Fetch news
+        run: |
+          cat > /tmp/fetch.mjs <<'JS'
+          import fs from "node:fs";
+          const CITY = "会津若松";
+          const TOWNS = ["会津若松", "喜多方", "会津坂下", "会津美里", "猪苗代", "南会津", "西会津", "磐梯町", "湯川村", "北塩原", "柳津町", "只見町", "下郷町"];
+          const MAIN_KW = ["オープン予定", "出店", "新店", "閉店", "出店計画", "オープニングスタッフ", "移転", "跡地"];
+          const SUB_KW = ["オープン", "出店"];
+          const EXTRA = ["会津若松 地鎮祭", "会津若松 起工式", "会津若松 開発許可", "会津若松 大規模小売店舗", "会津若松 進出", "会津 出店へ", "会津若松 着工", "会津若松 道路 開通", "会津若松 リニューアル"];
+          const QUERIES = [...MAIN_KW.map(k => `会津若松 ${k}`), ...TOWNS.slice(1, 6).flatMap(t => MAIN_KW.slice(0, 4).map(k => `${t} ${k}`)), ...TOWNS.slice(6).flatMap(t => SUB_KW.map(k => `${t} ${k}`)), ...EXTRA];
+          const tagOf = t => /閉店|撤退|閉鎖|営業終了/.test(t) ? "閉店" : /出店計画|進出|開発許可|大規模小売|地鎮祭|起工/.test(t) ? "計画" : /着工|建設|開発|工事|造成|分譲/.test(t) ? "建設" : /開通|道路|バイパス/.test(t) ? "道路" : /求人|スタッフ|募集/.test(t) ? "求人" : /オープン|出店|開店|新店|進出/.test(t) ? "出店" : "その他";
+          const dec = s => s.replace(/<!\[CDATA\[|\]\]>/g, "").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#39;/g, "'").trim();
+          const pick = (x, tag) => { const m = x.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`)); return m ? dec(m[1]) : ""; };
+          let old = []; try { old = JSON.parse(fs.readFileSync("news.json", "utf8")).items || []; } catch {}
+          const items = new Map(old.map(i => [i.title, i]));
+          for (const q of QUERIES) {
+            const url = `https://news.google.com/rss/search?q=${encodeURIComponent(`${q} when:30d`)}&hl=ja&gl=JP&ceid=JP:ja`;
+            try {
+              const xml = await (await fetch(url, { headers: { "User-Agent": "Mozilla/5.0" } })).text();
+              for (const it of xml.split("<item>").slice(1)) {
+                let title = pick(it, "title"); const source = pick(it, "source");
+                if (source && title.endsWith(" - " + source)) title = title.slice(0, -(source.length + 3));
+                if (items.has(title)) continue;
+                items.set(title, { title, url: pick(it, "link"), source, date: new Date(pick(it, "pubDate")).toISOString(), tag: tagOf(title), local: /会津|若松|喜多方|鶴ヶ城|猪苗代|坂下|美里|磐梯|湯川|北塩原|柳津|只見|下郷|檜枝岐|三島町|金山町|昭和村/.test(title), query: q });
+              }
+            } catch (e) { console.error(q, e.message); }
+            await new Promise(r => setTimeout(r, 1200));
+          }
+          const cutoff = Date.now() - 90 * 864e5;
+          const list = [...items.values()].filter(i => Date.parse(i.date) > cutoff).sort((a, b) => b.date.localeCompare(a.date)).slice(0, 120);
+          fs.writeFileSync("news.json", JSON.stringify({ updatedAt: new Date().toISOString(), items: list }, null, 1));
+          console.log("items:", list.length);
+          JS
+          node /tmp/fetch.mjs
+      - name: Commit
+        run: |
+          git config user.name "news-bot"
+          git config user.email "news-bot@users.noreply.github.com"
+          git add news.json
+          git diff --cached --quiet || git commit -m "news: update"
+          git push
