@@ -294,6 +294,7 @@ details.filterbox > summary { cursor: pointer; padding: .65rem 0; font-weight: 7
 .qlinks { display: flex; flex-wrap: wrap; gap: .35rem; }
 .qlink { font-size: .8rem; padding: .3rem .65rem; border: 1px solid var(--line); border-radius: 999px; text-decoration: none; color: var(--heading); background: var(--paper); }
 .fc .newslist li b { font-weight: 700; }
+.refreshbar { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: .4rem .8rem; margin: 0 0 .8rem; }
 </style>
 
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" crossorigin="">
@@ -306,7 +307,7 @@ details.filterbox > summary { cursor: pointer; padding: .65rem 0; font-weight: 7
 </header>
 <nav class="tabbar" id="tabbar" aria-label="メインメニュー"></nav>
 <main id="app"><p class="muted">読み込み中</p></main>
-<footer>登録データは2026年10月28日時点の書き出しです。スコアは登録した公開情報にもとづく推計で、将来の発展や投資判断を保証するものではありません。地図は位置関係を示す模式図です。</footer>
+<footer>スコアは登録した公開情報にもとづく推計で、将来の発展や投資判断を保証するものではありません。地図は位置関係を示す模式図です。</footer>
 <div id="toast" class="toast" hidden></div>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" crossorigin=""></script>
@@ -638,7 +639,7 @@ function initMaps() {
         const a = cfg().areas.find(x => x.id === zid); if (!a) continue;
         const col = zoneFill(sc[zid]);
         L.circle([z[0], z[1]], { bubblingMouseEvents: false, radius: z[2] * M_PER_UNIT(), color: "#1f2f4f", weight: 1.5, dashArray: "6 5", fillColor: col.startsWith("rgba(47") ? "#2f7d5b" : col.startsWith("rgba(181") ? "#b5302a" : "#888", fillOpacity: sc[zid] && sc[zid].hasData ? Math.min(.3, .08 + Math.abs(sc[zid].score - 50) / 60) : .06 }).addTo(m).on("click", () => showMapCard(el, zoneCardHtml(zid)));
-        L.marker([z[0], z[1]], { interactive: false, icon: L.divIcon({ className: "zlabel", html: `<span>${esc(a.name.split("／")[0].split("～")[0])}${sc[zid] && sc[zid].hasData ? " " + sc[zid].score + "点" : ""}</span>`, iconSize: null }) }).addTo(m);
+        L.marker([z[0], z[1]], { interactive: false, icon: L.divIcon({ className: "zlabel", html: `<span>${esc(a.name.split("／")[0].split("～")[0])}${!opts.noScore && sc[zid] && sc[zid].hasData ? " " + sc[zid].score + "点" : ""}</span>`, iconSize: null }) }).addTo(m);
       }
       const pts = mapPoints(points), ll = [];
       for (const p of points.filter(hasRoute)) {
@@ -776,18 +777,57 @@ const STANCE = { up: ["上向きの材料が多い", "up"], mixed: ["材料が�
 const outlookOf = id => (cfg().areas.find(a => a.id === id) || {}).outlook;
 const stanceChip = id => { const o = outlookOf(id); return o && STANCE[o.stance] ? `<span class="chip ${STANCE[o.stance][1]}">将来性：${STANCE[o.stance][0]}</span>` : ""; };
 const momChip = a => a.hasData ? `<span class="chip ${a.mom > 0 ? "up" : a.mom < 0 ? "down" : ""}">3か月 ${signed(a.mom)}</span>` : "";
-function rankCard(a, i) {
+function rankCard(a, i, _arr, hide = false) {
   const [main, sub] = a.area.name.split("／");
-  const meta = [a.hasData ? `<span class="${a.mom > 0 ? "up" : a.mom < 0 ? "down" : ""}">3か月 ${signed(a.mom)}</span>` : "", `<span>案件 ${a.ps.length}件</span>`, (() => { const o = outlookOf(a.area.id); return o && STANCE[o.stance] ? `<span>将来性 ${STANCE[o.stance][0]}</span>` : ""; })()].join("");
+  const meta = [a.hasData && !hide ? `<span class="${a.mom > 0 ? "up" : a.mom < 0 ? "down" : ""}">3か月 ${signed(a.mom)}</span>` : "", hide ? "" : `<span>案件 ${a.ps.length}件</span>`, (() => { const o = outlookOf(a.area.id); return o && STANCE[o.stance] ? `<span>将来性 ${STANCE[o.stance][0]}</span>` : ""; })()].join("");
   return `<a class="rrow ${a.hasData ? "" : "nodata"}" href="#/area/${a.area.id}">
     <span class="rk">${a.hasData ? i + 1 : "–"}</span>
     <span class="rn">${esc(main)}${sub ? `<small>${esc(sub)}</small>` : ""}</span>
-    <span class="rs">${a.hasData ? a.score : "データ不足"}</span>
+    <span class="rs">${hide ? `<small class="muted" style="font-size:.78rem;font-weight:400">${a.ps.length}件</small>` : a.hasData ? a.score : "データ不足"}</span>
     <span class="rb">${scoreBar(a)}</span>
     <span class="rm">${meta}</span>
   </a>`;
 }
 const scoreMap = res => Object.fromEntries(res.map(a => [a.area.id, a]));
+function repoInfo() {
+  const m = location.hostname.match(/^([^.]+)\.github\.io$/); if (!m) return null;
+  const repo = location.pathname.split("/").filter(Boolean)[0]; return repo ? { owner: m[1], repo } : null;
+}
+function refreshBar() {
+  if (!window.EMBED) return "";
+  const t = S.dataUpdatedAt ? new Date(S.dataUpdatedAt).toLocaleString("ja-JP", { timeZone: "Asia/Tokyo", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" }) : "—";
+  return `<div class="refreshbar"><span class="muted small">データ更新 ${t}（3時間ごとに自動更新）</span><button class="btn sm secondary" type="button" data-reload>再読み込み</button></div>`;
+}
+async function reloadData(silent) {
+  try {
+    const j = await (await fetch("data.json?ts=" + Date.now(), { cache: "no-store" })).json();
+    if (j && Array.isArray(j.projects)) { S.projects = j.projects; if (j.configs) S.configs = j.configs; S.dataUpdatedAt = j.updatedAt; S.autoLog = j.log || []; syncConfig(); }
+    const n = await fetch("news.json?ts=" + Date.now(), { cache: "no-store" }); if (n.ok) S.news = await n.json();
+    if (!silent) toast("最新のデータを読み込みました");
+  } catch { if (!silent) toast("読み込めませんでした"); }
+  render();
+}
+async function runUpdate() {
+  const info = repoInfo(); if (!info) { toast("GitHub Pagesで開いたときに使えます"); return; }
+  let token = ""; try { token = localStorage.getItem("watch-gh-token") || ""; } catch {}
+  if (!token) { S.showToken = true; render(); return; }
+  const before = S.dataUpdatedAt;
+  S.refreshing = "収集を開始しています…"; render();
+  const r = await fetch(`https://api.github.com/repos/${info.owner}/${info.repo}/actions/workflows/update.yml/dispatches`, { method: "POST", headers: { Authorization: "Bearer " + token, Accept: "application/vnd.github+json" }, body: JSON.stringify({ ref: "main" }) }).catch(() => null);
+  if (!r || r.status !== 204) {
+    S.refreshing = ""; if (r && (r.status === 401 || r.status === 403 || r.status === 404)) { try { localStorage.removeItem("watch-gh-token"); } catch {} S.showToken = true; toast("トークンが使えませんでした。もう一度入力してください"); } else toast("開始できませんでした。時間をおいて試してください");
+    render(); return;
+  }
+  S.refreshing = "収集中（数分かかります）…"; render();
+  const startedAt = Date.now();
+  const poll = async () => {
+    await reloadData(true);
+    if (S.dataUpdatedAt && S.dataUpdatedAt !== before) { S.refreshing = ""; toast("最新情報に更新しました"); render(); return; }
+    if (Date.now() - startedAt > 10 * 60e3) { S.refreshing = ""; toast("まだ終わっていません。少し後に「再読み込み」してください"); render(); return; }
+    S.refreshing = `収集中（${Math.round((Date.now() - startedAt) / 60e3)}分経過）…`; render(); setTimeout(poll, 30e3);
+  };
+  setTimeout(poll, 60e3);
+}
 function viewDashboard() {
   const asOf = new Date(), { all, res } = analyze(asOf), al = alertsOf(res, all, asOf);
   const since = d => new Date(asOf - d * DAY);
@@ -801,20 +841,21 @@ function viewDashboard() {
   const withData = city.filter(a => a.hasData);
   const why = top ? (top.reasons.length ? top.reasons.slice(0, 2).join("／") : (outlookOf(top.area.id) || {}).headline || "") : "";
   return `
+  ${refreshBar()}
   ${top ? `<section class="hero">
-    <div class="eyebrow">いちばん動いているエリア（${fmt(todayStr())}時点）</div>
+    <div class="eyebrow">いま動いているエリア（${fmt(todayStr())}時点）</div>
     <h1>${esc(top.area.name.split("／")[0])}${top.area.name.includes("／") ? `<small>${esc(top.area.name.split("／")[1])}</small>` : ""}</h1>
-    <div class="big"><b>${top.score}</b><span>点</span><em class="${top.mom < 0 ? "down" : ""}">3か月 ${signed(top.mom)}</em></div>
+    <div class="big"><b>${top.ps.length}</b><span>件</span><em>出店 ${top.st.open12}・予定 ${top.ps.filter(p => p.status === "PLANNED" || p.status === "CONFIRMED").length}</em></div>
     ${why ? `<div class="why">${esc(why)}</div>` : ""}
   </section>` : `<h1>今、${esc(curCity().name)}のどこが動いているか</h1>`}
   ${!all.length && S.loadedP ? `<div class="notice">まだ案件がありません。${editable() ? `<a href="#/edit/new">最初の案件を登録</a>してください。` : ""}</div>` : ""}
   ${newsBlock(5, true)}
-  <h2>エリア別の発展度</h2>
+  <h2>エリア別のうごき</h2>
   <div class="grid2col">
-    <div><div class="panel">${city.map(rankCard).join("")}</div>
-      ${peri.some(a => a.hasData) ? `<details class="more"><summary>周辺市町（${peri.length}）</summary><div class="panel">${peri.map(rankCard).join("")}</div></details>` : ""}
+    <div><div class="panel">${city.map((a, i) => rankCard(a, i, null, true)).join("")}</div>
+      ${peri.some(a => a.hasData) ? `<details class="more"><summary>周辺市町（${peri.length}）</summary><div class="panel">${peri.map((a, i) => rankCard(a, i, null, true)).join("")}</div></details>` : ""}
     </div>
-    <div>${mapSVG(mapPoints(all), { scores: scoreMap(res) })}</div>
+    <div>${mapSVG(mapPoints(all), { scores: scoreMap(res), noScore: true })}</div>
   </div>
   <h2>主な数字</h2>
   <div class="kpis">
@@ -959,6 +1000,8 @@ function viewSignals() {
   return `<h1>出店・発展の予兆</h1>
   <p class="muted small">正式発表の前に出る「兆し」を集めたページです。求人票やローカル情報からの推定は確度D（推測）として扱い、確認できしだい更新します。</p>
   ${S.news ? `<h2>ニュース（自動取得）</h2>${newsBlock(30, false)}` : ""}
+  ${S.dataUpdatedAt ? `<div class="newsbox"><div class="newshead"><b>自動更新</b><span class="muted small">最終更新 ${new Date(S.dataUpdatedAt).toLocaleString("ja-JP", { timeZone: "Asia/Tokyo", month: "numeric", day: "numeric", hour: "2-digit", minute: "2-digit" })}・3時間ごと</span></div>
+    ${(S.autoLog || []).length ? `<ul class="newslist">${S.autoLog.slice(0, 10).map(l => `<li><span class="chip ${l.action === "新規" ? "up" : ""}">${esc(l.action)}</span> <a href="#/project/${esc(l.id)}">${esc(l.name)}</a><div class="small muted">${esc(l.at)}　${esc(l.note || "")}</div></li>`).join("")}</ul>` : `<p class="muted small" style="margin:.2rem 0 0">まだ自動登録はありません。新しい記事が見つかると、AIが内容を読んで案件を登録・更新します（「自動登録」ラベル付き）。</p>`}</div>` : ""}
   <h2>確度別の出店予測</h2>
   ${isAizu() ? forecastBlock() : ""}
   <h2>求人票からの出店予測</h2>
@@ -998,7 +1041,7 @@ function pCard(p) {
   const d = p.closedDate ? `閉店 ${fmt(p.closedDate)}` : p.openedDate ? `開店 ${fmt(p.openedDate)}` : p.plannedDate ? `予定 ${fmt(p.plannedDate)}` : `発見 ${fmt(p.firstDiscoveredAt)}`;
   return `<a class="pcard" href="#/project/${p.id}">
     <div class="pn"><span class="pin-dot" style="background:${PIN_COLOR[pinOf(p)]}"></span>${esc(p.name)}</div>
-    <div class="pc"><span class="chip ${st}">${STATUS[p.status]}</span><span class="chip">${esc(catLabel(p.kind, p.category))}</span><span class="chip">${esc(areaName(p.area).split("／")[0])}</span><span class="chip">確度${p.confidence}</span></div>
+    <div class="pc"><span class="chip ${st}">${STATUS[p.status]}</span><span class="chip">${esc(catLabel(p.kind, p.category))}</span><span class="chip">${esc(areaName(p.area).split("／")[0])}</span><span class="chip">確度${p.confidence}</span>${p.auto ? `<span class="chip mid">自動登録</span>` : ""}</div>
     <div class="pd">${d}${(p.estimated || []).length ? "（一部推定）" : ""}</div>
   </a>`;
 }
@@ -1490,6 +1533,10 @@ document.addEventListener("change", e => {
 document.addEventListener("click", async e => {
   const tp = e.target.closest("[data-toggle-pin]");
   if (tp) { const k = tp.dataset.togglePin, s = S.mapFilter.pins; s.has(k) ? s.delete(k) : s.add(k); render(); return; }
+  if (e.target.closest("[data-reload]")) { reloadData(false); return; }
+  if (e.target.closest("[data-runupdate]")) { runUpdate(); return; }
+  if (e.target.closest("[data-canceltoken]")) { S.showToken = false; render(); return; }
+  if (e.target.closest("[data-savetoken]")) { const v = (document.getElementById("ghtoken") || {}).value || ""; if (!v.trim()) { toast("トークンを入力してください"); return; } try { localStorage.setItem("watch-gh-token", v.trim()); } catch {} S.showToken = false; runUpdate(); return; }
   const cp = e.target.closest("[data-copy]");
   if (cp) { try { await navigator.clipboard.writeText(cp.dataset.copy); toast("コピーしました。チャットに貼り付けてください"); } catch { toast("コピーできませんでした。文字を長押しして選択してください"); } return; }
   const mz = e.target.closest("[data-mz]");
@@ -1530,7 +1577,15 @@ setBB();
 if (window.EMBED) {
   S.projects = window.EMBED.projects; S.configs = window.EMBED.configs; S.canWrite = false; S.loadedP = S.loadedC = true;
   syncConfig(); render();
+  fetch("data.json?ts=" + Date.now(), { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(j => {
+    if (j && Array.isArray(j.projects)) { S.projects = j.projects; if (j.configs) S.configs = j.configs; S.dataUpdatedAt = j.updatedAt; S.autoLog = j.log || []; syncConfig(); render(); }
+  }).catch(() => {});
   fetch("news.json?ts=" + Date.now(), { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(j => { if (j) { S.news = j; render(); } }).catch(() => {});
+  // 開いている間も10分ごとに最新データを自動で読み込み直す
+  S.lastReload = Date.now();
+  const autoReload = () => { if (document.visibilityState === "visible" && !S.refreshing && Date.now() - S.lastReload > 9.5 * 60e3) { S.lastReload = Date.now(); reloadData(true); } };
+  setInterval(autoReload, 60e3);
+  document.addEventListener("visibilitychange", autoReload);
 } else { render(); bootDb(); }
 async function bootDb() {
   const [db, user] = await Promise.all([window.claude?.use?.("db") ?? null, window.claude?.use?.("user") ?? null]);
