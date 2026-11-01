@@ -1,5 +1,5 @@
 {
- "updatedAt": "2026-11-01T06:07:40.473Z",
+ "updatedAt": "2026-11-01T13:27:12.558Z",
  "items": [
   {
    "title": "１日まで西会津ふるさとまつり 地元の民俗芸能披露",
@@ -10,6 +10,26 @@
    "tag": "その他",
    "local": true,
    "query": "西会津 出店"
+  },
+  {
+   "title": "【奈良市近隣】朗報です！ イオンモール奈良登美ヶ丘に人気ラーメン店が12月下旬オープン予定！",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBnVm52TkFYcnJQWkUyWGdUTVhOMzdLTXRvVkxKNG1BVU0zMFViMzYyM0N1b0N2UUNfTVFyNk9UZ1FLaUd6TWM0WGVhYm5COFBKa3BNT0hwMnhMSUE?oc=5",
+   "source": "号外NET 奈良市",
+   "date": "2026-10-31T23:46:16.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiW0FVX3lxTFBnVm52TkFYcnJQWkUyWGdUTVhOMzdLTXRvVkxKNG1BVU0zMFViMzYyM0N1b0N2UUNfTVFyNk9UZ1FLaUd6TWM0WGVhYm5COFBKa3BNT0hwMnhMSUE?oc=5\" target=\"_blank\">【奈良市近隣】朗報です！ イオンモール奈良登美ヶ丘に人気ラーメン店が12月下旬オープン予定！</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">号外NET 奈良市</font>",
+   "tag": "出店",
+   "local": false,
+   "query": "会津若松 オープン予定"
+  },
+  {
+   "title": "市町村だより 会津若松 ■グラウンドゴルフ大会",
+   "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBFTC1IVTAwZjVNa3dYcXZIZXZJUEQzc3AyQ0x0UEE4cWcyRVlwOWc4bFJnVE9ob2FMRFFFaW5NbXJtZzdKcGQ5dEJ6aWlrS0E?oc=5",
+   "source": "福島民報デジタル",
+   "date": "2026-10-31T20:21:00.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiT0FVX3lxTFBFTC1IVTAwZjVNa3dYcXZIZXZJUEQzc3AyQ0x0UEE4cWcyRVlwOWc4bFJnVE9ob2FMRFFFaW5NbXJtZzdKcGQ5dEJ6aWlrS0E?oc=5\" target=\"_blank\">市町村だより 会津若松 ■グラウンドゴルフ大会</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">福島民報デジタル</font>",
+   "tag": "その他",
+   "local": true,
+   "query": "会津 出店へ"
   },
   {
    "title": "市町村だより 会津若松 ■県立会津支援学校と県立聴覚支援学校会津校の合同文化祭「パワー祭り」",
@@ -1342,6 +1362,16 @@
    "query": "下郷町 出店"
   },
   {
+   "title": "伝統の民芸品をポップに表現 若松・画廊ダットで魅力発信へ作品展示や販売:イベント・レジャー",
+   "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTFBIYkFKS1pTSkNIV2syWEFvQnZJWXMxQUJVRi1mbVd2Ql9MVkhuUXRHN01idEVObHNFY1hWSVhHRWlsQVdHcS1NSUtMY0c1Q1IzaEd6REdtWW9pMVNxNjZRQjhUNmV1MjB3?oc=5",
+   "source": "福島民友新聞社",
+   "date": "2026-10-25T00:00:00.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiaEFVX3lxTFBIYkFKS1pTSkNIV2syWEFvQnZJWXMxQUJVRi1mbVd2Ql9MVkhuUXRHN01idEVObHNFY1hWSVhHRWlsQVdHcS1NSUtMY0c1Q1IzaEd6REdtWW9pMVNxNjZRQjhUNmV1MjB3?oc=5\" target=\"_blank\">伝統の民芸品をポップに表現 若松・画廊ダットで魅力発信へ作品展示や販売:イベント・レジャー</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">福島民友",
+   "tag": "その他",
+   "local": true,
+   "query": "会津若松 出店"
+  },
+  {
    "title": "好みの一杯見つけて...会津美里でワインフェス、25日まで:グルメ",
    "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5oUkdaRDNlb0dPVzI3MUZwZFJWeVFjVnQ1bkRQZWthZDZUcU9kTjhXdTdxX1cxQW9NX3NzZTgxYkQ4SjlXS1VNM3FITWRMcWlnZjdUcVdYTjRrM2EzbG5JR1AyVUhwSDdV?oc=5",
    "source": "福島民友新聞社",
@@ -1470,36 +1500,6 @@
    "tag": "閉店",
    "local": false,
    "query": "喜多方 閉店"
-  },
-  {
-   "title": "東京駅地下街の「食堂はせ川」で三遊亭兼好師匠と食べた喜多方ラーメンが美味しかった",
-   "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE1BTEEyLVBwNmtUSXZjVWxjeXBCcXFVMHdVNkJ2SmdMNlMxQUZ0SDA3dUJteVR1X3RoT0FmajdDV3duU212R0pieTZn?oc=5",
-   "source": "Web LEON",
-   "date": "2026-10-24T19:31:21.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiSkFVX3lxTE1BTEEyLVBwNmtUSXZjVWxjeXBCcXFVMHdVNkJ2SmdMNlMxQUZ0SDA3dUJteVR1X3RoT0FmajdDV3duU212R0pieTZn?oc=5\" target=\"_blank\">東京駅地下街の「食堂はせ川」で三遊亭兼好師匠と食べた喜多方ラーメンが美味しかった</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">Web LEON</font>",
-   "tag": "その他",
-   "local": true,
-   "query": "喜多方 出店"
-  },
-  {
-   "title": "八十里越がつなぐ絆 只見と新潟・三条の若者が１２年前のタイムカプセル開封",
-   "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE0xZDBnb0UwYW0zeTI5VGlOVDdJT1l1Qy1VRXpfQXlqemxsaXdZTHZMcmVOSWxLMzR2aWlWT3dqQlF3ZnE1RjdrUGozTjd0Tk0?oc=5",
-   "source": "福島民報デジタル",
-   "date": "2026-10-24T11:00:00.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiT0FVX3lxTE0xZDBnb0UwYW0zeTI5VGlOVDdJT1l1Qy1VRXpfQXlqemxsaXdZTHZMcmVOSWxLMzR2aWlWT3dqQlF3ZnE1RjdrUGozTjd0Tk0?oc=5\" target=\"_blank\">八十里越がつなぐ絆 只見と新潟・三条の若者が１２年前のタイムカプセル開封</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">福島民報デジタル</font>",
-   "tag": "その他",
-   "local": true,
-   "query": "只見町 出店"
-  },
-  {
-   "title": "福島県内外のワイン飲み比べ 福島・会津美里でワインフェス、11ワイナリー出店（福島民友新聞）",
-   "url": "https://news.google.com/rss/articles/CBMif0FVX3lxTE16T1B2cVpGdHhQc3dSUG9VbzlsejlPeHlISlc4OVdsWENDTDgzMWVtZXV0TFV2dkdLUVo5Ql9YRFRIc2JQeTNodFk1cGZaWjk3bm1xdURvakx1YnRSc1R3LVFxMkpGcUhtZmpKc1pPSktva2lGTDEyd0lIRHhGcTg?oc=5",
-   "source": "Yahoo!ニュース",
-   "date": "2026-10-24T10:31:15.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMif0FVX3lxTE16T1B2cVpGdHhQc3dSUG9VbzlsejlPeHlISlc4OVdsWENDTDgzMWVtZXV0TFV2dkdLUVo5Ql9YRFRIc2JQeTNodFk1cGZaWjk3bm1xdURvakx1YnRSc1R3LVFxMkpGcUhtZmpKc1pPSktva2lGTDEyd0lIRHhGcTg?oc=5\" target=\"_blank\">福島県内外のワイン飲み比べ 福島・会津美里でワインフェス、11ワイナリー出店（福島民友新聞）</a>&nbsp;",
-   "tag": "出店",
-   "local": true,
-   "query": "会津美里 出店"
   }
  ]
 }
