@@ -24,13 +24,41 @@ data.log = data.log || [];
 let news = { items: [] };
 try { news = JSON.parse(fs.readFileSync("news.json", "utf8")); } catch {}
 
+// ---------- 0. 手動で追加した案件（manual フォルダ）を反映 ----------
+const DEFAULTS = { kind: "STORE", category: "other", size: "SMALL", status: "PLANNED", changeType: "NEW", confidence: "C", address: "", company: "", chain: "UNKNOWN", parking: "", plannedDate: "", openedDate: "", closedDate: "", areaId: "", areaManual: false, estimated: [], note: "", events: [], city: "aizuwakamatsu" };
+if (fs.existsSync("manual")) {
+  for (const f of fs.readdirSync("manual").filter(f => f.endsWith(".json"))) {
+    let items; try { items = JSON.parse(fs.readFileSync("manual/" + f, "utf8")); } catch (e) { console.error("manual/" + f, e.message); continue; }
+    for (const m of [].concat(items)) {
+      if (!m || !m.id) continue;
+      const cur = data.projects.find(p => p.id === m.id);
+      if (cur) {
+        const evIds = new Set((cur.events || []).map(e => e.id));
+        const { events, ...rest } = m;
+        Object.assign(cur, rest, { events: [...(cur.events || []), ...(events || []).filter(e => !evIds.has(e.id))], updatedAt: cur.updatedAt });
+      } else {
+        const p = { ...DEFAULTS, ...m, firstDiscoveredAt: m.firstDiscoveredAt || today, lastCheckedAt: today, createdAt: new Date().toISOString(), updatedAt: new Date().toISOString() };
+        if (typeof p.lat !== "number" && p.address) {
+          try {
+            const q = /福島県/.test(p.address) ? p.address : "福島県" + p.address;
+            const res = await (await fetch("https://msearch.gsi.go.jp/address-search/AddressSearch?q=" + encodeURIComponent(q))).json();
+            if (res && res[0]) { p.lng = res[0].geometry.coordinates[0]; p.lat = res[0].geometry.coordinates[1]; p.latEst = true; }
+          } catch {}
+        }
+        data.projects.push(p);
+        data.log.unshift({ at: today, action: "手動登録", id: p.id, name: p.name, note: (p.note || "").slice(0, 60) });
+      }
+    }
+  }
+}
+
 // ---------- 1. ニュース収集 ----------
 const TOWNS = ["会津若松", "喜多方", "会津坂下", "会津美里", "猪苗代", "南会津", "西会津", "磐梯町", "湯川村", "北塩原", "柳津町", "只見町", "下郷町"];
 const MAIN_KW = ["オープン予定", "出店", "新店", "閉店", "出店計画", "オープニングスタッフ", "移転", "跡地"];
-const EXTRA = ["会津若松 地鎮祭", "会津若松 起工式", "会津若松 開発許可", "会津若松 大規模小売店舗", "会津若松 進出", "会津 出店へ", "会津若松 着工", "会津若松 道路 開通", "会津若松 リニューアル"];
+const EXTRA = ["会津若松店 オープニング", "会津若松店 新店", "会津若松 グランドオープン", "会津 初出店", "会津若松 新規出店", "喜多方店 オープン", "会津若松 地鎮祭", "会津若松 起工式", "会津若松 開発許可", "会津若松 大規模小売店舗", "会津若松 進出", "会津 出店へ", "会津若松 着工", "会津若松 道路 開通", "会津若松 リニューアル"];
 const QUERIES = [...MAIN_KW.map(k => `会津若松 ${k}`), ...TOWNS.slice(1, 6).flatMap(t => MAIN_KW.slice(0, 4).map(k => `${t} ${k}`)), ...TOWNS.slice(6).flatMap(t => ["オープン", "出店"].map(k => `${t} ${k}`)), ...EXTRA];
 const LOCAL = /会津|若松|喜多方|鶴ヶ城|猪苗代|坂下|美里|磐梯|湯川|北塩原|柳津|只見|下郷|檜枝岐|三島町|金山町|昭和村/;
-const tagOf = t => /閉店|撤退|閉鎖|営業終了/.test(t) ? "閉店" : /出店計画|進出|開発許可|大規模小売|地鎮祭|起工/.test(t) ? "計画" : /着工|建設|開発|工事|造成|分譲/.test(t) ? "建設" : /開通|道路|バイパス/.test(t) ? "道路" : /求人|スタッフ|募集/.test(t) ? "求人" : /オープン|出店|開店|新店|移転|リニューアル/.test(t) ? "出店" : "その他";
+const tagOf = t => /閉店|撤退|閉鎖|営業終了/.test(t) ? "閉店" : /出店計画|初出店|進出|開発許可|大規模小売|地鎮祭|起工/.test(t) ? "計画" : /着工|建設|開発|工事|造成|分譲/.test(t) ? "建設" : /開通|道路|バイパス/.test(t) ? "道路" : /求人|スタッフ|募集/.test(t) ? "求人" : /オープン|出店|開店|新店|移転|リニューアル/.test(t) ? "出店" : "その他";
 const dec = s => s.replace(/<!\[CDATA\[|\]\]>/g, "").replace(/<[^>]+>/g, " ").replace(/&amp;/g, "&").replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, '"').replace(/&#0?39;/g, "'").replace(/&#8230;|&hellip;/g, "…").replace(/\s+/g, " ").trim();
 const pick = (x, tag) => { const m = x.match(new RegExp(`<${tag}[^>]*>([\\s\\S]*?)</${tag}>`)); return m ? dec(m[1]) : ""; };
 const byTitle = new Map((news.items || []).map(i => [i.title, i]));
