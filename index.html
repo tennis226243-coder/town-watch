@@ -804,7 +804,7 @@ function refreshBar() {
 async function reloadData(silent) {
   try {
     const j = await (await fetch("data.json?ts=" + Date.now(), { cache: "no-store" })).json();
-    if (j && Array.isArray(j.projects)) { S.projects = j.projects; if (j.configs) S.configs = j.configs; S.dataUpdatedAt = j.updatedAt; S.autoLog = j.log || []; syncConfig(); }
+    if (j && Array.isArray(j.projects)) { const ids = new Set(j.projects.map(p => p.id)); S.projects = [...j.projects, ...((window.EMBED && window.EMBED.projects) || []).filter(p => !ids.has(p.id))]; if (j.configs) S.configs = j.configs; S.dataUpdatedAt = j.updatedAt; S.autoLog = j.log || []; syncConfig(); }
     const n = await fetch("news.json?ts=" + Date.now(), { cache: "no-store" }); if (n.ok) S.news = await n.json();
     if (!silent) toast("最新のデータを読み込みました");
   } catch { if (!silent) toast("読み込めませんでした"); }
@@ -1592,7 +1592,7 @@ if (window.EMBED) {
   S.projects = window.EMBED.projects; S.configs = window.EMBED.configs; S.canWrite = false; S.loadedP = S.loadedC = true;
   syncConfig(); render();
   fetch("data.json?ts=" + Date.now(), { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(j => {
-    if (j && Array.isArray(j.projects)) { S.projects = j.projects; if (j.configs) S.configs = j.configs; S.dataUpdatedAt = j.updatedAt; S.autoLog = j.log || []; syncConfig(); render(); }
+    if (j && Array.isArray(j.projects)) { const ids = new Set(j.projects.map(p => p.id)); S.projects = [...j.projects, ...((window.EMBED && window.EMBED.projects) || []).filter(p => !ids.has(p.id))]; if (j.configs) S.configs = j.configs; S.dataUpdatedAt = j.updatedAt; S.autoLog = j.log || []; syncConfig(); render(); }
   }).catch(() => {});
   fetch("news.json?ts=" + Date.now(), { cache: "no-store" }).then(r => r.ok ? r.json() : null).then(j => { if (j) { S.news = j; render(); } }).catch(() => {});
   // 開いている間も10分ごとに最新データを自動で読み込み直す

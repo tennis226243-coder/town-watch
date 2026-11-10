@@ -24,6 +24,17 @@ data.log = data.log || [];
 let news = { items: [] };
 try { news = JSON.parse(fs.readFileSync("news.json", "utf8")); } catch {}
 
+// ---------- 0a. index.html に新しく入った案件を data.json に取り込む ----------
+try {
+  const html = fs.readFileSync("index.html", "utf8");
+  const st = html.indexOf("window.EMBED = ");
+  if (st >= 0) {
+    const e = JSON.parse(html.slice(st + "window.EMBED = ".length, html.indexOf(";</script>", st)));
+    const ids = new Set(data.projects.map(p => p.id));
+    for (const p of e.projects || []) if (!ids.has(p.id)) { data.projects.push(p); data.log.unshift({ at: today, action: "追加", id: p.id, name: p.name, note: "サイト更新で追加" }); }
+  }
+} catch (err) { console.error("index.html", err.message); }
+
 // ---------- 0. 手動で追加した案件（manual フォルダ）を反映 ----------
 const DEFAULTS = { kind: "STORE", category: "other", size: "SMALL", status: "PLANNED", changeType: "NEW", confidence: "C", address: "", company: "", chain: "UNKNOWN", parking: "", plannedDate: "", openedDate: "", closedDate: "", areaId: "", areaManual: false, estimated: [], note: "", events: [], city: "aizuwakamatsu" };
 if (fs.existsSync("manual")) {
