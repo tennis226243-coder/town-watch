@@ -31,7 +31,15 @@ try {
   if (st >= 0) {
     const e = JSON.parse(html.slice(st + "window.EMBED = ".length, html.indexOf(";</script>", st)));
     const ids = new Set(data.projects.map(p => p.id));
-    for (const p of e.projects || []) if (!ids.has(p.id)) { data.projects.push(p); data.log.unshift({ at: today, action: "追加", id: p.id, name: p.name, note: "サイト更新で追加" }); }
+    const nn = s => (s || "").normalize("NFKC").replace(/（.*?）|\(.*?\)/g, "").replace(/[\s・\-「」『』]/g, "").replace(/^(イタリア食堂|スーパーセンター)/, "").replace(/(会津若松|会津|若松)?店?$/, "");
+    for (const p of e.projects || []) if (!ids.has(p.id)) {
+      // 同じ店を自動登録していた場合は、確認済みの案件に置き換える
+      const k = nn(p.name);
+      data.projects = data.projects.filter(x => !(x.auto && k && (nn(x.name).includes(k) || k.includes(nn(x.name)))));
+      data.projects.push(p); data.log.unshift({ at: today, action: "追加", id: p.id, name: p.name, note: "確認済みの情報を追加" });
+    }
+    // サイト側の設定（エリア・予測など）が新しければ取り込む
+    if (e.exportedAt && (!data.configsFrom || e.exportedAt > data.configsFrom)) { data.configs = e.configs; data.configsFrom = e.exportedAt; }
   }
 } catch (err) { console.error("index.html", err.message); }
 
@@ -95,6 +103,36 @@ news = { updatedAt: new Date().toISOString(), items: [...byTitle.values()].filte
 fs.writeFileSync("news.json", JSON.stringify(news, null, 1));
 console.log("news:", news.items.length);
 
+// ---------- 1b. ニュースの地名から位置を推定（地図に「未確認ニュース」として出す） ----------
+const LANDMARK_GEO = { "会津若松駅": [37.5079, 139.9303], "駅前": [37.5070, 139.9310], "七日町": [37.4998, 139.9233], "神明通り": [37.4975, 139.9300], "鶴ヶ城": [37.4878, 139.9297], "千石通り": [37.5050, 139.9440], "西若松駅": [37.4860, 139.9141] };
+const CITY_OF = t => ["喜多方", "会津坂下", "会津美里", "猪苗代", "南会津", "西会津", "磐梯", "湯川", "北塩原", "柳津", "只見", "下郷"].find(c => t.includes(c));
+async function placeOf(it) {
+  const t = (it.title + " " + (it.desc || "")).normalize("NFKC");
+  for (const [k, v] of Object.entries(LANDMARK_GEO)) if (t.includes(k)) return { lat: v[0], lng: v[1], place: k };
+  const towns = ((data.configs && data.configs.main && data.configs.main.areas) || []).flatMap(a => a.towns || []).filter(x => x && !/市$/.test(x) && !/^(会津坂下町|会津美里町)$/.test(x)).sort((a, b) => b.length - a.length);
+  let town = towns.find(x => t.includes(x));
+  if (!town) { const m = t.match(/([一-龠々]{1,5}(?:町|[0-9一二三四五六七八九]+丁目))/); if (m && !/^(会津|若松)/.test(m[1])) town = m[1]; }
+  if (!town) return null;
+  const city = CITY_OF(t);
+  const q = "福島県" + (city ? "" : "会津若松市") + (city || "") + town;
+  try {
+    const res = await (await fetch("https://msearch.gsi.go.jp/address-search/AddressSearch?q=" + encodeURIComponent(q))).json();
+    if (res && res[0]) { const [lng, lat] = res[0].geometry.coordinates; return { lat, lng, place: town }; }
+  } catch {}
+  return null;
+}
+{
+  let n = 0;
+  for (const it of news.items) {
+    if (n >= 40) break;
+    if (it.geoTried || !it.local || !["出店", "計画", "建設", "閉店"].includes(it.tag)) continue;
+    it.geoTried = true; n++;
+    const g = await placeOf(it); if (g) it.geo = g;
+    await sleep(200);
+  }
+  fs.writeFileSync("news.json", JSON.stringify(news, null, 1));
+}
+
 // ---------- 2. Claude で記事を読み、案件に反映 ----------
 const keyOf = i => i.url || i.title;
 const targets = news.items.filter(i => i.local && i.tag !== "その他" && !data.processed.includes(keyOf(i))).slice(0, MAX_PER_RUN);
@@ -145,6 +183,90 @@ async function geocode(address) {
 }
 const slug = s => "auto-" + [...s].reduce((h, c) => (h * 31 + c.codePointAt(0)) >>> 0, 7).toString(36);
 
+// ---------- 2b. 鍵なしの場合：ルール（パターン）で見出しから案件を作る ----------
+const z2h = t => t.replace(/[０-９]/g, c => String.fromCharCode(c.charCodeAt(0) - 0xFEE0)).replace(/　/g, " ");
+const NG = /イベント|フェス|マルシェ|祭|まつり|催事|フェア|展示|販売会|朝市|十日市|キッチンカー|出店者|募集します|コンテスト/;
+const AIZU_PLACES = ["会津若松市", "喜多方市", "会津坂下町", "会津美里町", "猪苗代町", "南会津町", "西会津町", "磐梯町", "湯川村", "北塩原村", "柳津町", "只見町", "下郷町"];
+function townsFromConfig() {
+  const c = (data.configs && data.configs.main) || {};
+  return (c.areas || []).flatMap(a => a.towns || []).filter(t => t && !/市|町$/.test(t) || /町$/.test(t)).sort((a, b) => b.length - a.length);
+}
+function ruleExtract(it) {
+  let t = z2h(it.title).replace(/^【[^】]*】\s*/, "").trim();
+  const text = t + " " + z2h(it.desc || "");
+  if (NG.test(t)) return null;
+  let name = (t.match(/[「『]([^」』]{2,30})[」』]/) || [])[1];
+  if (!name) { const m = t.match(/^(.{2,25}?)(?:が|、|は)(?:.*?)(?:オープン|出店|開店|閉店|移転|開業|新設|進出|リニューアル)/); if (m) name = m[1]; }
+  if (!name) return null;
+  name = name.replace(/^(会津若松市?|会津|若松|喜多方市?)(に|で|の)?/, "").trim();
+  if (name.length < 2 || NG.test(name) || /^(新店|新しい|話題の|人気の)/.test(name)) return null;
+  const closed = /閉店|閉業|営業終了|撤退|閉鎖/.test(t);
+  const moved = /移転/.test(t), renew = /リニューアル|改装/.test(t);
+  const big = /大型|ショッピングセンター|モール|工業団地|ホテル/.test(t);
+  // 日付
+  const base = new Date(it.date);
+  let y = null, mo = null, d = null;
+  const ym = text.match(/(20\d{2}|\d{2})年\s*(\d{1,2})月(?:\s*(\d{1,2})日)?/);
+  const md = text.match(/(\d{1,2})月\s*(\d{1,2})日/);
+  const mOnly = text.match(/(\d{1,2})月(?:上旬|中旬|下旬|末|頃|ごろ|予定|オープン|開店|に)/);
+  if (ym) { y = +ym[1] < 100 ? 2000 + +ym[1] : +ym[1]; mo = +ym[2]; d = ym[3] ? +ym[3] : null; }
+  else if (md) { mo = +md[1]; d = +md[2]; }
+  else if (mOnly) { mo = +mOnly[1]; }
+  else if (/来年/.test(text)) { y = base.getFullYear() + 1; }
+  let date = "";
+  if (mo && mo >= 1 && mo <= 12) {
+    if (!y) { y = base.getFullYear(); if (mo < base.getMonth() + 1 - 2) y += 1; }
+    const last = new Date(y, mo, 0).getDate();
+    date = `${y}-${String(mo).padStart(2, "0")}-${String(d && d <= last ? d : last).padStart(2, "0")}`;
+  }
+  const future = date ? date > today : /予定|計画|出店へ|進出へ|開業へ|初出店|方針|来年|来春|来秋|今冬|今秋|建設|着工/.test(t);
+  const status = closed ? "CLOSED" : future ? (date ? "CONFIRMED" : "PLANNED") : "OPEN";
+  // 場所
+  const place = AIZU_PLACES.find(pl => text.includes(pl)) || AIZU_PLACES.find(pl => text.includes(pl.replace(/[市町村]$/, ""))) || "会津若松市";
+  const town = townsFromConfig().find(tw => text.includes(tw)) || ((text.match(/([^\s、。]{1,6}(?:町|丁目))/) || [])[1] || "");
+  return {
+    name, status, changeType: closed ? "CLOSURE" : moved ? "RELOCATION" : renew ? "RENEWAL" : "NEW",
+    kind: big ? "LARGE_COMMERCIAL" : "STORE", size: big ? "LARGE" : "SMALL",
+    plannedDate: status !== "OPEN" && status !== "CLOSED" ? date : "", openedDate: status === "OPEN" ? (date && date <= today ? date : "") : "", closedDate: closed ? date : "",
+    address: town && !town.startsWith(place) ? place + town : place, hasTown: !!town, dateEstimated: !!date && !d,
+  };
+}
+const normName = s => (s || "").normalize("NFKC").replace(/[\s・\-（）()「」『』]/g, "").replace(/(会津若松|会津|若松)?店$/, "");
+if (!KEY && targets.length) {
+  for (const it of targets) {
+    const r = ruleExtract(it); if (!r) continue;
+    const isNews = /民友|民報|号外NET|NHK|テレビ|新聞|KFB|FCT|TUF|FTV/.test(it.source || "");
+    const ev = { id: "e" + Date.now().toString(36) + Math.random().toString(36).slice(2, 5), type: r.status === "CLOSED" ? "CLOSED" : "MEDIA_REPORT", date: it.date.slice(0, 10), confidence: isNews ? "C" : "D", description: it.title.slice(0, 80), source: { name: it.source || "ニュース", url: it.url, title: it.title, tier: 2, publishedAt: it.date.slice(0, 10) } };
+    const nn = normName(r.name);
+    const cur = data.projects.find(p => { const pn = normName(p.name.replace(/（.*?）/g, "")); return pn && nn && (pn.includes(nn) || nn.includes(pn)); });
+    if (cur) {
+      if ((cur.events || []).some(e => e.source && e.source.url === it.url)) continue;
+      cur.events = [...(cur.events || []), ev];
+      if (ORDER[r.status] > (ORDER[cur.status] ?? -1)) cur.status = r.status;
+      for (const k of ["plannedDate", "openedDate", "closedDate"]) if (r[k] && !cur[k]) cur[k] = r[k];
+      cur.lastCheckedAt = today; cur.updatedAt = new Date().toISOString();
+      data.log.unshift({ at: today, action: "更新", id: cur.id, name: cur.name, note: it.title.slice(0, 60) });
+    } else {
+      const g2 = news.items.find(n => n.url === it.url && n.geo);
+      const geo = g2 ? g2.geo : r.hasTown ? await geocode(r.address) : null;
+      const id = slug(r.name);
+      if (data.projects.some(x => x.id === id)) continue;
+      data.projects.push({
+        id, name: r.name.slice(0, 40), kind: r.kind, category: r.kind === "STORE" ? "other" : "specialty", size: r.size, status: r.status, changeType: r.changeType,
+        confidence: ev.confidence, address: r.address, company: "", chain: "UNKNOWN", parking: "",
+        plannedDate: r.plannedDate, openedDate: r.openedDate, closedDate: r.closedDate,
+        firstDiscoveredAt: ev.date, lastCheckedAt: today, areaId: "", areaManual: false,
+        estimated: ["address", "size", ...(r.dateEstimated ? ["plannedDate"] : [])],
+        note: "自動登録（見出しから機械的に抽出。未確認）", events: [ev], auto: true, city: "aizuwakamatsu",
+        createdAt: new Date().toISOString(), updatedAt: new Date().toISOString(),
+        ...(geo ? { lat: geo.lat, lng: geo.lng, latEst: true } : {}),
+      });
+      data.log.unshift({ at: today, action: "新規", id, name: r.name, note: it.title.slice(0, 60) });
+      await sleep(300);
+    }
+  }
+}
+
 if (KEY && targets.length) {
   let results = [];
   try { results = await ask(targets); } catch (e) { console.error(e.message); }
@@ -182,9 +304,9 @@ if (KEY && targets.length) {
     }
   }
 }
-for (const it of targets) if (KEY) data.processed.push(keyOf(it));
+for (const it of targets) data.processed.push(keyOf(it));
 data.processed = data.processed.slice(-3000);
 data.log = data.log.slice(0, 100);
 data.updatedAt = new Date().toISOString();
 fs.writeFileSync("data.json", JSON.stringify(data));
-console.log("projects:", data.projects.length, "processed:", targets.length, KEY ? "" : "(APIキー未設定のためニュース収集のみ)");
+console.log("projects:", data.projects.length, "processed:", targets.length, KEY ? "(AIで抽出)" : "(ルールで抽出)");
