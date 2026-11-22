@@ -1,6 +1,27 @@
 {
- "updatedAt": "2026-11-22T01:21:28.228Z",
+ "updatedAt": "2026-11-22T11:27:05.225Z",
  "items": [
+  {
+   "title": "【東京駅】喜多方ラーメンの名店「食堂はせ川」が期間限定出店｜＠BAILA（バイラ）",
+   "url": "https://news.google.com/rss/articles/CBMiXEFVX3lxTE5WeDB2akdPMjRhMEh1am5CbUFvY1hQYWhGQllFUGw2d2txWkFYX01uTmNFTzlQdVN4dTNJRzFMYUIyM0VtTXM4OUtYa3RaWnF4Ql9LenowZFh4QUYz?oc=5",
+   "source": "BAILA（バイラ）",
+   "date": "2026-11-22T11:03:41.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiXEFVX3lxTE5WeDB2akdPMjRhMEh1am5CbUFvY1hQYWhGQllFUGw2d2txWkFYX01uTmNFTzlQdVN4dTNJRzFMYUIyM0VtTXM4OUtYa3RaWnF4Ql9LenowZFh4QUYz?oc=5\" target=\"_blank\">【東京駅】喜多方ラーメンの名店「食堂はせ川」が期間限定出店｜＠BAILA（バイラ）</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">BAILA（バイラ）</font>",
+   "tag": "出店",
+   "local": true,
+   "query": "喜多方 出店",
+   "geoTried": true
+  },
+  {
+   "title": "＜続報＞北塩原村で依然１千人超が孤立状態 大規模停電も継続 会津地方大雪",
+   "url": "https://news.google.com/rss/articles/CBMiW0FVX3lxTFBwNkV0VTktMGxIc2JBd1dvWEdHQ2ZOWVhfTTdxM0xlR2Nveklac3V2OTJabXQ2ZF84QWpScmY2QU51eVBuUmlEaGtiVjRNOFF4ckNEbnp1MW94SXc?oc=5",
+   "source": "福島民報デジタル",
+   "date": "2026-11-22T05:10:00.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiW0FVX3lxTFBwNkV0VTktMGxIc2JBd1dvWEdHQ2ZOWVhfTTdxM0xlR2Nveklac3V2OTJabXQ2ZF84QWpScmY2QU51eVBuUmlEaGtiVjRNOFF4ckNEbnp1MW94SXc?oc=5\" target=\"_blank\">＜続報＞北塩原村で依然１千人超が孤立状態 大規模停電も継続 会津地方大雪</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">福島民報デジタル</font>",
+   "tag": "その他",
+   "local": true,
+   "query": "北塩原 オープン"
+  },
   {
    "title": "【荒川区】12月上旬、日暮里駅近くに本格麻辣湯専門店・楊国福マーラータン東京日暮里店がオープンします！",
    "url": "https://news.google.com/rss/articles/CBMiO0FVX3lxTE5Zd3dadjkxRVpHeW9YMVI0UXhXVzdVV0RUQXpsV1pHUVkwajBwU19qaHVreEpGN2pJMmV3?oc=5",
@@ -10,6 +31,16 @@
    "tag": "出店",
    "local": false,
    "query": "会津若松店 オープニング"
+  },
+  {
+   "title": "【神戸市】北野坂に「九州らーめん亀王」がオープン予定！ 大阪に多数展開、シンガポールにもお店があるラーメン店",
+   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTFBVV1VfdF9HdGhMWjlLcy1oR1ZPU09kN2JqS3RLWFZZQ2FGWUo1SkJudUpKa1dGMUtsVjJPMFVzNlpIZ1l3TnlIWE9vTVRtQllyeXNBRm1rajZOVHFpaDM2SnR2azk?oc=5",
+   "source": "地域ニュースサイト号外NET",
+   "date": "2026-11-21T22:27:38.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiZEFVX3lxTFBVV1VfdF9HdGhMWjlLcy1oR1ZPU09kN2JqS3RLWFZZQ2FGWUo1SkJudUpKa1dGMUtsVjJPMFVzNlpIZ1l3TnlIWE9vTVRtQllyeXNBRm1rajZOVHFpaDM2SnR2azk?oc=5\" target=\"_blank\">【神戸市】北野坂に「九州らーめん亀王」がオープン予定！ 大阪に多数展開、シンガポールにもお店があるラーメン店</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">",
+   "tag": "出店",
+   "local": false,
+   "query": "会津若松 オープン予定"
   },
   {
    "title": "【柳津町】名物「あわまんじゅう」の小池菓子舗 店内にはカフェスペースも",
@@ -52,6 +83,26 @@
    "query": "会津若松 リニューアル"
   },
   {
+   "title": "園芸カレッジの内容体験 オープンキャンパス参加者",
+   "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTE5kZ0oyY3Rodm5SMHRWU1RjREhpWDZwXzFrcFFOSlZ0RlU1ZW8wX09XRHotamJ3Z1E4dG9BbzhJQjlMbmppMThLTXZ4eFBTcXM?oc=5",
+   "source": "福島民報デジタル",
+   "date": "2026-11-21T20:30:00.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiT0FVX3lxTE5kZ0oyY3Rodm5SMHRWU1RjREhpWDZwXzFrcFFOSlZ0RlU1ZW8wX09XRHotamJ3Z1E4dG9BbzhJQjlMbmppMThLTXZ4eFBTcXM?oc=5\" target=\"_blank\">園芸カレッジの内容体験 オープンキャンパス参加者</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">福島民報デジタル</font>",
+   "tag": "出店",
+   "local": false,
+   "query": "会津 初出店"
+  },
+  {
+   "title": "最優秀賞に猪苗代支店 会津信金営業店表彰",
+   "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE1PWndqTlVzZk5wQ2R5aktlZVRFcHA0ZnJ5XzFOeklERDgydGpwYWZoR0ZsaWRUYjhqdk5YeVVBbGFZNFFsSE1aaDJNdw?oc=5",
+   "source": "47NEWS",
+   "date": "2026-11-21T20:16:00.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiS0FVX3lxTE1PWndqTlVzZk5wQ2R5aktlZVRFcHA0ZnJ5XzFOeklERDgydGpwYWZoR0ZsaWRUYjhqdk5YeVVBbGFZNFFsSE1aaDJNdw?oc=5\" target=\"_blank\">最優秀賞に猪苗代支店 会津信金営業店表彰</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">47NEWS</font>",
+   "tag": "その他",
+   "local": true,
+   "query": "猪苗代 オープン予定"
+  },
+  {
    "title": "只見町名誉町民・故皆川雅舟さん 町に遺作の書寄贈 長女・恭舟さんが２点",
    "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTE9yY0VhcnZralVvemRka1BNaGxub093RFFfVjRKUWZ6b251elk0cEJmNGpEWEtiVmstNlFpbHNtRnZyYlRKQllFaWRTSQ?oc=5",
    "source": "47NEWS",
@@ -77,6 +128,16 @@
    "source": "地域ニュースサイト号外NET",
    "date": "2026-11-21T14:43:54.000Z",
    "desc": "<a href=\"https://news.google.com/rss/articles/CBMib0FVX3lxTE50QWZYLWJ1X1JDT09sZjdrUGNVQ3BBS1lnYl85MDFqUGUzNWxNLWZCd0ltaWppM0dGZ2JvYTljVEw0VXlrYkp5M2ZVQWUwb0d5ZGNDdWxzVU9XUHZPMDdvVnYtbmg5UW1XaTFCbnpZdw?oc=5\" target=\"_blank\">【鈴鹿市】江島町に廻転寿司「にぎり長次郎」がオープン予定！建設中の店舗敷地内に看板が設置されています</a>&nbsp;&nbsp;<font color",
+   "tag": "建設",
+   "local": false,
+   "query": "会津若松 オープン予定"
+  },
+  {
+   "title": "【鈴鹿市】江島台に廻転寿司「にぎり長次郎」がオープン予定！建設中の店舗敷地内に看板が設置されています",
+   "url": "https://news.google.com/rss/articles/CBMib0FVX3lxTE50QWZYLWJ1X1JDT09sZjdrUGNVQ3BBS1lnYl85MDFqUGUzNWxNLWZCd0ltaWppM0dGZ2JvYTljVEw0VXlrYkp5M2ZVQWUwb0d5ZGNDdWxzVU9XUHZPMDdvVnYtbmg5UW1XaTFCbnpZdw?oc=5",
+   "source": "地域ニュースサイト号外NET",
+   "date": "2026-11-21T14:43:54.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMib0FVX3lxTE50QWZYLWJ1X1JDT09sZjdrUGNVQ3BBS1lnYl85MDFqUGUzNWxNLWZCd0ltaWppM0dGZ2JvYTljVEw0VXlrYkp5M2ZVQWUwb0d5ZGNDdWxzVU9XUHZPMDdvVnYtbmg5UW1XaTFCbnpZdw?oc=5\" target=\"_blank\">【鈴鹿市】江島台に廻転寿司「にぎり長次郎」がオープン予定！建設中の店舗敷地内に看板が設置されています</a>&nbsp;&nbsp;<font color",
    "tag": "建設",
    "local": false,
    "query": "会津若松 オープン予定"
@@ -248,6 +309,16 @@
    "query": "北塩原 オープン"
   },
   {
+   "title": "福祉車両の常設ギャラリーが郡山市にオープン",
+   "url": "https://news.google.com/rss/articles/CBMihwFBVV95cUxOZFAwQkZUZ2NVSTVPeWFxdzNFa2Npa1J3eUtyT0p0RzkzZnV2YjhXZUZpTUV5T1lTSERRZEVyTU5qVFNneE1xUTFGdDN5Qy1CbUdibjhLSlZhWGtLX3J3VEVsRzlHMDI0bE9NenVFNlozU0RDLUliTDhoUHU2NTNWODgtTlJNalHSAYcBQVVfeXFMTmRQMEJGVGdjVUk1T3lhcXczRWtjaWtSd3lLck9KdEc5M2Z1dmI4V2VGaU1FeU9ZU0hEUWRFck1OalRTZ3hNcVExRnQzeUMtQm1HYm44S0pWYVhrS19yd1RFbEc5RzAyNGxPTXp1RTZaM1NEQy1JYkw4aFB1NjUzVjg4LU5STWpR?oc=5",
+   "source": "ｄメニューニュース",
+   "date": "2026-11-21T02:00:00.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMihwFBVV95cUxOZFAwQkZUZ2NVSTVPeWFxdzNFa2Npa1J3eUtyT0p0RzkzZnV2YjhXZUZpTUV5T1lTSERRZEVyTU5qVFNneE1xUTFGdDN5Qy1CbUdibjhLSlZhWGtLX3J3VEVsRzlHMDI0bE9NenVFNlozU0RDLUliTDhoUHU2NTNWODgtTlJNalHSAYcBQVVfeXFMTmRQMEJGVGdjVUk1T3lhcXczRWtjaWtSd3lLck9KdEc5M2Z1dmI4V2",
+   "tag": "出店",
+   "local": false,
+   "query": "会津若松店 オープニング"
+  },
+  {
    "title": "＜速報＞北塩原村裏磐梯地区、大雪による倒木で孤立状態",
    "url": "https://news.google.com/rss/articles/CBMiT0FVX3lxTFBzVThkM0JMUHZEQXhIMlREa1RXczVuN2ZNNXYwT2FzS3hyV0RzbkVTV2t6NTE0UzhCR2RPRG1TaEVLbk5ISUhSajdwSlA2ZGs?oc=5",
    "source": "福島民報デジタル",
@@ -276,6 +347,16 @@
    "tag": "出店",
    "local": false,
    "query": "喜多方店 オープン"
+  },
+  {
+   "title": "【江東区】看板商品のメロンパンが先着無料に！「BAKERIES LAB. 砂町銀座店」11月21日グランドオープン",
+   "url": "https://news.google.com/rss/articles/CBMicEFVX3lxTFBlNXBjR1dNM1lhTWxDZHRna21UMkhVd2RLZERSVlVKMk40RTR4eVcxekJiWnVVU3hDMG1lRGE1dmhGdzlOeTZfRXlwMkpoUWl4N0lSVzZMVkpCVkFhZ1dLUGozd1piOU9MNkxLb1h0cUQ?oc=5",
+   "source": "号外NET 江東区",
+   "date": "2026-11-20T22:49:34.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMicEFVX3lxTFBlNXBjR1dNM1lhTWxDZHRna21UMkhVd2RLZERSVlVKMk40RTR4eVcxekJiWnVVU3hDMG1lRGE1dmhGdzlOeTZfRXlwMkpoUWl4N0lSVzZMVkpCVkFhZ1dLUGozd1piOU9MNkxLb1h0cUQ?oc=5\" target=\"_blank\">【江東区】看板商品のメロンパンが先着無料に！「BAKERIES LAB. 砂町銀座店」11月21日グランドオープン</a>&nbsp;&nbsp;<fo",
+   "tag": "出店",
+   "local": false,
+   "query": "会津若松 グランドオープン"
   },
   {
    "title": "３１年経て念願の開店 イオンモール伊達試験営業始まる ２７日正式オープン 一足早く買い物、食事",
@@ -530,6 +611,26 @@
    "source": "号外NET 長野",
    "date": "2026-11-19T22:32:46.000Z",
    "desc": "<a href=\"https://news.google.com/rss/articles/CBMiaEFVX3lxTE9PT2hpeVB5anh5Qk5vR1VnUG1LN1YxcWFUaXMxVTJ5d2tRWHZNaldTS1J2ZzNwY3NtTm9yc2dMZGFGY2FsdmpXVHhXRVVpSVlYRldDV01sczd2U1pxWUs5c1NlZVliUEZy?oc=5\" target=\"_blank\">【千曲市】桜堂の平安堂更埴店となりに「HONETSUGI千曲桜堂はりきゅう接骨院」が12月8日（火）オープン！</a>&nbsp;&nbsp;<font color=\"#6f",
+   "tag": "出店",
+   "local": false,
+   "query": "喜多方店 オープン"
+  },
+  {
+   "title": "【大阪市城東区】11月25日（水）オープン！『セブンイレブン地下鉄蒲生4丁目駅北店』でオープンセールを開催",
+   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1hX2lUVG95dFQ3WlFfQmpNNUZGZjBpenhDY1U5b2MyUlpkaUowMGNzY0hSV0t5ZDVtbXlWVklDdmI0aGJKazlRQURKR2JTQkJsTUU4NnNKaTFhWEwzRXBycUtDRE4?oc=5",
+   "source": "地域ニュースサイト号外NET",
+   "date": "2026-11-19T22:13:24.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiZEFVX3lxTE1hX2lUVG95dFQ3WlFfQmpNNUZGZjBpenhDY1U5b2MyUlpkaUowMGNzY0hSV0t5ZDVtbXlWVklDdmI0aGJKazlRQURKR2JTQkJsTUU4NnNKaTFhWEwzRXBycUtDRE4?oc=5\" target=\"_blank\">【大阪市城東区】11月25日（水）オープン！『セブンイレブン地下鉄蒲生4丁目駅北店』でオープンセールを開催</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">地",
+   "tag": "出店",
+   "local": false,
+   "query": "喜多方店 オープン"
+  },
+  {
+   "title": "【春日部市】いよいよ！ 東武ストア 春日部店が11月26日（木）朝9時オープン！",
+   "url": "https://news.google.com/rss/articles/CBMiakFVX3lxTE1lZWhmejQ1YnBaN3g2RGVQZkpoUmJ5NF8yUURMRmR0aVpuNHA2SjBEQ3g1X0ZTRGxMc2dNRmtnZUZGbjlsVkwwdDBVSkF2aWUwdmpVbVQ3dVlDa0gtRURnTVFicVJ0YXB4WVE?oc=5",
+   "source": "号外NET 春日部市",
+   "date": "2026-11-19T22:05:51.000Z",
+   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiakFVX3lxTE1lZWhmejQ1YnBaN3g2RGVQZkpoUmJ5NF8yUURMRmR0aVpuNHA2SjBEQ3g1X0ZTRGxMc2dNRmtnZUZGbjlsVkwwdDBVSkF2aWUwdmpVbVQ3dVlDa0gtRURnTVFicVJ0YXB4WVE?oc=5\" target=\"_blank\">【春日部市】いよいよ！ 東武ストア 春日部店が11月26日（木）朝9時オープン！</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">号外NET ",
    "tag": "出店",
    "local": false,
    "query": "喜多方店 オープン"
@@ -1418,106 +1519,6 @@
    "tag": "その他",
    "local": false,
    "query": "会津若松 閉店"
-  },
-  {
-   "title": "会津大次期理事長予定者に束原恒夫氏 選考会議で再任 任期は来年４月から２年",
-   "url": "https://news.google.com/rss/articles/CBMiS0FVX3lxTFB4U3BONmFMcE1TTkllMlY0M3ZZaGtHTFVtdUpYLXlyc21sZXRXcU9RVG1GRnQ2cGVwRGR6dE1PdDRkUHlTWWNneWZjNA?oc=5",
-   "source": "47NEWS",
-   "date": "2026-11-17T09:32:00.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiS0FVX3lxTFB4U3BONmFMcE1TTkllMlY0M3ZZaGtHTFVtdUpYLXlyc21sZXRXcU9RVG1GRnQ2cGVwRGR6dE1PdDRkUHlTWWNneWZjNA?oc=5\" target=\"_blank\">会津大次期理事長予定者に束原恒夫氏 選考会議で再任 任期は来年４月から２年</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">47NEWS</font>",
-   "tag": "その他",
-   "local": true,
-   "query": "会津若松 閉店"
-  },
-  {
-   "title": "【ラーメン魁力屋】200店舗目！京都北白川 ラーメン魁力屋「イオンモール伊達店」(福島県伊達市)が2026年11月27日(金)にグランドオープン！",
-   "url": "https://news.google.com/rss/articles/CBMiZEFVX3lxTE1MREFRWC1xWVhpZkh1VFZhX1VWVUJuYm5UN0RqZEZ2Y0lLeGtGY1dVTnFUQ21YanNTSXdhRFBsaGtjaUI5bEVjdzFSdmRMUXp6TXI4MjhWNGZlek1RUGt3QldRTUc?oc=5",
-   "source": "福島民友新聞社",
-   "date": "2026-11-17T08:00:00.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiZEFVX3lxTE1MREFRWC1xWVhpZkh1VFZhX1VWVUJuYm5UN0RqZEZ2Y0lLeGtGY1dVTnFUQ21YanNTSXdhRFBsaGtjaUI5bEVjdzFSdmRMUXp6TXI4MjhWNGZlek1RUGt3QldRTUc?oc=5\" target=\"_blank\">【ラーメン魁力屋】200店舗目！京都北白川 ラーメン魁力屋「イオンモール伊達店」(福島県伊達市)が2026年11月27日(金)にグランドオープン！</a>&nbsp;&nbsp;<fo",
-   "tag": "出店",
-   "local": false,
-   "query": "会津若松店 オープニング"
-  },
-  {
-   "title": "磐梯町に広がる「藍」の輪：菅家ひかるアナウンサーの日記",
-   "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE9McmdTcWt5OXhuZWRnWHFtb3lUQldVbS1aZjJMNnkwRExna0xUczJFYVA1eDNxZU14cjlaUWZ5Q0djMEh4MnExYjd2Zllxc3ZlZmt1bjZnTjA4aHhPMjd5by0waFBNMTl1?oc=5",
-   "source": "FTV 福島テレビ",
-   "date": "2026-11-17T07:11:00.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiaEFVX3lxTE9McmdTcWt5OXhuZWRnWHFtb3lUQldVbS1aZjJMNnkwRExna0xUczJFYVA1eDNxZU14cjlaUWZ5Q0djMEh4MnExYjd2Zllxc3ZlZmt1bjZnTjA4aHhPMjd5by0waFBNMTl1?oc=5\" target=\"_blank\">磐梯町に広がる「藍」の輪：菅家ひかるアナウンサーの日記</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">FTV 福島テレビ</font>",
-   "tag": "その他",
-   "local": true,
-   "query": "磐梯町 オープン"
-  },
-  {
-   "title": "コインランドリーで下着盗んだ疑い 須賀川市の37歳会社員の男を逮捕",
-   "url": "https://news.google.com/rss/articles/CBMigAFBVV95cUxQZjQ0cWNJNjFkYjl5OGt6OTB4M3NScWxmcGNEMW1ncXViRzAtY2lHYVVPcE1kNi12cDl2QTdpYzdtamVHM0g4YW5rblE3MzFrLTk5OXVjbVVkQnRDMHJ5czVLNExySFV5dXA1b1dla0Jlb0VNa3l3SGFYVmh3Zkk5U9IBgAFBVV95cUxQZjQ0cWNJNjFkYjl5OGt6OTB4M3NScWxmcGNEMW1ncXViRzAtY2lHYVVPcE1kNi12cDl2QTdpYzdtamVHM0g4YW5rblE3MzFrLTk5OXVjbVVkQnRDMHJ5czVLNExySFV5dXA1b1dla0Jlb0VNa3l3SGFYVmh3Zkk5Uw?oc=5",
-   "source": "ｄメニューニュース",
-   "date": "2026-11-17T07:03:00.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMigAFBVV95cUxQZjQ0cWNJNjFkYjl5OGt6OTB4M3NScWxmcGNEMW1ncXViRzAtY2lHYVVPcE1kNi12cDl2QTdpYzdtamVHM0g4YW5rblE3MzFrLTk5OXVjbVVkQnRDMHJ5czVLNExySFV5dXA1b1dla0Jlb0VNa3l3SGFYVmh3Zkk5U9IBgAFBVV95cUxQZjQ0cWNJNjFkYjl5OGt6OTB4M3NScWxmcGNEMW1ncXViRzAtY2lHYVVPcE1kNi",
-   "tag": "その他",
-   "local": false,
-   "query": "会津若松 グランドオープン"
-  },
-  {
-   "title": "旧堀切邸で番傘のライトアップ 約80本の番傘が色鮮やかに",
-   "url": "https://news.google.com/rss/articles/CBMidkFVX3lxTE02TnNGQlMzR3JwMTF0ZW5pUnYyeURTZHp1QV9RcC1xbTRZekFNYXlwZFNhZ21mbTAxNHFleUJRVVptRGNWQkJIRWctM1FSUTRNUnQ1eWY5aWJrTlMzZDJnSkFDM21SN0FnV213bXRTWGRQZWstdnfSAXZBVV95cUxNNk5zRkJTM0dycDExdGVuaVJ2MnlEU2R6dUFfUXAtcW00WXpBTWF5cGRTYWdtZm0wMTRxZXlCUVVabURjVkJCSEVnLTNRUlE0TVJ0NXlmOWlia05TM2QyZ0pBQzNtUjdBZ1dtd210U1hkUGVrLXZ3?oc=5",
-   "source": "ｄメニューニュース",
-   "date": "2026-11-17T06:59:00.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMidkFVX3lxTE02TnNGQlMzR3JwMTF0ZW5pUnYyeURTZHp1QV9RcC1xbTRZekFNYXlwZFNhZ21mbTAxNHFleUJRVVptRGNWQkJIRWctM1FSUTRNUnQ1eWY5aWJrTlMzZDJnSkFDM21SN0FnV213bXRTWGRQZWstdnfSAXZBVV95cUxNNk5zRkJTM0dycDExdGVuaVJ2MnlEU2R6dUFfUXAtcW00WXpBTWF5cGRTYWdtZm0wMTRxZXlCUVVabU",
-   "tag": "その他",
-   "local": false,
-   "query": "会津若松 グランドオープン"
-  },
-  {
-   "title": "高卒就職内定率82.5％ 福島県内、前年同期1.8ポイント下回る (福島民友新聞)",
-   "url": "https://news.google.com/rss/articles/CBMijgFBVV95cUxQZlVNeUJJeG1QQ0EwSmlvSld1N2FkNWxaY1NEZWNvck1lYllEbFVHRzAzX282UjRVd1pzbkphdHJuZjRhY0hVcW5pZnNKaF9iQUhFQzF4cnhaN0xlb3UzSHExMkYtS1dJV2p4U3dreFBQa1ZCMlVxNWN3OS1tTnJHTDhONGI5VkFDTGM2X1JB?oc=5",
-   "source": "Yahoo!ニュース",
-   "date": "2026-11-17T06:49:26.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMijgFBVV95cUxQZlVNeUJJeG1QQ0EwSmlvSld1N2FkNWxaY1NEZWNvck1lYllEbFVHRzAzX282UjRVd1pzbkphdHJuZjRhY0hVcW5pZnNKaF9iQUhFQzF4cnhaN0xlb3UzSHExMkYtS1dJV2p4U3dreFBQa1ZCMlVxNWN3OS1tTnJHTDhONGI5VkFDTGM2X1JB?oc=5\" target=\"_blank\">高卒就職内定率82.5％ 福島県内、前年同期1.8ポイント下回る (福",
-   "tag": "その他",
-   "local": false,
-   "query": "会津若松 閉店"
-  },
-  {
-   "title": "東京ラーメンストリート「ご当地ラーメンチャレンジ」第4弾は札幌の「雨は、やさしく No,2」 12月3 日から期間限定出店",
-   "url": "https://news.google.com/rss/articles/CBMiUEFVX3lxTFBFcEVsczl6d3BONjcya0ktQkFaQ2dsX3dSUTBZclR0S0hpekJyVG1CRmVzZE9sTGZBRjBrS1dmaW5lY1pvWmp1SHhfTzFTaWRq?oc=5",
-   "source": "風傳媒",
-   "date": "2026-11-17T06:42:00.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiUEFVX3lxTFBFcEVsczl6d3BONjcya0ktQkFaQ2dsX3dSUTBZclR0S0hpekJyVG1CRmVzZE9sTGZBRjBrS1dmaW5lY1pvWmp1SHhfTzFTaWRq?oc=5\" target=\"_blank\">東京ラーメンストリート「ご当地ラーメンチャレンジ」第4弾は札幌の「雨は、やさしく No,2」 12月3 日から期間限定出店</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">風傳媒</font>",
-   "tag": "出店",
-   "local": false,
-   "query": "喜多方 出店"
-  },
-  {
-   "title": "【町田市】スーパー「三和 山崎店」11/29リニューアルオープン予定！11/25～27は臨時休業",
-   "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5pZkU0aHRhRWVnX2FzN1N0c3AyaWdYcHNqUFhDbWxpSFJEX2thSTVZN0owck9PcUJUQ0xPWk16NGxMN1I2NzBCbzhwLWJBVS1VM1dhZ2s2N2JWNGgyZkwwbXpwUFk0bzI3?oc=5",
-   "source": "号外NET 町田市",
-   "date": "2026-11-17T04:55:14.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiaEFVX3lxTE5pZkU0aHRhRWVnX2FzN1N0c3AyaWdYcHNqUFhDbWxpSFJEX2thSTVZN0owck9PcUJUQ0xPWk16NGxMN1I2NzBCbzhwLWJBVS1VM1dhZ2s2N2JWNGgyZkwwbXpwUFk0bzI3?oc=5\" target=\"_blank\">【町田市】スーパー「三和 山崎店」11/29リニューアルオープン予定！11/25～27は臨時休業</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">号",
-   "tag": "出店",
-   "local": false,
-   "query": "喜多方店 オープン"
-  },
-  {
-   "title": "【町田市】スーパー「三和 山崎店」11/28リニューアルオープン予定！11/25～27は臨時休業",
-   "url": "https://news.google.com/rss/articles/CBMiaEFVX3lxTE5pZkU0aHRhRWVnX2FzN1N0c3AyaWdYcHNqUFhDbWxpSFJEX2thSTVZN0owck9PcUJUQ0xPWk16NGxMN1I2NzBCbzhwLWJBVS1VM1dhZ2s2N2JWNGgyZkwwbXpwUFk0bzI3?oc=5",
-   "source": "号外NET 町田市",
-   "date": "2026-11-17T04:55:14.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiaEFVX3lxTE5pZkU0aHRhRWVnX2FzN1N0c3AyaWdYcHNqUFhDbWxpSFJEX2thSTVZN0owck9PcUJUQ0xPWk16NGxMN1I2NzBCbzhwLWJBVS1VM1dhZ2s2N2JWNGgyZkwwbXpwUFk0bzI3?oc=5\" target=\"_blank\">【町田市】スーパー「三和 山崎店」11/28リニューアルオープン予定！11/25～27は臨時休業</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">号",
-   "tag": "出店",
-   "local": false,
-   "query": "喜多方店 オープン"
-  },
-  {
-   "title": "八十里越暫定開通を前に福島県10市町村が三条マルシェで魅力発信 白河ラーメン、赤べこ、天然炭酸水など",
-   "url": "https://news.google.com/rss/articles/CBMiSkFVX3lxTE92QjhybFczWmFRRmpyVFA1ams2c0lIcmczODA4OVpianJBSU9qdG1JVGVVdGNKemJ2Y1EtUE9GNERvYUtEUlEzSjV3?oc=5",
-   "source": "ケンオー・ドットコム",
-   "date": "2026-11-17T03:01:44.000Z",
-   "desc": "<a href=\"https://news.google.com/rss/articles/CBMiSkFVX3lxTE92QjhybFczWmFRRmpyVFA1ams2c0lIcmczODA4OVpianJBSU9qdG1JVGVVdGNKemJ2Y1EtUE9GNERvYUtEUlEzSjV3?oc=5\" target=\"_blank\">八十里越暫定開通を前に福島県10市町村が三条マルシェで魅力発信 白河ラーメン、赤べこ、天然炭酸水など</a>&nbsp;&nbsp;<font color=\"#6f6f6f\">ケンオー・ドットコム</font>",
-   "tag": "道路",
-   "local": false,
-   "query": "柳津町 出店"
   }
  ]
 }
